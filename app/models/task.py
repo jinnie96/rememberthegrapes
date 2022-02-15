@@ -1,4 +1,5 @@
 from .db import db
+from sqlalchemy.orm import relationship
 
 class Task(db.Model):
     __tablename__ = 'lists'
@@ -9,3 +10,5 @@ class Task(db.Model):
     title = db.Column(db.String(50), nullable=False, unique=True)
     due_by = db.Column(db.datetime(255), nullable=False, unique=True)
     complete = db.Column(db.Boolean)
+
+    users = relationship("User", foreign_keys=[user_id])
