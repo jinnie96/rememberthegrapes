@@ -12,3 +12,15 @@ class Task(db.Model):
     complete = db.Column(db.Boolean)
 
     users = relationship("User", foreign_keys=[user_id])
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'list_id': self.list_id,
+            'title': self.title,
+            'due_by': self.due_by,
+            'complete': self.complete,
+            'username': self.username,
+            'email': self.email
+        }
