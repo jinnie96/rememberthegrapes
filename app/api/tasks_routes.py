@@ -8,12 +8,16 @@ tasks_routes = Blueprint("tasks", __name__)
 @tasks_routes.route('/list/<int:id>')
 @login_required
 def getAllListTasks():
+
     return
 
 @tasks_routes.route('/user/<int:id>')
 @login_required
 def getUserTasks(id):
-    return
+    tasks = Task.query.filter(id == Task.user_id).all()
+    return {
+        "tasks": [task.to_dict() for task in tasks]
+    }
 
 @tasks_routes.route('/<int:id>')
 @login_required
