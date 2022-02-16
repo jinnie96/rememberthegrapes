@@ -10,19 +10,20 @@ lists_routes = Blueprint("lists", __name__)
 def getAllLists():
     return
 
+@lists_routes.route('/<int:id>')
+@login_required
+def getSingleList(id):
+    return
+
 @lists_routes.route('/', methods=["POST"])
 @login_required
 def postList(postId):
     return
 
-
-
 @lists_routes.route('/<int:id>', methods=["PUT"])
 @login_required
 def editList(id):
     return
-
-
 
 @lists_routes.route('/<int:id>', methods=["DELETE"])
 @login_required

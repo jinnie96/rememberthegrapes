@@ -5,9 +5,19 @@ from app.s3_helpers import (upload_file_to_s3, allowed_file, get_unique_filename
 
 tasks_routes = Blueprint("tasks", __name__)
 
-@tasks_routes.route('/')
+@tasks_routes.route('/list/<int:id>')
 @login_required
-def getAllTasks():
+def getAllListTasks():
+    return
+
+@tasks_routes.route('/user/<int:id>')
+@login_required
+def getUserTasks(id):
+    return
+
+@tasks_routes.route('/<int:id>')
+@login_required
+def getSingleTask(id):
     return
 
 @tasks_routes.route('/', methods=["POST"])
@@ -19,8 +29,6 @@ def postTask(postId):
 @login_required
 def editTask(id):
     return
-
-
 
 @tasks_routes.route('/<int:id>', methods=["DELETE"])
 @login_required
