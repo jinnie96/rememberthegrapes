@@ -61,13 +61,31 @@ export const getSingleTask = (id) => async dispatch => {
             return;
         };
 
-        dispatch(getUserTask(data));
+        dispatch(getOneTask(data));
         return data;
     }
 }
 
-export const getAllTasks = (id) => async dispatch => {
-    const response = await fetch (`/api/tasks/${id}`)
+export const addOneTask = (form) => async dispatch => {
+    const response = await fetch (`/api/tasks/`, {
+        method: 'POST',
+        body: form
+    })
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(addTask(data));
+        return data;
+    }
+}
+
+export const updateOneTask = (id) => async dispatch => {
+    const response = await fetch (`/api/tasks/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(post)
+    })
     if (response.ok) {
         const data = await response.json();
         if (data.errors) {
@@ -79,18 +97,16 @@ export const getAllTasks = (id) => async dispatch => {
     }
 }
 
-export const getAllTasks = (id) => async dispatch => {
-    const response = await fetch (`/api/tasks/${id}`)
+export const deleteOneTask = (id) => async dispatch => {
+    const response = await fetch (`/api/tasks/${id}`, {
+        method: 'DELETE',
+    })
     if (response.ok) {
-        const data = await response.json();
-        if (data.errors) {
-            return;
-        };
-
-        dispatch(getUserTask(data));
-        return data;
+        dispatch(getUserTask(id));
+        return "Deleted";
     }
 }
+
 // INITIAL STATE
 
 // REDUCER
