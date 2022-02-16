@@ -1,5 +1,7 @@
 from .db import db
 from sqlalchemy.orm import relationship
+from tkinter import CASCADE
+
 class List(db.Model):
     __tablename__ = 'lists'
 
@@ -7,4 +9,12 @@ class List(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     title = db.Column(db.String(50), nullable=False)
     cascade="all, delete-orphan"
+
     user = relationship("User", foreign_keys=[user_id])
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'title': self.title,
+        }
