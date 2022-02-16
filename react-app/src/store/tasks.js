@@ -8,10 +8,10 @@ const DELETE_TASK = 'tasks/DELETE_TASK'
 const GET_USER_TASK = 'tasks/GET_USER_TASK'
 
 // ACTION CREATORS
-const getTasks = tasks => ({
-    type: GET_TASKS,
-    payload: tasks
-})
+// const getTasks = tasks => ({
+//     type: GET_TASKS,
+//     payload: tasks
+// })
 
 const getOneTask = task => ({
     type: GET_ONE_TASK,
@@ -88,11 +88,7 @@ export const updateOneTask = (id) => async dispatch => {
     })
     if (response.ok) {
         const data = await response.json();
-        if (data.errors) {
-            return;
-        };
-
-        dispatch(getUserTask(data));
+        dispatch(updateTask(data));
         return data;
     }
 }
@@ -102,11 +98,55 @@ export const deleteOneTask = (id) => async dispatch => {
         method: 'DELETE',
     })
     if (response.ok) {
-        dispatch(getUserTask(id));
+        dispatch(deleteTask(id));
         return "Deleted";
     }
 }
 
 // INITIAL STATE
 
+const initialState = {}
+
 // REDUCER
+
+export default function listReducer(state = initialState, action) {
+    let newState;
+    switch (action.type) {
+        case GET_USER_TASK: {
+            newState = { ...state };
+            for (const key in action.payload) {
+                newState[action.payload[key].id] = action.payload[key]
+            }
+            return newState
+        }
+        case GET_ONE_TASK: {
+            newState = {
+                ...state,
+                [action.payload.post.id]: action.payload.post
+            };
+            return newState;
+        };
+        case ADD_TASK: {
+            newState = {
+                ...state,
+                [action.payload.post.id]: action.payload.post
+            };
+            return newState;
+        };
+        case UPDATE_TASK: {
+            newState = {
+                ...state,
+                [action.payload.post.id]: action.payload.post
+            };
+            return newState;
+        };
+        case DELETE_TASK: {
+            newState = { ...state };
+            delete newState[action.payload.id];
+            return newState;
+        };
+
+        default:
+            return state;
+    }
+}
