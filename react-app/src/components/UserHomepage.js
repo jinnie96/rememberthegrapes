@@ -13,6 +13,8 @@ function UserHomepage () {
     const userTasks = useSelector(state => state.task)
     const [tasks, setTasks] = useState()
     const [showDate, setShowDate] = useState(false)
+    const [title, setTitle] = useState("")
+    const [date, setDate] = useState()
     console.log("STATE@@@@@@@", userTasks)
 
     useEffect(() => {
@@ -25,25 +27,26 @@ function UserHomepage () {
             //   setTasks(tasks);
         })();
     }, [dispatch]);
+
+    function showCalendar () {
+        setShowDate(!showDate)
+    }
+
     const tasksArr = Object.values(userTasks)
     const tasksArray = tasksArr.reverse().reverse();
     const arr = ["a", "b", "c"]
     return (
         <div className="homePage">
             <h1>Welcome {user.firstName}</h1>
-            <input placeholder="Add a task.."></input><button>Add</button>
+            <input name='title' type='text' placeholder="Add a task.." value={title} onChange={setTitle}></input><button>Add</button>
             <div id="icons">
-                {/* <img id="dueBy" src="https://img.icons8.com/ios-filled/344/calendar-15.png"></img> */}
-                <button>Due By</button>
-                {/* <form action="#" class="ws-validate"> */}
-    <div class="form-row show-inputbtns">
-        <input type="date" data-date-inline-picker="false" data-date-open-on-focus="true" />
-    </div>
-    {/* <div class="form-row">
-        <input type="submit" />
-    </div> */}
-{/* </form> */}
-
+                <button onClick={showCalendar}>Due By</button>
+                <button>List:</button>
+            <div class="showDate">
+                {showDate &&
+                <input type="date" data-date-open-on-focus="false" />
+                }
+            </div>
                 <p></p>
             </div>
             <h1>All tasks:</h1>
