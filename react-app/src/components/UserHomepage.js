@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllTasks } from '../store/tasks';
+import './UserHomepage.css'
+// import image from '/images'
 
 
 function UserHomepage () {
     const dispatch = useDispatch()
+    const user = useSelector(state => state.session.user)
     const userId = useSelector(state => state.session.user.id);
     const userTasks = useSelector(state => state.task)
     const [tasks, setTasks] = useState()
@@ -25,11 +28,18 @@ function UserHomepage () {
     const tasksArray = tasksArr.reverse().reverse();
     const arr = ["a", "b", "c"]
     return (
-        <div className="listsContainer">
-            {console.log("TASKS ARRE",((tasksArr)))}
-            {tasksArr && (tasksArr.map(task => (
-                <p>{task.title}</p>
-            )))}
+        <div className="homePage">
+            <h1>Welcome {user.firstName}</h1>
+            <input placeholder="Add a task.."></input><button>Add</button>
+            <div id="icons">
+                <img id="dueBy" src="https://img.icons8.com/ios-filled/344/calendar-15.png"></img>
+            </div>
+            <div className="listsContainer">
+                {console.log("TASKS ARRE",((tasksArr)))}
+                {tasksArr && (tasksArr.map(task => (
+                    <p>{task.title}</p>
+                )))}
+            </div>
         </div>
     )
 
