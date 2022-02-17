@@ -67,12 +67,17 @@ export const getSingleTask = (id) => async dispatch => {
 }
 
 export const addOneTask = (form) => async dispatch => {
+    console.log("FORM@!#!@#!#", form)
     const response = await fetch (`/api/tasks/`, {
         method: 'POST',
-        body: form
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(form)
     })
     if (response.ok) {
         const data = await response.json();
+        console.log("DATAAAAAAAAA", data)
         dispatch(addTask(data));
         return data;
     }
@@ -126,14 +131,14 @@ export default function listReducer(state = initialState, action) {
         case GET_ONE_TASK: {
             newState = {
                 ...state,
-                [action.payload.post.id]: action.payload.post
+                [action.payload.task.id]: action.payload.task
             };
             return newState;
         };
         case ADD_TASK: {
             newState = {
                 ...state,
-                [action.payload.post.id]: action.payload.post
+                [action.payload.id]: action.payload
             };
             return newState;
         };
