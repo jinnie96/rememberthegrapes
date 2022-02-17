@@ -12,6 +12,7 @@ function UserHomepage () {
     const userId = useSelector(state => state.session.user.id);
     const userTasks = useSelector(state => state.task)
     const [tasks, setTasks] = useState()
+    const [showDate, setShowDate] = useState(false)
     console.log("STATE@@@@@@@", userTasks)
 
     useEffect(() => {
@@ -32,8 +33,20 @@ function UserHomepage () {
             <h1>Welcome {user.firstName}</h1>
             <input placeholder="Add a task.."></input><button>Add</button>
             <div id="icons">
-                <img id="dueBy" src="https://img.icons8.com/ios-filled/344/calendar-15.png"></img>
+                {/* <img id="dueBy" src="https://img.icons8.com/ios-filled/344/calendar-15.png"></img> */}
+                <button>Due By</button>
+                {/* <form action="#" class="ws-validate"> */}
+    <div class="form-row show-inputbtns">
+        <input type="date" data-date-inline-picker="false" data-date-open-on-focus="true" />
+    </div>
+    {/* <div class="form-row">
+        <input type="submit" />
+    </div> */}
+{/* </form> */}
+
+                <p></p>
             </div>
+            <h1>All tasks:</h1>
             <div className="listsContainer">
                 {console.log("TASKS ARRE",((tasksArr)))}
                 {tasksArr && (tasksArr.map(task => (
