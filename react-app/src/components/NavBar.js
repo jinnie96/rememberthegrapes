@@ -2,8 +2,26 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
+import { login } from "../store/session"
+import { useDispatch } from 'react-redux';
 
 const NavBar = () => {
+  const dispatch = useDispatch()
+  const demoLogin = async (e) => {
+    e.preventDefault()
+    await dispatch(login("demo@aa.io", "password"))
+}
+
+// const onLogin = async (e) => {
+//   e.preventDefault();
+//   const data = await dispatch(login(email, password));
+//   if (data) {
+//     setErrors(data);
+//   }
+// };
+
+
+
   return (
     <nav>
       <ul>
