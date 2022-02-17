@@ -41,7 +41,7 @@ const getUserTask = task => ({
 // THUNK CREATORS
 
 export const getAllTasks = (id) => async dispatch => {
-    const response = await fetch (`/api/tasks/${id}`)
+    const response = await fetch (`/api/tasks/user/${id}`)
     if (response.ok) {
         const data = await response.json();
         if (data.errors) {
@@ -78,13 +78,13 @@ export const addOneTask = (form) => async dispatch => {
     }
 }
 
-export const updateOneTask = (id) => async dispatch => {
-    const response = await fetch (`/api/tasks/${id}`, {
+export const updateOneTask = (task) => async dispatch => {
+    const response = await fetch (`/api/tasks/${task.id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(post)
+        body: JSON.stringify(task)
     })
     if (response.ok) {
         const data = await response.json();
@@ -113,10 +113,14 @@ export default function listReducer(state = initialState, action) {
     let newState;
     switch (action.type) {
         case GET_USER_TASK: {
-            newState = { ...state };
-            for (const key in action.payload) {
-                newState[action.payload[key].id] = action.payload[key]
-            }
+            newState = {...state};
+            // for (const key in action.payload) {
+            //     newState[action.payload[key].id] = action.payload[key]
+            // }
+            console.log(action.payload.tasks,"!!@#@!#@!#!#!#")
+            action.payload.tasks.forEach(task => {
+                newState[task.id] = task
+            })
             return newState
         }
         case GET_ONE_TASK: {
@@ -136,7 +140,7 @@ export default function listReducer(state = initialState, action) {
         case UPDATE_TASK: {
             newState = {
                 ...state,
-                [action.payload.post.id]: action.payload.post
+                [action.payload.post]: action.payload.post
             };
             return newState;
         };

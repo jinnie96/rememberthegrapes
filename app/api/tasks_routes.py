@@ -13,6 +13,7 @@ def getAllListTasks():
 @tasks_routes.route('/user/<int:id>')
 @login_required
 def getUserTasks(id):
+    print(id, "ID@!~!!!!!~!~~!")
     tasks = Task.query.filter(id == Task.user_id).all()
     return {
         "tasks": [task.to_dict() for task in tasks]
