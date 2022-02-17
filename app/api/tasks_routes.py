@@ -41,16 +41,27 @@ def getSingleTask(id):
 @tasks_routes.route('/', methods=["POST"])
 @login_required
 def postTask():
-    print("IN API!!!!!!", request.get_json())
+    print("IN API!!!!!!", request.get_json()["due_by"][0])
     # data = json.loads(request.data.decode("utf-8"))
     # data = request.json()
     form = AddTaskForm()
     print(form.data, "FORM DATA@!@#!#!@")
+    # if len(request.get_json()["due_by"][0].split("-")[1]) is 1:
+
+    year = request.get_json()["due_by"][0].split("-")[0]
+    month = request.get_json()["due_by"][0].split("-")[1]
+    day = request.get_json()["due_by"][0].split("-")[2]
+
+    print("YEARRRRRRRRRR", int(year))
+    print("YEARRRRRRRRRR", type(int((f"{int(month):02d}"))))
+    print("YEARRRRRRRRRR", int(day))
+
+    print("YEARRRRRRRRRR", type(9))
     form['csrf_token'].data = request.cookies['csrf_token']
     # form['title'].data = "test"
     if form.validate_on_submit():
         print("FORM@@@@@", form.data)
-        task = Task(user_id=current_user.id, list_id=None, title=form.data["title"], due_by=date(2029, 9, 15), complete=False)
+        task = Task(user_id=current_user.id, list_id=None, title=form.data["title"], due_by=date(int(year), int((f"{int(month):02d}")), int(day)), complete=False)
         db.session.add(task)
         db.session.commit()
         return task.to_dict()
