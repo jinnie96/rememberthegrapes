@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addOneTask, deleteOneTask, getAllTasks, updateOneTask } from '../store/tasks';
 import './UserHomepage.css'
+import { getAllLists } from '../store/lists';
 // import image from '/images'
 
 
@@ -11,7 +12,10 @@ function UserHomepage () {
     const user = useSelector(state => state.session.user)
     const userId = useSelector(state => state.session.user.id);
     const userTasks = useSelector(state => state.task)
+    const userLists = useSelector(state => state.list)
+    const state = useSelector(state => state)
     const [tasks, setTasks] = useState()
+    const [lists, setLists] = useState()
     const [showDate, setShowDate] = useState(false)
     const [title, setTitle] = useState("")
     const [listId, setListId] = useState(null)
@@ -20,7 +24,7 @@ function UserHomepage () {
     // const defDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     const [dueBy, setDueBy] = useState("0000-00-00T00:00")
     const [newDueBy, setNewDueBy] = useState("0000-00-00T00:00")
-    console.log("STATE@@@@@@@", userTasks)
+    console.log("STATE@@@@@@@", userLists)
 
     useEffect(() => {
         // const id = user.id
@@ -28,6 +32,9 @@ function UserHomepage () {
             const response = await dispatch(getAllTasks(userId))
             console.log("RESPINSE@@@@@@@", response)
             setTasks(response);
+            const responseLists = await dispatch(getAllLists(userId))
+            console.log("RESPONSELists", response)
+            setLists(responseLists)
             // const tasks = await response.json();
             //   setTasks(tasks);test
         })();
@@ -100,6 +107,7 @@ function UserHomepage () {
         setNewDueBy(e.target.value)
       }
     const tasksArr = Object.values(userTasks)
+    const listsArr = Object.values(userLists)
     const tasksArray = tasksArr.reverse().reverse();
     const arr = ["a", "b", "c"]
     return (
@@ -108,6 +116,11 @@ function UserHomepage () {
             <h1>Welcome {user.firstName}</h1>
                 <p>Insert Logo Here</p>
                 <p>Insert All Lists Here</p>
+                {listsArr && (listsArr.map(list => (
+                    <div id = {list.id}key={list.id}>
+                        <p>{list.title}</p>
+                    </div>
+                )))}
             </div>
             <div className="listTasksContainer">
             <form onSubmit={addTask}>
