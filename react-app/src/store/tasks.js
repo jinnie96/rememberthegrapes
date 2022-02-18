@@ -67,19 +67,24 @@ export const getSingleTask = (id) => async dispatch => {
 }
 
 export const addOneTask = (form) => async dispatch => {
+    console.log("FORM@!#!@#!#", form)
     const response = await fetch (`/api/tasks/`, {
         method: 'POST',
-        body: form
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(form)
     })
     if (response.ok) {
         const data = await response.json();
+        console.log("DATAAAAAAAAA", data)
         dispatch(addTask(data));
         return data;
     }
 }
 
-export const updateOneTask = (task) => async dispatch => {
-    const response = await fetch (`/api/tasks/${task.id}`, {
+export const updateOneTask = (id, task) => async dispatch => {
+    const response = await fetch (`/api/tasks/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -126,14 +131,14 @@ export default function listReducer(state = initialState, action) {
         case GET_ONE_TASK: {
             newState = {
                 ...state,
-                [action.payload.post.id]: action.payload.post
+                [action.payload.task.id]: action.payload.task
             };
             return newState;
         };
         case ADD_TASK: {
             newState = {
                 ...state,
-                [action.payload.post.id]: action.payload.post
+                [action.payload.id]: action.payload
             };
             return newState;
         };
@@ -146,7 +151,7 @@ export default function listReducer(state = initialState, action) {
         };
         case DELETE_TASK: {
             newState = { ...state };
-            delete newState[action.payload.id];
+            delete newState[action.id];
             return newState;
         };
 
