@@ -83,8 +83,8 @@ export const addOneTask = (form) => async dispatch => {
     }
 }
 
-export const updateOneTask = (task) => async dispatch => {
-    const response = await fetch (`/api/tasks/${task.id}`, {
+export const updateOneTask = (id, task) => async dispatch => {
+    const response = await fetch (`/api/tasks/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
