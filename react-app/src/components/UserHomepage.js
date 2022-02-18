@@ -125,6 +125,7 @@ function UserHomepage () {
                 {tasksArr && (tasksArr.map(task => (
                     <div id = {task.id}key={task.id}>
                         <p>{task.title}</p>
+                        <p>Due By: {task.due_by}</p>
                         {/* {!editing ? (
                             <button onClick = {setEditing(!editing)}>Edit</button>
                         ) : (
@@ -144,6 +145,7 @@ function UserHomepage () {
                         } else {
                         return (
                             <div>
+                                <p>Update Task:</p>
                                 <input id= {task.id} name='title' type='text' placeholder="Edit task.." defaultValue={task.title} onChange={updateTaskTitle}></input>
                                 <input id="dateInput" type="datetime-local" onChange={updateNewDate} defaultValue={Date.now()}></input>
                                 <button id={task.id} onClick={editTask}>Update</button>

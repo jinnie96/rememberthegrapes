@@ -88,10 +88,11 @@ def postTask():
 def editTask(id):
     task = Task.query.get(id)
     data = request.get_json()
-    if data["title"]:
-        task.title=data["title"]
-    if data["due_by"]:
-        task.due_by= data["due_by"]
+    print(data["newEditTask"])
+    if data["newEditTask"]:
+        task.title=data["newEditTask"]
+    if data["newDueBy"]:
+        task.due_by= data["newDueBy"]
     db.session.commit()
     return task.to_dict()
 

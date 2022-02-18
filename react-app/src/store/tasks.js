@@ -91,8 +91,10 @@ export const updateOneTask = (id, task) => async dispatch => {
         },
         body: JSON.stringify(task)
     })
+    console.log("UDPDATE RES", response)
     if (response.ok) {
         const data = await response.json();
+        console.log(data, "UPADTE DATA")
         dispatch(updateTask(data));
         return data;
     }
@@ -145,7 +147,7 @@ export default function listReducer(state = initialState, action) {
         case UPDATE_TASK: {
             newState = {
                 ...state,
-                [action.payload.post]: action.payload.post
+                [action.payload.id]: action.payload
             };
             return newState;
         };
