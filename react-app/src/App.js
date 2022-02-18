@@ -12,6 +12,8 @@ import UserHomepage from './components/UserHomepage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
+  const [selectedList, setSelectedList] = useState("All Tasks")
+  const [selectedTask, setSelectedTask] = useState("")
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,7 +21,7 @@ function App() {
       await dispatch(authenticate());
       setLoaded(true);
     })();
-  }, [dispatch]);
+  }, [dispatch, selectedList, selectedTask]);
 
   if (!loaded) {
     return null;
@@ -44,6 +46,12 @@ function App() {
         <ProtectedRoute path='/' exact={true} >
           {/* <h1>My Home Page</h1> */}
           <UserHomepage />
+        </ProtectedRoute>
+        <ProtectedRoute path='/app/:listId'>
+          {/* <DisplayListTasks /> */}
+        </ProtectedRoute>
+        <ProtectedRoute path='/app/$:listId/:id>'>
+          {/* <DisplayTaskDetails /> */}
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

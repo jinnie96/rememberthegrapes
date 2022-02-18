@@ -47,7 +47,7 @@ function UserHomepage () {
             user_id: user.id,
             list_id: listId,
             title: title,
-            due_by: dueDate
+            due_by: dueBy
         }
         console.log("NEWTASK", newTask)
         const data = await dispatch(addOneTask(newTask));
@@ -73,6 +73,7 @@ function UserHomepage () {
 
       const editTask = async (e) => {
         e.preventDefault()
+        console.log(newDueBy, "NEW DUE DATE!!!!!")
         const task = {
             newEditTask,
             newDueBy
@@ -103,7 +104,12 @@ function UserHomepage () {
     const arr = ["a", "b", "c"]
     return (
         <div className="homePage">
+            <div className="listsContainer">
             <h1>Welcome {user.firstName}</h1>
+                <p>Insert Logo Here</p>
+                <p>Insert All Lists Here</p>
+            </div>
+            <div className="listTasksContainer">
             <form onSubmit={addTask}>
                 <input id="taskInput" name='title' type='text' placeholder="Add a task.." value={title} onChange={updateTitle}></input><button type="submit">Add</button>
                 <div id="icons">
@@ -119,7 +125,7 @@ function UserHomepage () {
                     <p></p>
                 </div>
             </form>
-            <h1>All tasks:</h1>
+            <h1>All tasks: (Replace with Tasks in List Selected)</h1>
             <div className="listsContainer">
                 {console.log("TASKS ARRE",((tasksArr)))}
                 {tasksArr && (tasksArr.map(task => (
@@ -158,6 +164,11 @@ function UserHomepage () {
 
                 )))}
             </div>
+            </div>
+            <div className="taskInfoContainer">
+                <p>Insert Details of List Selected Here</p>
+            </div>
+
         </div>
     )
 

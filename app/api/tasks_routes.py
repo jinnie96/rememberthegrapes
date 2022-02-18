@@ -41,27 +41,29 @@ def getSingleTask(id):
 @tasks_routes.route('/', methods=["POST"])
 @login_required
 def postTask():
-    print("IN API!!!!!!", request.get_json()["due_by"][0])
+    print("IN API!!!!!!", request.get_json()["due_by"])
     # data = json.loads(request.data.decode("utf-8"))
     # data = request.json()
+    data = request.get_json()
+    print("DATA JSON@@!!!!!!!!")
     form = AddTaskForm()
     print(form.data, "FORM DATA@!@#!#!@")
     # if len(request.get_json()["due_by"][0].split("-")[1]) is 1:
 
-    year = request.get_json()["due_by"][0].split("-")[0]
-    month = request.get_json()["due_by"][0].split("-")[1]
-    day = request.get_json()["due_by"][0].split("-")[2]
+    # year = request.get_json()["due_by"][0].split("-")[0]
+    # month = request.get_json()["due_by"][0].split("-")[1]
+    # day = request.get_json()["due_by"][0].split("-")[2]
 
-    print("YEARRRRRRRRRR", int(year))
-    print("YEARRRRRRRRRR", type(int((f"{int(month):02d}"))))
-    print("YEARRRRRRRRRR", int(day))
-
+    # print("YEARRRRRRRRRR", int(year))
+    # print("YEARRRRRRRRRR", type(int((f"{int(month):02d}"))))
+    # print("YEARRRRRRRRRR", int(day))
+# date(int(year), int((f"{int(month):02d}")
     print("YEARRRRRRRRRR", type(9))
     form['csrf_token'].data = request.cookies['csrf_token']
     # form['title'].data = "test"
     if form.validate_on_submit():
         print("FORM@@@@@", form.data)
-        task = Task(user_id=current_user.id, list_id=None, title=form.data["title"], due_by=date(int(year), int((f"{int(month):02d}")), int(day)), complete=False)
+        task = Task(user_id=current_user.id, list_id=None, title=form.data["title"], due_by=request.get_json()["due_by"], complete=False)
         db.session.add(task)
         db.session.commit()
         return task.to_dict()
@@ -88,7 +90,7 @@ def postTask():
 def editTask(id):
     task = Task.query.get(id)
     data = request.get_json()
-    print(data["newEditTask"])
+    print(data["newEditTask"], "NEW TITLE")
     if data["newEditTask"]:
         task.title=data["newEditTask"]
     if data["newDueBy"]:
