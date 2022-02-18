@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { addOneTask, getAllTasks } from '../store/tasks';
+import { addOneTask, deleteOneTask, getAllTasks } from '../store/tasks';
 import './UserHomepage.css'
 // import image from '/images'
 
@@ -17,7 +17,7 @@ function UserHomepage () {
     const [listId, setListId] = useState(null)
     const today = new Date()
     // const defDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    const [dueBy, setDueBy] = useState("0000-00-00000:00")
+    const [dueBy, setDueBy] = useState("0000-00-00T00:00")
     console.log("STATE@@@@@@@", userTasks)
 
     useEffect(() => {
@@ -34,6 +34,8 @@ function UserHomepage () {
     function showCalendar () {
         setShowDate(!showDate)
     }
+    const taskval = document.getElementById("taskInput")
+    const dateval = document.getElementById("dateInput")
 
     const addTask = async (e) => {
         e.preventDefault();
@@ -47,11 +49,25 @@ function UserHomepage () {
         }
         console.log("NEWTASK", newTask)
         const data = await dispatch(addOneTask(newTask));
+        dispatch(getAllTasks(userId))
         console.log("@@@@@@@DATA@@@@@", data)
+        console.log("SEFESFSE", taskval)
+        console.log("DATEVAL", dateval)
+        setTitle("")
+        setDueBy("0000-00-00T00:00")
+        taskval.value = ""
+        dateval.value = "0000-00-00T00:00"
         // if (data) {
         //   setErrors(data);
         // }
       };
+
+      const deleteTask = async (e) => {
+          e.preventDefault()
+          console.log("SFSESEFESF", e.target.id)
+          await dispatch(deleteOneTask(e.target.id))
+          dispatch(getAllTasks(userId))
+      }
 
       const updateTitle = e => {
           setTitle(e.target.value)
@@ -68,17 +84,17 @@ function UserHomepage () {
         <div className="homePage">
             <h1>Welcome {user.firstName}</h1>
             <form onSubmit={addTask}>
-                <input name='title' type='text' placeholder="Add a task.." value={title} onChange={updateTitle}></input><button type="submit">Add</button>
+                <input id="taskInput" name='title' type='text' placeholder="Add a task.." value={title} onChange={updateTitle}></input><button type="submit">Add</button>
                 <div id="icons">
 
                     <label for="due"><button>Due By</button></label>
-                    <input type="datetime-local" onChange={updateDate} value={dueBy} id="due"></input>
+                    <input id="dateInput" type="datetime-local" onChange={updateDate} value={dueBy}></input>
                     <button>List:</button>
-                <div class="showDate">
+                {/* <div class="showDate">
                     {showDate &&
                     <input type="date" data-date-open-on-focus="false" />
                     }
-                </div>
+                </div> */}
                     <p></p>
                 </div>
             </form>
@@ -86,7 +102,12 @@ function UserHomepage () {
             <div className="listsContainer">
                 {console.log("TASKS ARRE",((tasksArr)))}
                 {tasksArr && (tasksArr.map(task => (
-                    <p>{task.title}</p>
+                    <div id = {task.id}key={task.id}>
+                        <p>{task.title}</p>
+                        <button>Edit</button>
+                        <button id={task.id} onClick={deleteTask} key={task.id}>Delete</button>
+                    </div>
+
                 )))}
             </div>
         </div>

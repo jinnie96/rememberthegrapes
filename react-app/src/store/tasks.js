@@ -151,7 +151,7 @@ export default function listReducer(state = initialState, action) {
         };
         case DELETE_TASK: {
             newState = { ...state };
-            delete newState[action.payload.id];
+            delete newState[action.id];
             return newState;
         };
 

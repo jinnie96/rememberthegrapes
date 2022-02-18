@@ -98,7 +98,12 @@ def editTask(id):
 @tasks_routes.route('/<int:id>', methods=["DELETE"])
 @login_required
 def deleteTask(id):
+    print("ID", id)
     task = Task.query.get(id)
+    print("BEFORE@", task)
     db.session.delete(task)
     db.session.commit()
-    return list.to_dict()
+    print("DELETED")
+    return {
+        "id": id
+    }
