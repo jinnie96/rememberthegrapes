@@ -1,74 +1,75 @@
 // ACTION TYPES
 
-const GET_TASKS = 'tasks/GET_TASKS'
-const GET_ONE_TASK = 'tasks/GET_ONE_TASK'
-const ADD_TASK = 'tasks/ADD_TASK'
-const UPDATE_TASK = 'tasks/UPDATE_TASK'
-const DELETE_TASK = 'tasks/DELETE_TASK'
-const GET_USER_TASK = 'tasks/GET_USER_TASK'
+const GET_LISTS = 'tasks/GET_LISTS'
+const GET_ONE_LIST = 'tasks/GET_ONE_LIST'
+const ADD_LIST = 'tasks/ADD_LIST'
+const UPDATE_LIST = 'tasks/UPDATE_LIST'
+const DELETE_LIST = 'tasks/DELETE_LIST'
+const GET_USER_LIST = 'tasks/GET_USER_LIST'
 
 // ACTION CREATORS
-// const getTasks = tasks => ({
-//     type: GET_TASKS,
-//     payload: tasks
-// })
-
-const getOneTask = task => ({
-    type: GET_ONE_TASK,
-    payload: task
+const getLists = lists => ({
+    type: GET_LISTS,
+    payload: lists
 })
 
-const addTask = task => ({
-    type: ADD_TASK,
-    payload: task
+const getOneList = list => ({
+    type: GET_ONE_LIST,
+    payload: list
 })
 
-const updateTask = task => ({
-    type: UPDATE_TASK,
-    payload: task
+const addList = list => ({
+    type: ADD_LIST,
+    payload: list
 })
 
-const deleteTask = task => ({
-    type: DELETE_TASK,
-    payload: task
+const updateList = list => ({
+    type: UPDATE_LIST,
+    payload: list
 })
 
-const getUserTask = task => ({
-    type: GET_USER_TASK,
-    payload: task
+const deleteList = list => ({
+    type: DELETE_LIST,
+    payload: list
+})
+
+const getUserList = list => ({
+    type: GET_USER_LIST,
+    payload: list
 })
 
 // THUNK CREATORS
 
-export const getAllTasks = (id) => async dispatch => {
-    const response = await fetch (`/api/tasks/user/${id}`)
+export const getAllLists = (id) => async dispatch => {
+    console.log("IN DPSATCH------")
+    const response = await fetch (`/api/lists/user/${id}`)
     if (response.ok) {
         const data = await response.json();
         if (data.errors) {
             return;
         };
 
-        dispatch(getUserTask(data));
+        dispatch(getUserList(data));
         return data;
     }
 }
 
-export const getSingleTask = (id) => async dispatch => {
-    const response = await fetch (`/api/tasks/${id}`)
+export const getSingleLists = (id) => async dispatch => {
+    const response = await fetch (`/api/lists/${id}`)
     if (response.ok) {
         const data = await response.json();
         if (data.errors) {
             return;
         };
 
-        dispatch(getOneTask(data));
+        dispatch(getOneList(data));
         return data;
     }
 }
 
-export const addOneTask = (form) => async dispatch => {
+export const addOneList = (form) => async dispatch => {
     console.log("FORM@!#!@#!#", form)
-    const response = await fetch (`/api/tasks/`, {
+    const response = await fetch (`/api/lists/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -78,13 +79,13 @@ export const addOneTask = (form) => async dispatch => {
     if (response.ok) {
         const data = await response.json();
         console.log("DATAAAAAAAAA", data)
-        dispatch(addTask(data));
+        dispatch(addList(data));
         return data;
     }
 }
 
-export const updateOneTask = (id, task) => async dispatch => {
-    const response = await fetch (`/api/tasks/${id}`, {
+export const updateOneList = (id, task) => async dispatch => {
+    const response = await fetch (`/api/lists/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -95,17 +96,17 @@ export const updateOneTask = (id, task) => async dispatch => {
     if (response.ok) {
         const data = await response.json();
         console.log(data, "UPADTE DATA")
-        dispatch(updateTask(data));
+        dispatch(updateList(data));
         return data;
     }
 }
 
-export const deleteOneTask = (id) => async dispatch => {
-    const response = await fetch (`/api/tasks/${id}`, {
+export const deleteOneList = (id) => async dispatch => {
+    const response = await fetch (`/api/lists/${id}`, {
         method: 'DELETE',
     })
     if (response.ok) {
-        dispatch(deleteTask(id));
+        dispatch(deleteList(id));
         return "Deleted";
     }
 }
@@ -116,42 +117,42 @@ const initialState = {}
 
 // REDUCER
 
-export default function taskReducer(state = initialState, action) {
+export default function listReducer(state = initialState, action) {
     let newState;
     switch (action.type) {
-        case GET_USER_TASK: {
+        case GET_USER_LIST: {
             newState = {...state};
             // for (const key in action.payload) {
             //     newState[action.payload[key].id] = action.payload[key]
             // }
             console.log(action.payload.tasks,"!!@#@!#@!#!#!#")
-            action.payload.tasks.forEach(task => {
-                newState[task.id] = task
+            action.payload.lists.forEach(list => {
+                newState[list.id] = list
             })
             return newState
         }
-        case GET_ONE_TASK: {
+        case GET_ONE_LIST: {
             newState = {
                 ...state,
                 [action.payload.task.id]: action.payload.task
             };
             return newState;
         };
-        case ADD_TASK: {
+        case ADD_LIST: {
             newState = {
                 ...state,
                 [action.payload.id]: action.payload
             };
             return newState;
         };
-        case UPDATE_TASK: {
+        case UPDATE_LIST: {
             newState = {
                 ...state,
                 [action.payload.id]: action.payload
             };
             return newState;
         };
-        case DELETE_TASK: {
+        case DELETE_LIST: {
             newState = { ...state };
             delete newState[action.payload];
             return newState;
