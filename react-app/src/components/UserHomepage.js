@@ -23,6 +23,7 @@ function UserHomepage () {
     const [editing, setEditing] = useState(false)
     const [newEditTask, setNewEditTask] = useState("")
     const [addingList, setAddingList] = useState(false)
+    const [selectedList, setSelectedList] = useState()
     // const defDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     const [dueBy, setDueBy] = useState("0000-00-00T00:00")
     const [newDueBy, setNewDueBy] = useState("0000-00-00T00:00")
@@ -130,6 +131,12 @@ function UserHomepage () {
       const changeAdding = e => {
           setAddingList(!addingList)
       }
+
+      const changeSelectedList = e => {
+          console.log("SELECTEDLIST", e.target.id)
+          setSelectedList(e.target.id)
+          console.log("SELECT LIST ID", selectedList)
+      }
     const tasksArr = Object.values(userTasks)
     const listsArr = Object.values(userLists)
     const tasksArray = tasksArr.reverse().reverse();
@@ -149,8 +156,13 @@ function UserHomepage () {
                     </form>
                 )}
                 {listsArr && (listsArr.map(list => (
-                    <div id = {list.id}key={list.id}>
-                        <button>{list.title}</button>
+                    <div>
+                        {list.user_id === userId && (
+                            <div key={list.id}>
+                                <button id={list.id} onClick={changeSelectedList}>{list.title}</button>
+                            </div>
+
+                        )}
                     </div>
                 )))}
             </div>
@@ -171,9 +183,13 @@ function UserHomepage () {
                 </div>
             </form>
             <h1>All tasks: (Replace with Tasks in List Selected)</h1>
-            <div className="listsContainer">
+            <div className="listContainer">
                 {console.log("TASKS ARRE",((tasksArr)))}
                 {tasksArr && (tasksArr.map(task => (
+                    
+                    <div>
+                        {console.log("TASKID", task.list_id, "selectedLIST", selectedList)}
+                        {task.id == selectedList && (
                     <div id = {task.id}key={task.id}>
                         <p>{task.title}</p>
                         <p>Due By: {task.due_by}</p>
@@ -205,6 +221,10 @@ function UserHomepage () {
                         )
                         }
                     })()}
+                    </div>
+
+                        )}
+
                     </div>
 
                 )))}
