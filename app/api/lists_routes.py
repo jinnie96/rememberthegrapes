@@ -29,7 +29,11 @@ def getUserLists(id):
 @lists_routes.route('/<int:id>')
 @login_required
 def getSingleList(id):
-    return
+    list = List.query.get(id)
+    return {
+        "id": list.id,
+        "title": list.title
+    }
 
 @lists_routes.route('/', methods=["POST"])
 @login_required

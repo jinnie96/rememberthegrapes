@@ -24,9 +24,12 @@ function UserHomepage () {
     const [newEditTask, setNewEditTask] = useState("")
     const [addingList, setAddingList] = useState(false)
     const [selectedList, setSelectedList] = useState()
+    const [selectedListId, setSelectedListId] = useState()
+    const [selectedListTitle, setSelectedListTitle] = useState()
     // const defDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     const [dueBy, setDueBy] = useState("0000-00-00T00:00")
     const [newDueBy, setNewDueBy] = useState("0000-00-00T00:00")
+    const [num, setNum] = useState()
     console.log("STATE@@@@@@@", userLists)
 
     useEffect(() => {
@@ -116,6 +119,24 @@ function UserHomepage () {
           changeAdding()
       }
 
+      const getSingleListInfo =  async(id) => {
+        const response = await fetch (`/api/lists/${id}`)
+        // console.log("RES", response.body)
+        if (response.ok) {
+            const data = await response.json();
+            setSelectedListId(data.id)
+            setSelectedListTitle(data.title)
+            const filterTasks = tasksArr.filter(task => task.list_id == data.id)
+            const num = filterTasks.filter( task => task.user_id === userId)
+            console.log("nummmmm", num)
+            setNum(num.length)
+            if (data.errors) {
+                return;
+            };
+        }
+        console.log("YOOOO", selectedListTitle)
+    }
+
       const updateListTitle = e => {
           setListTitle(e.target.value)
       }
@@ -135,12 +156,15 @@ function UserHomepage () {
       const changeSelectedList = e => {
           console.log("SELECTEDLIST", e.target.id)
           setSelectedList(e.target.id)
+          getSingleListInfo(e.target.id)
           console.log("SELECT LIST ID", selectedList)
       }
     const tasksArr = Object.values(userTasks)
     const listsArr = Object.values(userLists)
     const tasksArray = tasksArr.reverse().reverse();
     const arr = ["a", "b", "c"]
+
+
     return (
         <div className="homePage">
             <div className="listsContainer">
@@ -182,14 +206,14 @@ function UserHomepage () {
                     <p></p>
                 </div>
             </form>
-            <h1>All tasks: (Replace with Tasks in List Selected)</h1>
+            {/* <h1>All tasks: (Replace with Tasks in List Selected)</h1> */}
             <div className="listContainer">
                 {console.log("TASKS ARRE",((tasksArr)))}
                 {tasksArr && (tasksArr.map(task => (
-                    
+
                     <div>
                         {console.log("TASKID", task.list_id, "selectedLIST", selectedList)}
-                        {task.id == selectedList && (
+                        {task.list_id == selectedList && (
                     <div id = {task.id}key={task.id}>
                         <p>{task.title}</p>
                         <p>Due By: {task.due_by}</p>
@@ -231,7 +255,8 @@ function UserHomepage () {
             </div>
             </div>
             <div className="taskInfoContainer">
-                <p>Insert Details of List Selected Here</p>
+                <p>{selectedListTitle}</p><br></br>
+                <h3>{num} task</h3><h3>completed</h3>
             </div>
 
         </div>
