@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addOneTask, deleteOneTask, getAllTasks, updateOneTask } from '../store/tasks';
 import './UserHomepage.css'
-import { getAllLists } from '../store/lists';
+import { addOneList, getAllLists } from '../store/lists';
 // import image from '/images'
 
 
@@ -18,9 +18,11 @@ function UserHomepage () {
     const [lists, setLists] = useState()
     const [showDate, setShowDate] = useState(false)
     const [title, setTitle] = useState("")
+    const [listTitle, setListTitle] = useState("")
     const [listId, setListId] = useState(null)
     const [editing, setEditing] = useState(false)
     const [newEditTask, setNewEditTask] = useState("")
+    const [addingList, setAddingList] = useState(false)
     // const defDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     const [dueBy, setDueBy] = useState("0000-00-00T00:00")
     const [newDueBy, setNewDueBy] = useState("0000-00-00T00:00")
@@ -99,12 +101,34 @@ function UserHomepage () {
         // updateTitleTag.value = e.target.value
       }
 
+      const addList = async (e) => {
+          e.preventDefault()
+          console.log("LISTTITLE", listTitle)
+          const newList = {
+              user_id: user.id,
+              title: listTitle
+          }
+
+          const data = dispatch(addOneList(newList))
+          dispatch(getAllLists(userId))
+          setListTitle("")
+          changeAdding()
+      }
+
+      const updateListTitle = e => {
+          setListTitle(e.target.value)
+      }
+
       const updateDate = e => {
         setDueBy(e.target.value)
       }
 
       const updateNewDate = e => {
         setNewDueBy(e.target.value)
+      }
+
+      const changeAdding = e => {
+          setAddingList(!addingList)
       }
     const tasksArr = Object.values(userTasks)
     const listsArr = Object.values(userLists)
@@ -114,11 +138,19 @@ function UserHomepage () {
         <div className="homePage">
             <div className="listsContainer">
             <h1>Welcome {user.firstName}</h1>
-                <p>Insert Logo Here</p>
-                <p>Insert All Lists Here</p>
+                <p>Inbox</p>
+                <button>All Tasks</button>
+                <p>Lists:</p><button onClick={changeAdding}>Add List</button>
+                {addingList && (
+                    <form onSubmit={addList}>
+                        <input name='title' placeholder="Enter new list..."type="text" value ={listTitle} onChange={updateListTitle}></input><br></br>
+                        <button type="submit">Submit</button>
+                        <button onClick={changeAdding}>Cancel</button>
+                    </form>
+                )}
                 {listsArr && (listsArr.map(list => (
                     <div id = {list.id}key={list.id}>
-                        <p>{list.title}</p>
+                        <button>{list.title}</button>
                     </div>
                 )))}
             </div>

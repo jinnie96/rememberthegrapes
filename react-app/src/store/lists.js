@@ -125,7 +125,7 @@ export default function listReducer(state = initialState, action) {
             // for (const key in action.payload) {
             //     newState[action.payload[key].id] = action.payload[key]
             // }
-            console.log(action.payload.tasks,"!!@#@!#@!#!#!#")
+            console.log(action.payload.lists,"!!@#@!#@!#!#!#")
             action.payload.lists.forEach(list => {
                 newState[list.id] = list
             })
