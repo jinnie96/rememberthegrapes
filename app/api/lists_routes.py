@@ -62,4 +62,12 @@ def editList(id):
 @lists_routes.route('/<int:id>', methods=["DELETE"])
 @login_required
 def deleteList(id):
-    return
+    print("IDDEL", id)
+    list = List.query.get(id)
+    print("BEFORE@", list)
+    db.session.delete(list)
+    db.session.commit()
+    print("DELETED")
+    return {
+        "id": id
+    }

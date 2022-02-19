@@ -10,7 +10,8 @@ class List(db.Model):
     title = db.Column(db.String(50), nullable=False)
     cascade="all, delete-orphan"
 
-    user = relationship("User", foreign_keys=[user_id])
+    users = relationship("User", foreign_keys=[user_id], back_populates="lists")
+    tasks = relationship("Task", cascade="all, delete", back_populates="list")
 
     def to_dict(self):
         return {

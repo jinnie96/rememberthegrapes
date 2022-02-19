@@ -14,7 +14,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
-    lists = relationship("List", foreign_keys="List.user_id", back_populates='user')
+    lists = relationship("List", foreign_keys="List.user_id", back_populates='users')
     tasks = relationship("Task", foreign_keys="Task.user_id", back_populates='users')
 
     @property

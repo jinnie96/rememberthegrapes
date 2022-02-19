@@ -15,3 +15,8 @@
 #taskTitle:hover {
     cursor: pointer;
 }
+
+.listBtns {
+    display: flex;
+    justify-content: space-between;
+}

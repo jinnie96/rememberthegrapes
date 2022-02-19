@@ -11,8 +11,8 @@ class Task(db.Model):
     due_by = db.Column(db.DateTime(255), nullable=True)
     complete = db.Column(db.Boolean, nullable=False)
 
-    users = relationship("User", foreign_keys=[user_id])
-
+    users = relationship("User", foreign_keys=[user_id], back_populates="tasks")
+    list = relationship("List", back_populates="tasks")
     def to_dict(self):
         return {
             'id': self.id,

@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addOneTask, deleteOneTask, getAllTasks, updateOneTask } from '../store/tasks';
 import './UserHomepage.css'
-import { addOneList, getAllLists } from '../store/lists';
+import { addOneList, getAllLists, deleteOneList, updateOneList } from '../store/lists';
 // import image from '/images'
 
 
@@ -123,6 +123,12 @@ function UserHomepage () {
           changeAdding()
       }
 
+      const deleteList = async (e) => {
+        e.preventDefault()
+        console.log("SFSESEFESF", selectedListId)
+        await dispatch(deleteOneList(selectedListId))
+        dispatch(getAllLists(userId))
+      }
       const getSingleListInfo =  async(id) => {
         const response = await fetch (`/api/lists/${id}`)
         // console.log("RES", response.body)
@@ -161,6 +167,7 @@ function UserHomepage () {
           console.log("SELECTEDLIST", e.target.id)
           setSelectedList(e.target.id)
           getSingleListInfo(e.target.id)
+          setListId(e.target.id)
           console.log("SELECT LIST ID", selectedList)
       }
 
@@ -208,7 +215,7 @@ function UserHomepage () {
                 {listsArr && (listsArr.map(list => (
                     <div>
                         {list.user_id === userId && (
-                            <div key={list.id}>
+                            <div id="listBtns" key={list.id}>
                                 <button id={list.id} onClick={changeSelectedList}>{list.title}</button>
                             </div>
 
@@ -223,7 +230,7 @@ function UserHomepage () {
 
                     <label for="due"><button>Due By</button></label>
                     <input id="dateInput" type="datetime-local" onChange={updateDate} value={dueBy}></input>
-                    <button>List:</button>
+                    <label for="List">List:</label>
                 {/* <div class="showDate">
                     {showDate &&
                     <input type="date" data-date-open-on-focus="false" />
@@ -279,6 +286,11 @@ function UserHomepage () {
                     </div>
 
                 )))}
+                    <div>
+
+                        <button>Edit List</button>
+                        <button onClick = {deleteList}>Delete List</button>
+                    </div>
             </div>
             </div>
             {showTask && (

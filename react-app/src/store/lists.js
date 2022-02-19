@@ -102,6 +102,7 @@ export const updateOneList = (id, task) => async dispatch => {
 }
 
 export const deleteOneList = (id) => async dispatch => {
+    console.log("INSIDE API DELETE", id)
     const response = await fetch (`/api/lists/${id}`, {
         method: 'DELETE',
     })
