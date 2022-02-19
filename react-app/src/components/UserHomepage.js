@@ -26,10 +26,14 @@ function UserHomepage () {
     const [selectedList, setSelectedList] = useState()
     const [selectedListId, setSelectedListId] = useState()
     const [selectedListTitle, setSelectedListTitle] = useState()
+    const [selectedTaskId, setSelectedTaskId] = useState()
+    const [selectedTaskTitle, setSelectedTaskTitle] = useState("")
+    const [selectedTaskDue, setSelectedTaskDue] = useState()
     // const defDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     const [dueBy, setDueBy] = useState("0000-00-00T00:00")
     const [newDueBy, setNewDueBy] = useState("0000-00-00T00:00")
     const [num, setNum] = useState()
+    const [showTask, setShowTask] = useState(false)
     console.log("STATE@@@@@@@", userLists)
 
     useEffect(() => {
@@ -159,6 +163,28 @@ function UserHomepage () {
           getSingleListInfo(e.target.id)
           console.log("SELECT LIST ID", selectedList)
       }
+
+      const showTaskDetails = async (e) => {
+        setShowTask(!showTask)
+        console.log("IN SHOWTASK", e.target)
+        const response = await fetch (`/api/tasks/${e.target.id}`)
+        // console.log("RES", response.body)
+        if (response.ok) {
+            const data = await response.json();
+            console.log("TASK DATAAAA", data)
+            setSelectedTaskId(data.id)
+            setSelectedTaskTitle(data.task.title)
+            setSelectedTaskDue(data.task.due_by)
+            // const filterTasks = tasksArr.filter(task => task.list_id == data.id)
+            // const num = filterTasks.filter( task => task.user_id === userId)
+            // console.log("nummmmm", num)
+            // setNum(num.length)
+            // if (data.errors) {
+            //     return;
+            // };
+        }
+
+      }
     const tasksArr = Object.values(userTasks)
     const listsArr = Object.values(userLists)
     const tasksArray = tasksArr.reverse().reverse();
@@ -214,9 +240,10 @@ function UserHomepage () {
                     <div>
                         {console.log("TASKID", task.list_id, "selectedLIST", selectedList)}
                         {task.list_id == selectedList && (
-                    <div id = {task.id}key={task.id}>
-                        <p>{task.title}</p>
-                        <p>Due By: {task.due_by}</p>
+                    <div key={task.id}>
+                        <input type="checkbox"></input>
+                        <div id={task.id} onClick={showTaskDetails}>{task.title}</div> <br></br>
+                        Due By: {task.due_by}
                         {/* {!editing ? (
                             <button onClick = {setEditing(!editing)}>Edit</button>
                         ) : (
@@ -254,10 +281,21 @@ function UserHomepage () {
                 )))}
             </div>
             </div>
-            <div className="taskInfoContainer">
-                <p>{selectedListTitle}</p><br></br>
-                <h3>{num} task</h3><h3>completed</h3>
-            </div>
+            {showTask && (
+                <div className="taskInfoContainer">
+                    <p>{selectedListTitle}</p><br></br>
+                    <h3>{num} tasks</h3><h3>completed</h3>
+                </div>
+            )}
+            {!showTask && (
+                <div>
+                    {console.log("FALSE", selectedTaskTitle)}
+                    <p>{selectedTaskTitle}</p><br></br>
+                    <p>due: {selectedTaskDue}</p>
+                    <p>list: {selectedListTitle}</p>
+                    {/* <p>due: {selectedTask</p> */}
+                </div>
+            )}
 
         </div>
     )

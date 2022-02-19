@@ -35,8 +35,9 @@ def getUserTasks(id):
 @tasks_routes.route('/<int:id>')
 @login_required
 def getSingleTask(id):
+    print("IN API")
     task = Task.query.filter(id == Task.id).first()
-    return task
+    return {"task": task.to_dict()}
 
 @tasks_routes.route('/', methods=["POST"])
 @login_required
