@@ -3,7 +3,8 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import { login } from "../store/session"
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import './NavBar.css'
 
 const NavBar = () => {
   const dispatch = useDispatch()
@@ -11,6 +12,8 @@ const NavBar = () => {
     e.preventDefault()
     await dispatch(login("demo@aa.io", "password"))
 }
+
+const user = useSelector(state => state.session.user)
 
 // const onLogin = async (e) => {
 //   e.preventDefault();
@@ -24,27 +27,31 @@ const NavBar = () => {
 
   return (
     <nav>
-      <ul>
+      <ul class="navbar">
         <li>
           <NavLink to='/' exact={true} activeClassName='active'>
-            Home
+            <button>Home</button>
           </NavLink>
         </li>
-        <li>
-          <NavLink to='/login' exact={true} activeClassName='active'>
-            Login
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/sign-up' exact={true} activeClassName='active'>
-            Sign Up
-          </NavLink>
-        </li>
-        <li>
+        {!user && (
+          <div>
+            <li>
+              <NavLink to='/login' exact={true} activeClassName='active'>
+                Login
+              </NavLink>
+            </li>
+          <li>
+            <NavLink to='/sign-up' exact={true} activeClassName='active'>
+              Sign Up
+            </NavLink>
+          </li>
+          </div>
+        )}
+        {/* <li>
           <NavLink to='/users' exact={true} activeClassName='active'>
             Users
           </NavLink>
-        </li>
+        </li> */}
         <li>
           <LogoutButton />
         </li>
