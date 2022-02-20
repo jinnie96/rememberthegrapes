@@ -362,7 +362,7 @@ function UserHomepage () {
                 </div>
             )}
             {!showTask && (
-                <div>
+                <div class="taskSelectedInfoContainer">
                     {console.log("FALSE", selectedTaskTitle)}
                     <p onClick = {editingTaskTitle} id="taskTitleName">{selectedTaskTitle}</p><br></br>
                     {/* <input name='title' type='text' defaultValue={selectedTaskTitle} onChange={updateTaskTitle}></input> */}
