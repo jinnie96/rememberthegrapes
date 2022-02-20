@@ -46,7 +46,7 @@ def postTask():
     # data = json.loads(request.data.decode("utf-8"))
     # data = request.json()
     data = request.get_json()
-    print("DATA JSON@@!!!!!!!!")
+    print("DATA JSON@@!!!!!!!!", data["list_id"])
     form = AddTaskForm()
     print(form.data, "FORM DATA@!@#!#!@")
     # if len(request.get_json()["due_by"][0].split("-")[1]) is 1:
@@ -64,7 +64,7 @@ def postTask():
     # form['title'].data = "test"
     if form.validate_on_submit():
         print("FORM@@@@@", form.data)
-        task = Task(user_id=current_user.id, list_id=None, title=form.data["title"], due_by=request.get_json()["due_by"], complete=False)
+        task = Task(user_id=current_user.id, list_id=data["list_id"], title=form.data["title"], due_by=request.get_json()["due_by"], complete=False)
         db.session.add(task)
         db.session.commit()
         return task.to_dict()

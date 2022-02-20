@@ -25,6 +25,7 @@ function UserHomepage () {
     const [addingList, setAddingList] = useState(false)
     const [selectedList, setSelectedList] = useState()
     const [selectedListId, setSelectedListId] = useState()
+    const [selectedNewTaskId, setSelectedNewTaskId] = useState()
     const [selectedListTitle, setSelectedListTitle] = useState()
     const [selectedTaskId, setSelectedTaskId] = useState()
     const [selectedTaskTitle, setSelectedTaskTitle] = useState("")
@@ -60,9 +61,10 @@ function UserHomepage () {
         e.preventDefault();
         console.log("DUEEEEE DATEEEE", (dueBy.split('T')))
         const dueDate = dueBy.split("T")
+        console.log("LISTID@!!!!!", selectedNewTaskId)
         const newTask = {
             user_id: user.id,
-            list_id: listId,
+            list_id: selectedNewTaskId,
             title: title,
             due_by: dueBy
         }
@@ -96,6 +98,7 @@ function UserHomepage () {
             newDueBy
         }
         await dispatch(updateOneTask(e.target.id, task))
+        setEditing(false)
       }
 
       const updateTitle = e => {
@@ -114,6 +117,7 @@ function UserHomepage () {
           console.log("LISTTITLE", listTitle)
           const newList = {
               user_id: user.id,
+              list_id: selectedNewTaskId,
               title: listTitle
           }
 
@@ -128,10 +132,11 @@ function UserHomepage () {
         console.log("SFSESEFESF", selectedListId)
         await dispatch(deleteOneList(selectedListId))
         dispatch(getAllLists(userId))
+        setShowTask(false)
       }
       const getSingleListInfo =  async(id) => {
         const response = await fetch (`/api/lists/${id}`)
-        // console.log("RES", response.body)
+        // console.log("RES", response.body)new Date(task.dueDate).toDateString()
         if (response.ok) {
             const data = await response.json();
             setSelectedListId(data.id)
@@ -171,6 +176,11 @@ function UserHomepage () {
           console.log("SELECT LIST ID", selectedList)
       }
 
+      const changeNewTaskListId = e => {
+        console.log(e.target.value)
+        setSelectedNewTaskId(e.target.value)
+      }
+
       const showTaskDetails = async (e) => {
         setShowTask(!showTask)
         console.log("IN SHOWTASK", e.target)
@@ -192,10 +202,58 @@ function UserHomepage () {
         }
 
       }
+
+        const editingTaskTitle = (e) => {
+            console.log("YO")
+            const titleInput = document.getElementById("taskTitleName")
+            console.log(titleInput, selectedTaskTitle)
+            titleInput.innerHTML = `<input name='title' type='text' value=${selectedTaskTitle} onChange={updateTaskTitle}></input>`
+            console.log(titleInput)
+        }
+
+        // window.addEventListener("click", function() {
+        //     const titleInput = document.getElementById("taskTitleName")
+        //     if (titleInput) {
+        //         titleInput.innerHTML = `${selectedTaskTitle}`
+        //     } else {
+        //         return
+        //     }
+        // })
+      const editingTask = async (e) => {
+          setEditing(!editing)
+          console.log(editing)
+
+      }
     const tasksArr = Object.values(userTasks)
     const listsArr = Object.values(userLists)
     const tasksArray = tasksArr.reverse().reverse();
     const arr = ["a", "b", "c"]
+
+    const listName = document.getElementById("Weekendlist")
+    const editListBtn = document.getElementById("editListBtn")
+    const listInput = document.getElementById("editListInput")
+    const cancelListName = document.getElementById("editListCancelBtn")
+    // cancelListName.innerText = "Cancel"
+    const cancelListChange = async(e) => {
+        cancelListName.style.display="none"
+        listInput.style.display="none"
+        editListBtn.style.display = "block"
+        listName.style.display = "block"
+    }
+
+    // cancelListName.addEventListener("click", cancelListChange)
+
+    // const listName = document.getElementById("Weekendlist")
+    // const editListBtn = document.getElementById("editListBtn")
+    const changeListName = async (e) => {
+        console.log(e.target.parentElement.firstChild)
+        listInput.value = e.target.parentElement.firstChild.innerText
+        editListBtn.style.display = "none"
+        listName.style.display = 'none'
+        e.target.parentElement.appendChild(listInput)
+        e.target.parentElement.appendChild(cancelListName)
+    }
+
 
 
     return (
@@ -215,8 +273,11 @@ function UserHomepage () {
                 {listsArr && (listsArr.map(list => (
                     <div>
                         {list.user_id === userId && (
-                            <div id="listBtns" key={list.id}>
+                            <div className="listBtns" key={list.id}>
                                 <button id={list.id} onClick={changeSelectedList}>{list.title}</button>
+                                <button id="editListBtn" onClick={changeListName}>Edit</button>
+                                <input id="editListInput" value = {list.title}></input>
+                                <button id="editListCancelBtn">Cancel</button>
                             </div>
 
                         )}
@@ -225,12 +286,18 @@ function UserHomepage () {
             </div>
             <div className="listTasksContainer">
             <form onSubmit={addTask}>
-                <input id="taskInput" name='title' type='text' placeholder="Add a task.." value={title} onChange={updateTitle}></input><button type="submit">Add</button>
+                <input id="taskInput" name='title' required="true" type='text' placeholder="Add a task.." value={title} onChange={updateTitle}></input><button type="submit">Add</button>
                 <div id="icons">
 
                     <label for="due"><button>Due By</button></label>
                     <input id="dateInput" type="datetime-local" onChange={updateDate} value={dueBy}></input>
-                    <label for="List">List:</label>
+                    <label defaultValue="null" for="lists">List:</label>
+                    <select name="lists" id="listOptions" onChange={changeNewTaskListId}>
+                        <option value="None">None</option>
+                    {listsArr && (listsArr.map(list => (
+                               <option value={list.id}>{list.title}</option>
+                    )))}
+                    </select>
                 {/* <div class="showDate">
                     {showDate &&
                     <input type="date" data-date-open-on-focus="false" />
@@ -249,7 +316,7 @@ function UserHomepage () {
                         {task.list_id == selectedList && (
                     <div key={task.id}>
                         <input type="checkbox"></input>
-                        <div id={task.id} onClick={showTaskDetails}>{task.title}</div> <br></br>
+                        <div id={task.id} onClick={showTaskDetails}>{task.title}</div>
                         Due By: {task.due_by}
                         {/* {!editing ? (
                             <button onClick = {setEditing(!editing)}>Edit</button>
@@ -261,24 +328,19 @@ function UserHomepage () {
                             </div>
                         )} */}
                         {(() => {
-                        if (!editing) {
-                        return (
-                            <div>
-                            <button onClick = {setEditing(!editing)}>Edit</button>
-                            </div>
-                        )
-                        } else {
+                        if (editing) {
                         return (
                             <div>
                                 <p>Update Task:</p>
                                 <input id= {task.id} name='title' type='text' placeholder="Edit task.." defaultValue={task.title} onChange={updateTaskTitle}></input>
                                 <input id="dateInput" type="datetime-local" onChange={updateNewDate} defaultValue={Date.now()}></input>
                                 <button id={task.id} onClick={editTask}>Update</button>
-                                <button id={task.id} onClick={deleteTask} key={task.id}>Delete</button>
+                                <button onClick = {editingTask}>Cancel</button>
                             </div>
                         )
-                        }
-                    })()}
+                    }
+                })()}
+                <button id={task.id} onClick={deleteTask} key={task.id}>Delete Task</button>
                     </div>
 
                         )}
@@ -302,9 +364,12 @@ function UserHomepage () {
             {!showTask && (
                 <div>
                     {console.log("FALSE", selectedTaskTitle)}
-                    <p>{selectedTaskTitle}</p><br></br>
-                    <p>due: {selectedTaskDue}</p>
-                    <p>list: {selectedListTitle}</p>
+                    <p onClick = {editingTaskTitle} id="taskTitleName">{selectedTaskTitle}</p><br></br>
+                    {/* <input name='title' type='text' defaultValue={selectedTaskTitle} onChange={updateTaskTitle}></input> */}
+                    <p id="taskdue">due: {selectedTaskDue}</p>
+                    <p id="listName">list: {selectedListTitle}</p>
+                    <button onClick = {editingTask} id="editTaskBtn">Edit Task</button>
+                    {/* <button id="deleteTaskBtn">Delete Task</button> */}
                     {/* <p>due: {selectedTask</p> */}
                 </div>
             )}
