@@ -28,3 +28,20 @@
 #editListInput {
     display:none
 }
+
+.homePage {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+
+}
+
+.listTasksContainer {
+    background-color: #FFFFFF;
+    margin-bottom:0;
+    height: 100%;
+}
+
+.listContainer, .taskInfoContainer {
+    background-color:#E4EEF8;
+
+}

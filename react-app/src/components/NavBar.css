@@ -1,0 +1,17 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    /* width: 100%; */
+    align-items: center;
+    /* justify-content: center; */
+    /* text-align: center; */
+    margin-top: 0;
+    background-color: #0060bf;
+    height: 40px;
+    /* display: block; */
+    /* color: white; */
+}
+
+li {
+    color: white
+}
