@@ -20,3 +20,11 @@
     display: flex;
     justify-content: space-between;
 }
+
+#editListCancelBtn {
+    display: none
+}
+
+#editListInput {
+    display:none
+}
