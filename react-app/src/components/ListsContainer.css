@@ -21,3 +21,22 @@
 #inbox, #lists {
     font-weight: bolder;
 }
+
+#fa-edit {
+    z-index: 1;
+    margin-top: 16px
+}
+
+.listBtns {
+    width: 100%;
+}
+
+.addList {
+    display: flex;
+}
+
+#plusfa {
+    margin-left: 5px;
+    margin-top: 17px;
+    /* align-self: flex-end; */
+}

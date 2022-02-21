@@ -111,12 +111,17 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
             <h1>Welcome {user.firstName}</h1>
                 <p id="inbox">Inbox</p>
                 <p id="allTasks">All Tasks</p>
-                <p id="lists">Lists:</p><button onClick={changeAdding}>Add List</button>
+                <div className="addList">
+
+                <p id="lists">Lists:</p><i id="plusfa" class="fa-solid fa-plus" onClick={changeAdding}></i>
+                </div>
+                {/* <button onClick={changeAdding}>Add List</button> */}
+                {/* <i className="fa-solid fa-plus"></i> */}
                 {addingList && (
                     <form onSubmit={addList}>
-                        <input name='title' placeholder="Enter new list..."type="text" value ={listTitle} onChange={updateListTitle}></input><br></br>
+                        <input name='title' placeholder="Enter new list..."type="text" value ={listTitle} onChange={updateListTitle} required></input><br></br>
                         <button type="submit">Submit</button>
-                        <button onClick={changeAdding}>Cancel</button>
+                        <i id="addListPlus" onClick={changeAdding} class="fa-solid fa-rectangle-xmark"></i>
                     </form>
                 )}
                 {listsArr && (listsArr.map(list => (
@@ -124,10 +129,13 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
                         {list.user_id === userId && (
                             <div className="listBtns" key={list.id}>
                                 <p id={list.id} onClick={changeSelectedList}>{list.title}</p>
-                                <button id="editListBtn" onClick={changeListName}>Edit</button>
+                                <i id ="fa-edit" className="fa-solid fa-pen-to-square" onClick={changeListName}></i>
+                                {/* <button id="editListBtn" onClick={changeListName}>Edit</button> */}
                                 <input id="editListInput" onChange ={changeListNameState} defaultValue = {list.title}></input>
-                                <button id="updateListName" onClick={updateNewList}>Update</button>
-                                <button id="editListCancelBtn" onClick={cancelListChange}>Cancel</button>
+                                <i id="updateListName" class="fa-solid fa-square-check" onClick={updateNewList}></i>
+                                {/* <button id="updateListName" onClick={updateNewList}>Update</button> */}
+                                <i id="editListCancelBtn" onClick={cancelListChange} class="fa-solid fa-rectangle-xmark"></i>
+                                {/* <button id="editListCancelBtn" onClick={cancelListChange}>Cancel</button> */}
                             </div>
 
                         )}

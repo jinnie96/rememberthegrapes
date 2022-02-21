@@ -17,6 +17,7 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
                 <div class="taskSelectedInfoContainer">
                     {console.log("FALSE", selectedTaskTitle)}
                     <p onClick = {editingTaskTitle} id="taskTitleName">{selectedTaskTitle}</p><br></br>
+                    <p>{selectedTaskTitle}</p>
                     {/* <input name='title' type='text' defaultValue={selectedTaskTitle} onChange={updateTaskTitle}></input> */}
                     <p id="taskdue">due: {selectedTaskDue}</p>
                     <p id="listName">list: {selectedListTitle}</p>
