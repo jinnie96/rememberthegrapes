@@ -109,9 +109,9 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
         <div className="listsContainer">
             {console.log(tasksArr, "TASKS")}
             <h1>Welcome {user.firstName}</h1>
-                <p>Inbox</p>
-                <button>All Tasks</button>
-                <p>Lists:</p><button onClick={changeAdding}>Add List</button>
+                <p id="inbox">Inbox</p>
+                <p id="allTasks">All Tasks</p>
+                <p id="lists">Lists:</p><button onClick={changeAdding}>Add List</button>
                 {addingList && (
                     <form onSubmit={addList}>
                         <input name='title' placeholder="Enter new list..."type="text" value ={listTitle} onChange={updateListTitle}></input><br></br>
@@ -123,8 +123,7 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
                     <div>
                         {list.user_id === userId && (
                             <div className="listBtns" key={list.id}>
-                                <button id={list.id} onClick={changeSelectedList}>{list.title}</button>
-                                <button id="editListBtn" onClick={changeListName}>Edit</button>
+                                <p id={list.id} onClick={changeSelectedList}>{list.title}</p>
                                 <input id="editListInput" onChange ={changeListNameState} defaultValue = {list.title}></input>
                                 <button id="updateListName" onClick={updateNewList}>Update</button>
                                 <button id="editListCancelBtn" onClick={cancelListChange}>Cancel</button>

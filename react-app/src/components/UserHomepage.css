@@ -5,6 +5,10 @@
 
 .homePage {
     display:flex;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 50px;
 }
 
 .listsContainer, .tasksListsDisplay {
@@ -32,7 +36,16 @@
 .homePage {
     display: grid;
     grid-template-columns: 11% 44% 45%;
+    grid-template-rows: 1fr;
+    /* height: fit-content */
+    /* height: 100% */
 
+}
+
+.tasksListsDisplay {
+    /* margin-bottom:0; */
+    height: 100%;
+    bottom: 0px
 }
 
 .listTasksContainer {
@@ -43,11 +56,15 @@
 
 .taskInfoContainer {
     background-color:#E4EEF8;
-
+    bottom: 0;
+    margin-bottom: 0;
+    height: 100%;
 }
 
 .taskSelectedInfoContainer {
     background-color:#FFFFFF;
     /* position:absolute; */
-    bottom:0;
+    bottom: 0;
+    margin-bottom: 0;
+    height: 100%;
 }

@@ -28,11 +28,11 @@ const user = useSelector(state => state.session.user)
   return (
     <nav>
       <ul class="navbar">
-        <li>
+        {/* <li> */}
           <NavLink to='/' exact={true} activeClassName='active'>
-            <button>Home</button>
+            <i id = "homeBtn" className="fas fa-home i-img fa-2x"></i>
           </NavLink>
-        </li>
+        {/* </li> */}
         {!user && (
           <div>
             <li>
@@ -46,10 +46,15 @@ const user = useSelector(state => state.session.user)
             </NavLink>
           </li>
           </div>
+
         )}
+        <div class="searchBar">
+        <i className="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Search" />
+        </div>
         {/* <li>
           <NavLink to='/users' exact={true} activeClassName='active'>
-            Users
+          Users
           </NavLink>
         </li> */}
         <li>

@@ -1,0 +1,23 @@
+.tasksListsDisplay {
+    /* background-color: #FFFFFF; */
+    margin-bottom: 0;
+    height: 100%;
+
+}
+
+.taskInfoContainer {
+    height: 500px;
+    display: flex;
+    align-items: stretch;
+    bottom: 0
+    /* min-height: 500px */
+
+}
+
+.taskSelectedInfoContainer {
+    height: 100%;
+    display: flex;
+    align-items: stretch;
+    min-height: 500px
+
+}
