@@ -84,13 +84,14 @@ export const addOneList = (form) => async dispatch => {
     }
 }
 
-export const updateOneList = (id, task) => async dispatch => {
+export const updateOneList = (id, list) => async dispatch => {
+    console.log("IN API")
     const response = await fetch (`/api/lists/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(task)
+        body: JSON.stringify(list)
     })
     console.log("UDPDATE RES", response)
     if (response.ok) {
