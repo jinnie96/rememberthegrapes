@@ -124,6 +124,7 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
                         {list.user_id === userId && (
                             <div className="listBtns" key={list.id}>
                                 <p id={list.id} onClick={changeSelectedList}>{list.title}</p>
+                                <button id="editListBtn" onClick={changeListName}>Edit</button>
                                 <input id="editListInput" onChange ={changeListNameState} defaultValue = {list.title}></input>
                                 <button id="updateListName" onClick={updateNewList}>Update</button>
                                 <button id="editListCancelBtn" onClick={cancelListChange}>Cancel</button>
