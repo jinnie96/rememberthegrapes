@@ -1,5 +1,7 @@
 /* TODO Add site wide styles */
-body {
+html, body {
     margin: 0;
     background-color: #D7E7F5;
+    height: 100%;
+    width: 100%;
 }

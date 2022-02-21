@@ -1,0 +1,5 @@
+.listsTasksContainer {
+    display: flex;
+    align-items: stretch;
+    min-height: 500px
+}

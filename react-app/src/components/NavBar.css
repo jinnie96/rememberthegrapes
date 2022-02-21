@@ -15,3 +15,15 @@
 li {
     color: white
 }
+
+.searchBar {
+    color: #4383CC;
+    /* justify-content:left; */
+    width: 70px
+}
+
+#homeBtn {
+    /* height: 50px;
+    width: 50px */
+    color:black;
+}

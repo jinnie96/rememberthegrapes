@@ -55,7 +55,7 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
 </div>
 
         </form>
-        <button>Edit List</button>
+        {/* <button>Edit List</button> */}
         <button onClick = {deleteList}>Delete List</button>
         {/* <h1>All tasks: (Replace with Tasks in List Selected)</h1> */}
         <div className="listContainer">

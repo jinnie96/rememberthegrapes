@@ -9,3 +9,15 @@
 #updateListName {
     display: none;
 }
+
+.listBtns > p:hover {
+    cursor: pointer;
+}
+
+#allTasks:hover {
+    cursor:pointer;
+}
+
+#inbox, #lists {
+    font-weight: bolder;
+}
