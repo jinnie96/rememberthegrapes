@@ -35,7 +35,7 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
     return (
         <div className="listTasksContainer">
         <form onSubmit={addTask}>
-            <input id="taskInput" name='title' required="true" type='text' placeholder="Add a task.." value={title} onChange={updateTitle}></input><button type="submit">Add</button>
+            <input id="taskInput" name='title' required="true" type='text' placeholder="Add a task.." value={title} onChange={updateTitle}></input><br></br>
             <div id="icons">
 
                 <label for="due"><button>Due By</button></label>
@@ -45,10 +45,11 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
                     <option value="None">None</option>
                 {listsArr && (listsArr.map(list => (
 
-                           <option value={list.id}>{list.title}</option>
-                )))}
+                    <option value={list.id}>{list.title}</option>
+                    )))}
                 </select>
                 <p></p>
+                    <button type="submit">Add</button>
             </div>
             <div>
 
