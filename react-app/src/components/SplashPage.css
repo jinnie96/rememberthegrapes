@@ -1,0 +1,24 @@
+.splashNavBar {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 25%;
+    margin-right: 25%;
+    align-items: center;
+    height: 100%
+}
+
+.logSignUp {
+    display: flex;
+}
+
+.splash {
+    display:grid;
+    grid-template-rows: 7% 67% 26%;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+/* body {
+    grid-template-rows: 10% 70% 20%;
+} */
