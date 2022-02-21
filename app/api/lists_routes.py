@@ -57,7 +57,15 @@ def postList():
 @lists_routes.route('/<int:id>', methods=["PUT"])
 @login_required
 def editList(id):
-    return
+    print("IN rutes")
+    list = List.query.get(id)
+    data = request.get_json()
+    print(data, "NEW TITLE")
+    if data["title"]:
+        list.title=data["title"]
+    db.session.commit()
+    return list.to_dict()
+
 
 @lists_routes.route('/<int:id>', methods=["DELETE"])
 @login_required
