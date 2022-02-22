@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useHistory } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 
 const LoginForm = () => {
@@ -9,6 +9,7 @@ const LoginForm = () => {
   const [password, setPassword] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
+  // const history = useHistory()
 
   const onLogin = async (e) => {
     e.preventDefault();
@@ -22,6 +23,7 @@ const LoginForm = () => {
     console.log("IN DEMO!!!!!@#!@#!@#!#")
     e.preventDefault();
     await dispatch(login("demo@aa.io", "password"))
+    // history.push('./app')
   }
 
   const updateEmail = (e) => {
@@ -63,7 +65,10 @@ const LoginForm = () => {
           onChange={updatePassword}
         />
         <button type='submit'>Login</button>
-      <button onClick={demoLogin}>Demo User</button>
+        <NavLink to="/app" exact={true}>
+
+          <button onClick={demoLogin}>Demo User</button>
+        </NavLink>
       </div>
     </form>
   );

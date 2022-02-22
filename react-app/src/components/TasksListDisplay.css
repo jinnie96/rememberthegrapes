@@ -15,7 +15,21 @@
 }
 */
 .taskSelectedInfoContainer {
+    display:flex;
+    flex-direction: column;
     box-shadow: -2px 0 0 #d9d9d9;
     border-radius: 1%;
 
+}
+
+.editBtn {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+    margin-right: 20px;
+}
+
+#editTaskBtn {
+    display: flex;
+    align-self: flex-start;
 }
