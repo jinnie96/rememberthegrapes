@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar';
@@ -9,13 +9,14 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import UserHomepage from './components/UserHomepage';
-import SplashPage from './components/SplashPage';
+import SplashPage from './components/SplashPage'
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const [selectedList, setSelectedList] = useState("All Tasks")
   const [selectedTask, setSelectedTask] = useState("")
   const dispatch = useDispatch();
+  const user = useSelector(state => state.session.user)
 
   useEffect(() => {
     (async() => {
@@ -30,11 +31,16 @@ function App() {
 
   return (
     <BrowserRouter>
+      {user && (
+        <NavBar />
+      )}
       <Switch>
-      <Route path='/' exact={true}>
-        <SplashPage />
-      </Route>
-      <NavBar />
+        {!user && (
+        <Route path='/' exact={true}>
+          <SplashPage />
+        </Route>
+
+        )}
         <Route path='/login' exact={true}>
           <LoginForm />
         </Route>

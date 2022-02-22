@@ -4,6 +4,7 @@ import { addOneTask, deleteOneTask, getAllTasks, updateOneTask } from '../store/
 import './TasksListDisplay.css'
 
 function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle, editingTaskTitle, selectedTaskDue, editingTask}) {
+    console.log(selectedTaskTitle,"moooooooooo")
     return (
                     <div className="tasksListsDisplay">
 
@@ -15,13 +16,16 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
             )}
             {!showTask && (
                 <div class="taskSelectedInfoContainer">
+                    <div className="editBtn">
+                    <button onClick = {editingTask} id="editTaskBtn">Edit Task</button>
+
+                    </div>
                     {console.log("FALSE", selectedTaskTitle)}
-                    <p onClick = {editingTaskTitle} id="taskTitleName">{selectedTaskTitle}</p><br></br>
-                    <p>{selectedTaskTitle}</p>
+                    {/* <p onClick = {editingTaskTitle} id="taskTitleName">{selectedTaskTitle}</p><br></br>
+                    <p>{selectedTaskTitle}</p> */}
                     {/* <input name='title' type='text' defaultValue={selectedTaskTitle} onChange={updateTaskTitle}></input> */}
                     <p id="taskdue">due: {selectedTaskDue}</p>
                     <p id="listName">list: {selectedListTitle}</p>
-                    <button onClick = {editingTask} id="editTaskBtn">Edit Task</button>
                 </div>
             )}
             </div>

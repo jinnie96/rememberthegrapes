@@ -133,6 +133,7 @@ function UserHomepage () {
         if (response.ok) {
             const data = await response.json();
             setSelectedTaskId(data.id)
+            console.log("HEHEHEHEHEEHEHEHE", data.task.title)
             setSelectedTaskTitle(data.task.title)
             setSelectedTaskDue(data.task.due_by)
         }
@@ -165,6 +166,7 @@ function UserHomepage () {
         editListBtn.style.display = "block"
         listName.style.display = "block"
     }
+    console.log(selectedTaskTitle,"UOOOOOOOOOOO")
 
     return (
         <div className="homePage">

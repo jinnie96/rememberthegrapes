@@ -1,10 +1,11 @@
 .splashNavBar {
     display: flex;
     justify-content: space-between;
-    margin-left: 25%;
-    margin-right: 25%;
+    margin-left: 27%;
+    margin-right: 27%;
     align-items: center;
-    height: 100%
+    height: 100%;
+    color: #FFFFFF;
 }
 
 .logSignUp {
@@ -13,12 +14,99 @@
 
 .splash {
     display:grid;
-    grid-template-rows: 7% 67% 26%;
+    grid-template-rows: 9% 67% 24%;
     position: absolute;
     width: 100%;
     height: 100%;
+    background-color: #0060BF;
 }
 
 /* body {
     grid-template-rows: 10% 70% 20%;
+} */
+
+#splashLogin {
+    padding-right: 20px;
+}
+
+#splashLogIn {
+    border: white 2px solid
+}
+
+#splashLogin, #splashSignUp {
+    color: #FFFFFF;
+    font-family: MuseoSansRounded, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+}
+
+.navBarLogo {
+    color: #FFFFFF;
+    font-family: MuseoSansRounded, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+}
+
+.smartApp {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#smartAppBusy {
+    font-size: 44px;
+    /* font-weight: 700; */
+    color: #FFFFFF;
+    font-family: MuseoSansRounded, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#signUpFree {
+    padding: 11px 32px 12px;
+    line-height: 1.2;
+    border-radius: 4px;
+    font-family: MuseoSansRounded, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 23px;
+    color: #fff;
+    background-color: #d24b03;
+    border-color: transparent;
+}
+
+#busyPersonImg {
+    height: 30%;
+    width: 30%;
+    padding-top: 5px;
+}
+
+.busyImg {
+    display: flex;
+    justify-content: center;
+
+}
+
+.backgroundColor {
+    /* background-color:#0060BF; */
+}
+
+.splashLower {
+    background-color: #FFFFFF;
+}
+
+.splashLower {
+    display: flex;
+    justify-content: center;
+}
+
+.contacts {
+    display: flex;
+    justify-content: center;
+    justify-content: space-between;
+}
+
+#copyright {
+    font-size: 13px;
+    color: #898a92;
+
+}
+/* .links {
+    display: flex;
+    justify-content: center;
 } */
