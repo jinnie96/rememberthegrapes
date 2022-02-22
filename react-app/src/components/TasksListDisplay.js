@@ -6,7 +6,7 @@ import './TasksListDisplay.css'
 function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle, editingTaskTitle, selectedTaskDue, editingTask}) {
     console.log(selectedTaskTitle,"moooooooooo")
     return (
-                    <div className="tasksListsDisplay">
+            <div className="tasksListsDisplay">
 
             {showTask && (
                 <div className="taskInfoContainer">
