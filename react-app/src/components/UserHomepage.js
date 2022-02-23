@@ -81,6 +81,7 @@ function UserHomepage () {
           e.preventDefault()
           await dispatch(deleteOneTask(e.target.id))
           dispatch(getAllTasks(userId))
+          setShowTask(false)
       }
 
       const editTask = async (e) => {

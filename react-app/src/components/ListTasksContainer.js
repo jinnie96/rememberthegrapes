@@ -4,6 +4,7 @@ import { addOneTask, deleteOneTask, getAllTasks, updateOneTask } from '../store/
 import './ListTaskContainer.css'
 function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDueBy, setTitle, updateTitle, updateDate, dueBy, changeNewTaskListId, showTaskDetails, editing, updateTaskTitle, updateNewDate, editTask, editingTask, deleteTask, deleteList}) {
     const dispatch = useDispatch()
+    const [showComp, setShowComp] = useState(false)
     const userId= user.id
     const taskval = document.getElementById("taskInput")
     const dateval = document.getElementById("dateInput")
@@ -32,10 +33,31 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
       const listsArr = Object.values(userLists)
       const tasksArr = Object.values(userTasks)
 
+      const taskComplete = async (e) => {
+          console.log(e.target.parentElement.childNodes[1].id)
+          const compTask = {
+              complete: true
+          }
+
+          const res = await dispatch(updateOneTask(e.target.parentElement.childNodes[1].id, compTask))
+      }
+
+      const setIncomplete = e => {
+          setShowComp(false)
+      }
+
+      const setComplete = e => {
+          setShowComp(true)
+      }
+
     return (
         <div className="listTasksContainer">
         <div className="deleteBtnList">
             <button id="deleteBtn" onClick = {deleteList}>Delete List</button>
+        </div>
+        <div className="completeInc">
+            <p onClick = {setIncomplete} id="incomp">Incomplete</p>
+            <p onClick = {setComplete} id="comp">Completed</p>
         </div>
         <form onSubmit={addTask}>
             <input id="taskInput" name='title' required="true" type='text' placeholder="Add a task.." value={title} onChange={updateTitle}></input><br></br>
@@ -65,25 +87,27 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
         {/* <button>Edit List</button> */}
         {/* <h1>All tasks: (Replace with Tasks in List Selected)</h1> */}
         <div className="listContainer">
-            {console.log("TASKS ARRE",((tasksArr)), "SELECTED", selectedList)}
+            {!showComp && (
+                <div>
             {tasksArr && (tasksArr.map(task => (
-
                 <div className="deleteBtns">
-                    {selectedList === 0 && (
+                    {console.log(selectedList, "NULL")}
+                    {(selectedList === undefined && task.complete === false) && (
                 <div key={task.id}>
                 <input type="checkbox"></input>
                 <div id={task.id} onClick={showTaskDetails}>{task.title}</div>
                 Due By: {task.due_by}
                 <button id={task.id} className="deleteTaskBtn" onClick={deleteTask} key={task.id}>Delete Task</button>
-            </div>
+                </div>
                     )}
                     {console.log("TASKID", task.list_id, "selectedLIST", selectedList)}
-                    {task.list_id == selectedList && (
+                    {(task.list_id == selectedList && task.complete === false) && (
                 <div key={task.id}>
                     <input type="checkbox"></input>
                     <div id={task.id} onClick={showTaskDetails}>{task.title}</div>
                     {/* Due By: {task.due_by} */}
                     <button id={task.id} onClick={deleteTask} key={task.id}>Delete Task</button>
+                    <i onClick={taskComplete} id="completed" class="fa-solid fa-check"></i>
                 </div>
 
                     )}
@@ -91,6 +115,35 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
                 </div>
 
             )))}
+                </div>
+            )}
+
+            {showComp && (
+                <div>
+                {tasksArr && (tasksArr.map(task => (
+                    <div>
+                {(selectedList === undefined && task.complete === true) && (
+                    <div key={task.id}>
+                    <input type="checkbox"></input>
+                    <div id={task.id} onClick={showTaskDetails}>{task.title}</div>
+                    Due By: {task.due_by}
+                    <button id={task.id} className="deleteTaskBtn" onClick={deleteTask} key={task.id}>Delete Task</button>
+                </div>
+                    )}
+                        {console.log(selectedList, "LISTSELECT", task.list_id, "TASKLISTID", selectedList == task.list_id)}
+                    {(task.complete === true && selectedList == task.list_id) && (
+                        <div>
+                            <input type="checkbox"></input>
+                            <div id={task.id} onClick={showTaskDetails}>{task.title}</div>
+                        </div>
+                    )}
+                    </div>
+                )))}
+                </div>
+            )}
+
+
+
         </div>
         </div>
 
