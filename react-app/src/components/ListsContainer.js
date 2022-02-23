@@ -104,7 +104,7 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
         }
 
         const getTasksAll = (e) => {
-            setSelectedList(null)
+            setSelectedList(undefined)
         }
 
 
