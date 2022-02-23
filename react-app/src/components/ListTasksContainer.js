@@ -37,6 +37,10 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
         <div className="deleteBtnList">
             <button id="deleteBtn" onClick = {deleteList}>Delete List</button>
         </div>
+        <div className="completeInc">
+            <p id="incomp">Incomplete</p>
+            <p id="comp">Completed</p>
+        </div>
         <form onSubmit={addTask}>
             <input id="taskInput" name='title' required="true" type='text' placeholder="Add a task.." value={title} onChange={updateTitle}></input><br></br>
             <div className="icons">
@@ -69,7 +73,7 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
             {tasksArr && (tasksArr.map(task => (
 
                 <div className="deleteBtns">
-                    {selectedList === 0 && (
+                    {selectedList === null && (
                 <div key={task.id}>
                 <input type="checkbox"></input>
                 <div id={task.id} onClick={showTaskDetails}>{task.title}</div>
