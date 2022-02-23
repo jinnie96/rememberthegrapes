@@ -103,6 +103,10 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
             }
         }
 
+        const getTasksAll = (e) => {
+            setSelectedList(null)
+        }
+
 
 
     return (
@@ -110,7 +114,7 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
             {console.log(tasksArr, "TASKS")}
             <h1>Welcome {user.firstName}</h1>
                 <p id="inbox">Inbox</p>
-                <p id="allTasks">All Tasks</p>
+                <p id="allTasks" onClick={getTasksAll}>All Tasks</p>
                 <div className="addList">
 
                 <p id="lists">Lists:</p><i id="plusfa" class="fa-solid fa-plus" onClick={changeAdding}></i>
