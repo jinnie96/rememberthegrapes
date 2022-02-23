@@ -40,3 +40,11 @@
     margin-top: 17px;
     /* align-self: flex-end; */
 }
+
+#updateListName {
+    color: green;
+}
+
+#editListCancelBtn {
+    color: red;
+}

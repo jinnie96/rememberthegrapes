@@ -86,16 +86,20 @@ def postTask():
 #         db.session.commit()
 #         return post.to_dict()
 #     return (form.errors)
-@tasks_routes.route('/<int:id>', methods=["PUT"])
+@tasks_routes.route('/<int:id>', methods=["PATCH"])
 @login_required
 def editTask(id):
+    print("iN EDIT")
     task = Task.query.get(id)
+    print("TASK", task)
     data = request.get_json()
-    print(data["newEditTask"], "NEW TITLE")
-    if data["newEditTask"]:
-        task.title=data["newEditTask"]
-    if data["newDueBy"]:
-        task.due_by= data["newDueBy"]
+    print("DATRIRRRR", data)
+    if 'title' in data:
+        task.title=data["title"]
+    if 'due_by' in data:
+        task.due_by= data["due_by"]
+    if 'list_id' in data:
+        task.list_id = data["list_id"]
     db.session.commit()
     return task.to_dict()
 

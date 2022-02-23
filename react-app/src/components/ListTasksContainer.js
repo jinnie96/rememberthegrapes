@@ -49,7 +49,7 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
                     )))}
                 </select>
                 <p></p>
-                    <button type="submit">Add</button>
+                    <button type="submit">Add Task</button>
             </div>
             <div>
 

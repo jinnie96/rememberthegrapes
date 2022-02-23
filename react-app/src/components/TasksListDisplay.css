@@ -33,3 +33,31 @@
     display: flex;
     align-self: flex-start;
 }
+
+#taskdue, #listName, #titlename {
+    width: fit-content;
+}
+
+#taskdue:hover, #listName:hover, #titlename:hover {
+    border: solid black 1px;
+}
+
+#dueTimeChange {
+    display: none;
+}
+
+#taskdue {
+    display:block;
+}
+
+#newListOptions {
+    display: none;
+}
+
+#titleChange {
+    display: none;
+}
+
+#confirmTitle {
+    display: none;
+}

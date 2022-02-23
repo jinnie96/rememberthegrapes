@@ -130,12 +130,9 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
                             <div className="listBtns" key={list.id}>
                                 <p id={list.id} onClick={changeSelectedList}>{list.title}</p>
                                 <i id ="fa-edit" className="fa-solid fa-pen-to-square" onClick={changeListName}></i>
-                                {/* <button id="editListBtn" onClick={changeListName}>Edit</button> */}
                                 <input id="editListInput" onChange ={changeListNameState} defaultValue = {list.title}></input>
                                 <i id="updateListName" class="fa-solid fa-square-check" onClick={updateNewList}></i>
-                                {/* <button id="updateListName" onClick={updateNewList}>Update</button> */}
                                 <i id="editListCancelBtn" onClick={cancelListChange} class="fa-solid fa-rectangle-xmark"></i>
-                                {/* <button id="editListCancelBtn" onClick={cancelListChange}>Cancel</button> */}
                             </div>
 
                         )}

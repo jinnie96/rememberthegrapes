@@ -132,7 +132,8 @@ function UserHomepage () {
         // console.log("RES", response.body)
         if (response.ok) {
             const data = await response.json();
-            setSelectedTaskId(data.id)
+            console.log("DATABOI", data.task.id)
+            setSelectedTaskId(data.task.id)
             console.log("HEHEHEHEHEEHEHEHE", data.task.title)
             setSelectedTaskTitle(data.task.title)
             setSelectedTaskDue(data.task.due_by)
@@ -166,13 +167,14 @@ function UserHomepage () {
         editListBtn.style.display = "block"
         listName.style.display = "block"
     }
-    console.log(selectedTaskTitle,"UOOOOOOOOOOO")
+    console.log(selectedTaskId,"UOOOOOOOOOOO")
+    console.log(selectedTaskTitle,"sup")
 
     return (
         <div className="homePage">
             <ListsContainer user={user} addingList={addingList} setAddingList={setAddingList} selectedNewTaskId={selectedNewTaskId} setSelectedNewTaskId={setSelectedNewTaskId} listTitle={listTitle} setListTitle={setListTitle} selectedList={selectedList} setSelectedList={setSelectedList} listId={listId} setListId={setListId} selectedListTitle={selectedListTitle} setSelectedListTitle={setSelectedListTitle} selectedListId={selectedListId} setSelectedListId={setSelectedListId} num={num} setNum={setNum} />
             <ListTasksContainer user={user} selectedNewTaskId={selectedNewTaskId} setTitle={setTitle} setDueBy={setDueBy} title={title} updateTitle={updateTitle} updateDate={updateDate} dueBy={dueBy} changeNewTaskListId={changeNewTaskListId} listsArr={listsArr} tasksArr={tasksArr} selectedList={selectedList} showTaskDetails={showTaskDetails} editing={editing} updateTaskTitle = {updateTaskTitle} updateNewDate={updateNewDate} editTask = {editTask} editingTask = {editingTask} deleteTask={deleteTask} deleteList={deleteList} userTasks={userTasks} userLists={userLists}/>
-            <TasksListDisplay showTask={showTask} selectedListTitle={selectedListTitle} num={num} seletedTaskTitle={selectedTaskTitle} editingTaskTitle={editingTaskTitle} selectedTaskDue={selectedTaskDue} editingTask={editingTask} />
+            <TasksListDisplay showTask={showTask} selectedListTitle={selectedListTitle} num={num} selectedTaskTitle={selectedTaskTitle} editingTaskTitle={editingTaskTitle} selectedTaskDue={selectedTaskDue} editingTask={editingTask} listsArr={listsArr} selectedTaskId={selectedTaskId}/>
         </div>
     )
 
