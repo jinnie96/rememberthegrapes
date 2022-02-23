@@ -100,6 +100,8 @@ def editTask(id):
         task.due_by= data["due_by"]
     if 'list_id' in data:
         task.list_id = data["list_id"]
+    if 'complete' in data:
+        task.complete = data["complete"]
     db.session.commit()
     return task.to_dict()
 

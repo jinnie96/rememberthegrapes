@@ -4,6 +4,7 @@ import { addOneTask, deleteOneTask, getAllTasks, updateOneTask } from '../store/
 import './ListTaskContainer.css'
 function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDueBy, setTitle, updateTitle, updateDate, dueBy, changeNewTaskListId, showTaskDetails, editing, updateTaskTitle, updateNewDate, editTask, editingTask, deleteTask, deleteList}) {
     const dispatch = useDispatch()
+    const [showComp, setShowComp] = useState(false)
     const userId= user.id
     const taskval = document.getElementById("taskInput")
     const dateval = document.getElementById("dateInput")
@@ -31,6 +32,15 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
 
       const listsArr = Object.values(userLists)
       const tasksArr = Object.values(userTasks)
+
+      const taskComplete = async (e) => {
+          console.log(e.target.parentElement.childNodes[1].id)
+          const compTask = {
+              complete: true
+          }
+
+          const res = await dispatch(updateOneTask(e.target.parentElement.childNodes[1].id, compTask))
+      }
 
     return (
         <div className="listTasksContainer">
@@ -88,6 +98,7 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
                     <div id={task.id} onClick={showTaskDetails}>{task.title}</div>
                     {/* Due By: {task.due_by} */}
                     <button id={task.id} onClick={deleteTask} key={task.id}>Delete Task</button>
+                    <i onClick={taskComplete} id="completed" class="fa-solid fa-check"></i>
                 </div>
 
                     )}

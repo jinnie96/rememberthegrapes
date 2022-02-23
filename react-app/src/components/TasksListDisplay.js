@@ -169,7 +169,6 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
                                 )))}
                         </select>
                     </div>
-
                 </div>
                 )}
                 </div>

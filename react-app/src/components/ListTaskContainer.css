@@ -81,7 +81,7 @@ form {
     display: flex;
     justify-content: flex-end;
     /* margin-right: 60px; */
-    border-bottom: solid 1px black;
+    border-bottom: solid 1px #e5e5e5;
     margin-bottom: 5px;
 }
 
@@ -96,4 +96,11 @@ form {
     cursor:pointer;
     font-weight: bold;
     font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Helvetica,Arial,clean,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"!important;
+}
+
+#completed {
+    color:green;
+    font-size: 25px;
+    border: solid 2px green;
+    margin-left: 5px
 }
