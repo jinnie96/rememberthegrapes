@@ -4,7 +4,7 @@ import { useHistory } from 'react-router';
 import { addOneTask, deleteOneTask, getAllTasks, updateOneTask } from '../store/tasks';
 import './TasksListDisplay.css'
 
-function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle, editingTaskTitle, selectedTaskDue, editingTask, listsArr, selectedTaskId, setShowTask, showTaskDetails, setSelectedTaskTitle, setSelectedTaskDue}) {
+function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle, editingTaskTitle, selectedTaskDue, editingTask, listsArr, selectedTaskId, setShowTask, showTaskDetails, setSelectedTaskTitle, setSelectedTaskDue, setSelectedListTitle, selectedList}) {
     console.log(selectedTaskId,"moooooooooo")
 
     const [newTitleVal, setNewTitleVal] = useState("")
@@ -89,8 +89,9 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
     const changeTaskList = async(e) => {
         console.log("YEEEEEEEE", e.target.value)
         if (e.target.value === "0") {
+            console.log("ZERO")
              const newList = {
-                 list_id:null
+                 list_id:undefined
              }
              const res = await dispatch(updateOneTask(selectedTaskId, newList))
              if (res) {

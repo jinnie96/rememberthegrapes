@@ -104,3 +104,18 @@ form {
     border: solid 2px green;
     margin-left: 5px
 }
+
+.doneTask {
+    text-decoration: line-through;
+}
+
+.checkboxTitle {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4px;
+}
+
+.checkboxTitle > div {
+    display: flex;
+    align-items: center;
+}

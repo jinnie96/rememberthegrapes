@@ -53,6 +53,7 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
             if (response.ok) {
                 const data = await response.json();
                 setSelectedListId(data.id)
+                console.log("NULLTITLE", data.id)
                 setSelectedListTitle(data.title)
                 const filterTasks = tasksArr.filter(task => task.list_id == data.id)
                 const num = filterTasks.filter( task => task.user_id === userId)
@@ -105,6 +106,7 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
 
         const getTasksAll = (e) => {
             setSelectedList(undefined)
+            setSelectedListTitle("All Tasks")
         }
 
 

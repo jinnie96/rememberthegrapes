@@ -133,13 +133,31 @@ function UserHomepage () {
         // console.log("RES", response.body)
         if (response.ok) {
             const data = await response.json();
-            console.log("DATABOI", data.task.id)
+            console.log("DATABOI", data.task.list_id)
             setSelectedTaskId(data.task.id)
+            if (!data.task.list_id) {
+              setSelectedListTitle("null")
+            } else {
+              fetchOneList(data.task.list_id)
+
+            }
+            // const listTitle = await fetch(`api/lists/${data.task.list_id}`)
+            // console.log("LISSSSS", listTitle.json())
             console.log("HEHEHEHEHEEHEHEHE", data.task.title)
             setSelectedTaskTitle(data.task.title)
             setSelectedTaskDue(data.task.due_by)
         }
 
+      }
+
+      const fetchOneList = async(e) => {
+        const listTitle = await fetch(`api/lists/${e}`)
+        if (listTitle.ok) {
+          const data = await listTitle.json()
+          setSelectedListTitle(data.title)
+          console.log("LISSSSS", data.title)
+
+        }
       }
 
         const editingTaskTitle = (e) => {
@@ -175,7 +193,7 @@ function UserHomepage () {
         <div className="homePage">
             <ListsContainer user={user} addingList={addingList} setAddingList={setAddingList} selectedNewTaskId={selectedNewTaskId} setSelectedNewTaskId={setSelectedNewTaskId} listTitle={listTitle} setListTitle={setListTitle} selectedList={selectedList} setSelectedList={setSelectedList} listId={listId} setListId={setListId} selectedListTitle={selectedListTitle} setSelectedListTitle={setSelectedListTitle} selectedListId={selectedListId} setSelectedListId={setSelectedListId} num={num} setNum={setNum} />
             <ListTasksContainer user={user} selectedNewTaskId={selectedNewTaskId} setTitle={setTitle} setDueBy={setDueBy} title={title} updateTitle={updateTitle} updateDate={updateDate} dueBy={dueBy} changeNewTaskListId={changeNewTaskListId} listsArr={listsArr} tasksArr={tasksArr} selectedList={selectedList} showTaskDetails={showTaskDetails} editing={editing} updateTaskTitle = {updateTaskTitle} updateNewDate={updateNewDate} editTask = {editTask} editingTask = {editingTask} deleteTask={deleteTask} deleteList={deleteList} userTasks={userTasks} userLists={userLists}/>
-            <TasksListDisplay showTask={showTask} selectedListTitle={selectedListTitle} num={num} selectedTaskTitle={selectedTaskTitle} editingTaskTitle={editingTaskTitle} selectedTaskDue={selectedTaskDue} editingTask={editingTask} listsArr={listsArr} selectedTaskId={selectedTaskId} setShowTask={setShowTask} showTaskDetails={showTaskDetails} setSelectedTaskTitle={setSelectedTaskTitle} selectedTaskDue={selectedTaskDue} setSelectedTaskDue={setSelectedTaskDue}/>
+            <TasksListDisplay showTask={showTask} selectedListTitle={selectedListTitle} num={num} selectedTaskTitle={selectedTaskTitle} editingTaskTitle={editingTaskTitle} selectedTaskDue={selectedTaskDue} editingTask={editingTask} listsArr={listsArr} selectedTaskId={selectedTaskId} setShowTask={setShowTask} showTaskDetails={showTaskDetails} setSelectedTaskTitle={setSelectedTaskTitle} selectedTaskDue={selectedTaskDue} setSelectedTaskDue={setSelectedTaskDue} setSelectedListTitle={setSelectedListTitle} selectedList={selectedList}/>
         </div>
     )
 

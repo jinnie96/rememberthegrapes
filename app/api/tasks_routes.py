@@ -100,6 +100,9 @@ def editTask(id):
         task.due_by= data["due_by"]
     if 'list_id' in data:
         task.list_id = data["list_id"]
+    if not data:
+        task.list_id = None
+
     if 'complete' in data:
         task.complete = data["complete"]
     db.session.commit()

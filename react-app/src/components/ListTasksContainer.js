@@ -34,12 +34,12 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
       const tasksArr = Object.values(userTasks)
 
       const taskComplete = async (e) => {
-          console.log(e.target.parentElement.childNodes[1].id)
+          console.log(e.target.parentElement.childNodes[0].id, "COMPLETE")
           const compTask = {
               complete: true
           }
 
-          const res = await dispatch(updateOneTask(e.target.parentElement.childNodes[1].id, compTask))
+          const res = await dispatch(updateOneTask(e.target.parentElement.childNodes[0].id, compTask))
       }
 
       const setIncomplete = e => {
@@ -91,23 +91,32 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
                 <div>
             {tasksArr && (tasksArr.map(task => (
                 <div className="deleteBtns">
-                    {console.log(selectedList, "NULL")}
                     {(selectedList === undefined && task.complete === false) && (
-                <div key={task.id}>
-                <input type="checkbox"></input>
-                <div id={task.id} onClick={showTaskDetails}>{task.title}</div>
-                Due By: {task.due_by}
-                <button id={task.id} className="deleteTaskBtn" onClick={deleteTask} key={task.id}>Delete Task</button>
-                </div>
-                    )}
-                    {console.log("TASKID", task.list_id, "selectedLIST", selectedList)}
-                    {(task.list_id == selectedList && task.complete === false) && (
-                <div key={task.id}>
+                        <div className="checkboxTitle" key={task.id}>
+                        {console.log(selectedList, "NULL")}
+                    <div>
                     <input type="checkbox"></input>
                     <div id={task.id} onClick={showTaskDetails}>{task.title}</div>
-                    {/* Due By: {task.due_by} */}
-                    <button id={task.id} onClick={deleteTask} key={task.id}>Delete Task</button>
-                    <i onClick={taskComplete} id="completed" class="fa-solid fa-check"></i>
+                    </div>
+                {/* Due By: {task.due_by} */}
+                <div>
+                <button id={task.id} className="deleteTaskBtn" onClick={deleteTask} key={task.id}>Delete Task</button>
+                <i onClick={taskComplete} id="completed" class="fa-solid fa-check"></i>
+                </div>
+                </div>
+                    )}
+                    {(selectedList && task.list_id == selectedList && task.complete === false) && (
+                        <div className="checkboxTitle" key={task.id}>
+                            {console.log("TASKID", task.list_id, "selectedLIST", selectedList)}
+                        <div>
+                        <input type="checkbox"></input>
+                        <div id={task.id} onClick={showTaskDetails}>{task.title}</div>
+                        </div>
+                        {/* Due By: {task.due_by} */}
+                        <div>
+                        <button id={task.id} onClick={deleteTask} key={task.id}>Delete Task</button>
+                        <i onClick={taskComplete} id="completed" class="fa-solid fa-check"></i>
+                        </div>
                 </div>
 
                     )}
@@ -122,19 +131,23 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
                 <div>
                 {tasksArr && (tasksArr.map(task => (
                     <div>
-                {(selectedList === undefined && task.complete === true) && (
-                    <div key={task.id}>
-                    <input type="checkbox"></input>
-                    <div id={task.id} onClick={showTaskDetails}>{task.title}</div>
-                    Due By: {task.due_by}
-                    <button id={task.id} className="deleteTaskBtn" onClick={deleteTask} key={task.id}>Delete Task</button>
-                </div>
+                {(!selectedList && task.complete === true) && (
+                    <div className="checkboxTitle"key={task.id}>
+                        <div>
+                        <input type="checkbox"></input>
+                        <div id={task.id} class="doneTask" onClick={showTaskDetails}>{task.title}</div>
+                        </div>
+                    {/* Due By: {task.due_by} */}
+                    {/* <button id={task.id} className="deleteTaskBtn" onClick={deleteTask} key={task.id}>Delete Task</button> */}
+                    </div>
                     )}
                         {console.log(selectedList, "LISTSELECT", task.list_id, "TASKLISTID", selectedList == task.list_id)}
-                    {(task.complete === true && selectedList == task.list_id) && (
-                        <div>
+                    {(selectedList && task.complete === true && selectedList == task.list_id) && (
+                        <div className="checkboxTitle">
+                            <div>
                             <input type="checkbox"></input>
-                            <div id={task.id} onClick={showTaskDetails}>{task.title}</div>
+                            <div id={task.id} class="doneTask" onClick={showTaskDetails}>{task.title}</div>
+                            </div>
                         </div>
                     )}
                     </div>

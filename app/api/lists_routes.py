@@ -29,6 +29,7 @@ def getUserLists(id):
 @lists_routes.route('/<int:id>')
 @login_required
 def getSingleList(id):
+    print("INNNNNNN", id)
     list = List.query.get(id)
     return {
         "id": list.id,
