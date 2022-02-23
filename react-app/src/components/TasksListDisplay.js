@@ -1,18 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 import { addOneTask, deleteOneTask, getAllTasks, updateOneTask } from '../store/tasks';
 import './TasksListDisplay.css'
 
-function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle, editingTaskTitle, selectedTaskDue, editingTask, listsArr, selectedTaskId}) {
+function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle, editingTaskTitle, selectedTaskDue, editingTask, listsArr, selectedTaskId, setShowTask, showTaskDetails, setSelectedTaskTitle, setSelectedTaskDue}) {
     console.log(selectedTaskId,"moooooooooo")
 
     const [newTitleVal, setNewTitleVal] = useState("")
-
+    const history = useHistory()
+    const [today, setToday] = useState("")
     const dispatch = useDispatch()
     console.log("SHOWWW TASKKK", showTask)
 
     function windowOnClick(event) {
         return
+    }
+
+    function getToday() {
+        const date = new Date();
+
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+
+        if (month < 10) {
+            month = "0" + month;
+        }
+        if (day < 10) {
+            day = "0" + day;
+        }
+
+        const today = year + "-" + month + "-" + day +"T00:00";
+        setToday(today)
+
     }
 
     const editingTaskDue = (e) => {
@@ -47,40 +68,64 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
         e.target.parentElement.childNodes[2].style.display="block"
     }
 
-    const changeDueTime = (e) => {
+    const changeDueTime = async(e) => {
         const newDate = {
             due_by: e.target.value
         }
         console.log(e.target.value)
         console.log(selectedTaskId)
-        const res = dispatch(updateOneTask(selectedTaskId, newDate))
+        const res = await dispatch(updateOneTask(selectedTaskId, newDate))
         console.log(e.target.parentElement.childNodes[0],"HUUUUUUUH")
+        console.log("RESSSSS", res)
+        setSelectedTaskDue(res.due_by)
         if (res) {
             cancelTitleChange(e)
         }
+        // setShowTask(!showTask)
+        // setShowTask(!showTask)
+
     }
 
-    const changeTaskList = (e) => {
-        const newList = {
-            list_id: e.target.value
+    const changeTaskList = async(e) => {
+        console.log("YEEEEEEEE", e.target.value)
+        if (e.target.value === "0") {
+             const newList = {
+                 list_id:null
+             }
+             const res = await dispatch(updateOneTask(selectedTaskId, newList))
+             if (res) {
+                cancelTitleChange(e)
+            }
+            setShowTask(!showTask)
+
+        } else {
+            const newList = {
+                list_id: e.target.value
+            }
+            const res = await dispatch(updateOneTask(selectedTaskId, newList))
+            if (res) {
+                cancelTitleChange(e)
+            }
+            setShowTask(!showTask)
         }
 
-        const res = dispatch(updateOneTask(selectedTaskId, newList))
 
-        if (res) {
-            cancelTitleChange(e)
-        }
+        // setShowTask(!showTask)
     }
 
     const changeTitleName = (e) => {
         const newTitle = {
             title: newTitleVal
         }
+        setSelectedTaskTitle(newTitleVal)
 
         const res = dispatch(updateOneTask(selectedTaskId, newTitle))
         if (res) {
             cancelTitleValChange(e)
         }
+        // showTaskDetails(e)
+        // setShowTask(false)
+        // setShowTask(true)
     }
 
     const setTitleVal = (e) => {
@@ -89,7 +134,7 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
     }
 
 
-    window.addEventListener("click", windowOnClick);
+    window.addEventListener("click", getToday);
 
     return (
             <div className="tasksListsDisplay">
@@ -107,17 +152,18 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
                     </div>
                     <div>
                         <div id="titlename" onClick={editingTitle}>{selectedTaskTitle}</div>
-                        <input id="titleChange" name="title" defaultValue={selectedTaskTitle} onChange={setTitleVal}></input>
-                        <i id="confirmTitle" onClick={changeTitleName} class="fa-solid fa-square-check"></i>
+                            <input id="titleChange" name="title" defaultValue={selectedTaskTitle} onChange={setTitleVal} required="required"></input>
+                            <button type="submit" id="confirmTitle" onClick={changeTitleName} class="fa-solid fa-square-check">Submit</button>
                     </div>
                     <div>
                         <div onClick={editingTaskDue} id="taskdue">due:{selectedTaskDue}</div>
-                        <input id="dueTimeChange" onChange={changeDueTime} type="datetime-local" value={selectedTaskDue}></input>
+                        <input id="dueTimeChange" onChange={changeDueTime} type="datetime-local" defaultValue={today}></input>
                     </div>
                     <div>
                         <div onClick={editingList} id="listName">list: {selectedListTitle}</div>
                         <select name="lists" id="newListOptions" onChange={changeTaskList}>
-                            <option value="None">None</option>
+                        <option disabled selected value> -- select an option -- </option>
+                            <option value="0">None</option>
                                 {listsArr && (listsArr.map(list => (
                                     <option value={list.id}>{list.title}</option>
                                 )))}
