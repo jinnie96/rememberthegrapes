@@ -72,3 +72,16 @@
 i:hover {
     cursor: pointer;
 }
+
+.listContainer {
+    flex-shrink: 2;
+}
+
+.tasksListsDisplay {
+    flex-shrink: 2;
+}
+
+.listsContainer {
+    /* min-width:100px */
+    flex-shrink: 0;
+}

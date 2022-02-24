@@ -53,3 +53,13 @@
     color: red;
     background-color: transparent;
 }
+
+.userLists {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+/* .listBtns {
+    display: flex;
+} */

@@ -63,6 +63,8 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
     }
 
     const editingTitle = (e) => {
+        console.log("test", e.target.innerText)
+        setNewTitleVal(e.target.innerText)
         e.target.style.display="none"
         e.target.parentElement.childNodes[1].style.display="block"
         e.target.parentElement.childNodes[2].style.display="block"
@@ -115,6 +117,7 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
     }
 
     const changeTitleName = (e) => {
+        console.log("UEEEOOOE", newTitleVal)
         const newTitle = {
             title: newTitleVal
         }
@@ -130,7 +133,7 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
     }
 
     const setTitleVal = (e) => {
-        console.log(e.target.value)
+        console.log("OOOOOOOOO", e.target.value)
         setNewTitleVal(e.target.value)
     }
 

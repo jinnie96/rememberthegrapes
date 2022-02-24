@@ -142,6 +142,7 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
                         <i id="addListPlus" onClick={changeAdding} class="fa-solid fa-rectangle-xmark"></i>
                     </form>
                 )}
+                <div className="userLists">
                 {listsArr && (listsArr.map(list => (
                     <div>
                         {list.user_id === userId && (
@@ -156,6 +157,7 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
                         )}
                     </div>
                 )))}
+                </div>
             </div>
     )
 }
