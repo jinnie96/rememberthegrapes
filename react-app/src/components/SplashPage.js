@@ -35,8 +35,8 @@ const SplashPage = () => {
                 <div className="links">
                     <h2 id="copyright">© 2022 Remember the Grapes</h2>
                     <div className="contacts">
-                        <i id="github" class="fa-brands fa-github"></i>
-                        <i id="linkedin" class="fa-brands fa-linkedin"></i>
+                    <a href='https://github.com/jinnie96/rememberthegrapes' target="_blank" rel="noreferrer"><i id="github" class="fa-brands fa-github"></i></a>
+                    <a href='https://www.linkedin.com/in/karandeep-singh-600852a8' target="_blank" rel="noreferrer"><i id="linkedin" class="fa-brands fa-linkedin"></i></a>
                     </div>
                 </div>
             </div>
