@@ -13,6 +13,7 @@ class Task(db.Model):
 
     users = relationship("User", foreign_keys=[user_id], back_populates="tasks")
     list = relationship("List", back_populates="tasks")
+    
     def to_dict(self):
         return {
             'id': self.id,

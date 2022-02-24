@@ -23,6 +23,7 @@
 .listBtns {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 #editListCancelBtn {

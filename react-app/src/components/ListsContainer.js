@@ -4,7 +4,7 @@ import { addOneTask, deleteOneTask, getAllTasks, updateOneTask } from '../store/
 import { addOneList, getAllLists, deleteOneList, updateOneList } from '../store/lists';
 import './ListsContainer.css'
 
-function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, setSelectedNewTaskId, listTitle, setListTitle, selectedList, setSelectedList, listId, setListId, selectedListTitle, setSelectedListTitle, selectedListId, setSelectedListId, num, setNum}) {
+function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, setSelectedNewTaskId, listTitle, setListTitle, selectedList, setSelectedList, listId, setListId, selectedListTitle, setSelectedListTitle, selectedListId, setSelectedListId, num, setNum, setShowTask}) {
     console.log(listId, "UUUUUUUU")
     const dispatch = useDispatch()
     const userId = user.id
@@ -49,6 +49,7 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
 
         const changeSelectedList = e => {
             console.log("SELECTEDLIST", e.target.id)
+            setShowTask(false)
             setSelectedList(e.target.id)
             console.log(selectedList,"EEEEEEE")
             getSingleListInfo(e.target.id)

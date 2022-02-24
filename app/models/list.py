@@ -8,7 +8,7 @@ class List(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     title = db.Column(db.String(50), nullable=False)
-    cascade="all, delete-orphan"
+    # cascade="all, delete-orphan"
 
     users = relationship("User", foreign_keys=[user_id], back_populates="lists")
     tasks = relationship("Task", cascade="all, delete", back_populates="list")
