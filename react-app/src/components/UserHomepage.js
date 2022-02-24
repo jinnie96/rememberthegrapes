@@ -28,7 +28,7 @@ function UserHomepage () {
     const [selectedList, setSelectedList] = useState()
     const [selectedListId, setSelectedListId] = useState()
     const [selectedNewTaskId, setSelectedNewTaskId] = useState()
-    const [selectedListTitle, setSelectedListTitle] = useState()
+    const [selectedListTitle, setSelectedListTitle] = useState("All Tasks")
     const [selectedTaskId, setSelectedTaskId] = useState()
     const [selectedTaskTitle, setSelectedTaskTitle] = useState("")
     const [selectedTaskDue, setSelectedTaskDue] = useState()

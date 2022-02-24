@@ -48,3 +48,8 @@
 #editListCancelBtn {
     color: red;
 }
+
+#errorMsg {
+    color: red;
+    background-color: transparent;
+}

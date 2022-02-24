@@ -10,12 +10,21 @@ const SignUpForm = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('')
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
   const onSignUp = async (e) => {
     e.preventDefault();
-      const data = await dispatch(signUp(firstName, lastName, username, email, password));
+    setErrors([])
+    console.log(confirmPassword, "CONFIRM", password)
+    if (password != confirmPassword) {
+      console.log("PASS NOT MATCH")
+      errors.push("Passwords must match")
+
+    }
+      console.log("PASS MATCH")
+      const data = await dispatch(signUp(firstName, lastName, username, email, password, confirmPassword));
       if (data) {
         setErrors(data)
       }
@@ -39,6 +48,10 @@ const SignUpForm = () => {
 
   const updatePassword = (e) => {
     setPassword(e.target.value);
+  };
+
+  const updateConfirmPassword = (e) => {
+    setConfirmPassword(e.target.value);
   };
 
 
@@ -98,6 +111,16 @@ const SignUpForm = () => {
           value={password}
         ></input>
       </div>
+      <div>
+        <label>Confirm Password</label>
+        <input
+          type='password'
+          name='confirmPassword'
+          onChange={updateConfirmPassword}
+          value={confirmPassword}
+        ></input>
+      </div>
+
       <button type='submit'>Sign Up</button>
     </form>
   );

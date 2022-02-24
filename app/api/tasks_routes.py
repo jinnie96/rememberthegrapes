@@ -1,6 +1,6 @@
 from datetime import date
 from flask import Blueprint, request
-from app.models import db, Task
+from app.models import db, Task, List
 from flask_login import current_user, login_required
 from app.forms.add_task_form import AddTaskForm
 import json
@@ -50,11 +50,16 @@ def postTask():
     form = AddTaskForm()
     print(form.data, "FORM DATA@!@#!#!@")
     # if len(request.get_json()["due_by"][0].split("-")[1]) is 1:
-
+    lists = List.query.all()
+    print("LISSSTTTTTT", lists[0].to_dict())
     # year = request.get_json()["due_by"][0].split("-")[0]
     # month = request.get_json()["due_by"][0].split("-")[1]
     # day = request.get_json()["due_by"][0].split("-")[2]
-
+    # for list in lists:
+    #     print(list.to_dict()["title"])
+    #     form.lists.choices.push(list.to_dict()["title"])
+    # form.lists.choices = [list.to_dict["title"] for list in lists]
+    # print("FORM CHOICES", form.lists.choices)
     # print("YEARRRRRRRRRR", int(year))
     # print("YEARRRRRRRRRR", type(int((f"{int(month):02d}"))))
     # print("YEARRRRRRRRRR", int(day))

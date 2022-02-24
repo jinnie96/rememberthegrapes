@@ -76,11 +76,18 @@ export const addOneList = (form) => async dispatch => {
         },
         body: JSON.stringify(form)
     })
+    // console.log(response.json(), "JSON!!")
     if (response.ok) {
         const data = await response.json();
         console.log("DATAAAAAAAAA", data)
         dispatch(addList(data));
-        return data;
+        return null;
+    } else {
+        const data = await response.json()
+        console.log("YOYODATALIST", data)
+        if (data.errors) {
+            return data.errors
+        }
     }
 }
 

@@ -46,12 +46,12 @@ def postList():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         print("FORM@@@@@", form.data)
-        list = List(user_id=current_user.id, title=form.data["title"])
-        db.session.add(list)
+        lists = List(user_id=current_user.id, title=form.data["title"])
+        db.session.add(lists)
         db.session.commit()
-        return list.to_dict()
+        return lists.to_dict()
     else:
-        print(form.errors)
+        print(form.errors, "ERRORS")
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 

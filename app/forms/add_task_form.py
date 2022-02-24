@@ -1,9 +1,10 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, DateField, SubmitField, DateTimeField, SelectField
-from wtforms.validators import DataRequired, Email, ValidationError
+from wtforms import StringField, DateField, SubmitField, SelectField
+from wtforms.fields.html5 import DateTimeLocalField
+from wtforms.validators import DataRequired, Email, ValidationError, Length
 
 class AddTaskForm(FlaskForm):
-    title = StringField('title', validators=[DataRequired()])
-    # due_by = DateField('due_by')
-    # list = SelectField('list')
+    title = StringField('title', validators=[DataRequired(), Length(max=30)])
+    # due_by = DateTimeLocalField('due_by')
+    lists = SelectField('lists', validate_choice=False)
     submit = SubmitField('Submit')

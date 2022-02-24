@@ -12,6 +12,7 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
     const userTasks = useSelector(state => state.task)
     const [newListName, setNewListName] = useState()
     const [newListId, setNewListId] = useState()
+    const [errors, setErrors] = useState([])
     // const [num, setNum] = useState()
 
 
@@ -21,13 +22,19 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
           }
           const addList = async (e) => {
             e.preventDefault()
+            console.log("YOOOOOOOOO")
             const newList = {
                 user_id: user.id,
-                list_id: selectedNewTaskId,
                 title: listTitle
             }
 
-            const data = dispatch(addOneList(newList))
+            const data = await dispatch(addOneList(newList))
+            if (data) {
+                console.log("DATUR", data)
+            }
+            console.log("DATUR", data)
+            setErrors(data)
+            console.log("HEHE", errors)
             dispatch(getAllLists(userId))
             setListTitle("")
             changeAdding()
@@ -114,7 +121,7 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
     return (
         <div className="listsContainer">
             {console.log(tasksArr, "TASKS")}
-            <h1>Welcome {user.firstName}</h1>
+            <h1>Remember the ???</h1>
                 <p id="inbox">Inbox</p>
                 <p id="allTasks" onClick={getTasksAll}>All Tasks</p>
                 <div className="addList">
@@ -123,8 +130,13 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
                 </div>
                 {/* <button onClick={changeAdding}>Add List</button> */}
                 {/* <i className="fa-solid fa-plus"></i> */}
+                {errors?.map((error, ind) => (
+                    <li id="errorMsg" key={ind}>{error}</li>
+                ))}
                 {addingList && (
                     <form onSubmit={addList}>
+                        <ul className="errors">
+                     </ul>
                         <input name='title' placeholder="Enter new list..."type="text" value ={listTitle} onChange={updateListTitle} required></input><br></br>
                         <button type="submit">Submit</button>
                         <i id="addListPlus" onClick={changeAdding} class="fa-solid fa-rectangle-xmark"></i>

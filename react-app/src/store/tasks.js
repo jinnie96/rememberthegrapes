@@ -79,7 +79,13 @@ export const addOneTask = (form) => async dispatch => {
         const data = await response.json();
         console.log("DATAAAAAAAAA", data)
         dispatch(addTask(data));
-        return data;
+        return null;
+    } else {
+        const data = await response.json()
+        console.log("YOYODATA", data)
+        if (data.errors) {
+            return data.errors
+        }
     }
 }
 

@@ -119,3 +119,8 @@ form {
     display: flex;
     align-items: center;
 }
+
+#errorMsg {
+    color: red;
+    background-color: transparent;
+}
