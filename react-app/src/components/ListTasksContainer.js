@@ -102,13 +102,14 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
                 <div className="deleteBtns">
                     {(selectedList === undefined && task.complete === false) && (
                         <div className="checkboxTitle" key={task.id}>
-                        {console.log(selectedList, "NULL")}
+                        {console.log(task.title, "NULL")}
                     <div>
                     <input type="checkbox" checked={task.id === selectedTaskId}></input>
                     <div id={task.id} onClick={showTaskDetails}>{task.title}</div>
                     </div>
                 {/* Due By: {task.due_by} */}
                 <div>
+
                 <button id={task.id} className="deleteTaskBtn" onClick={deleteTask} key={task.id}>Delete Task</button>
                 <i onClick={taskComplete} id="completed" class="fa-solid fa-check"></i>
                 </div>

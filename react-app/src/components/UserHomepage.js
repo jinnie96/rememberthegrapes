@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addOneTask, deleteOneTask, getAllTasks, updateOneTask } from '../store/tasks';
@@ -11,6 +12,7 @@ import TasksListDisplay from './TasksListDisplay'
 
 function UserHomepage () {
     const dispatch = useDispatch()
+    const history = useHistory()
     const user = useSelector(state => state.session.user)
     const userId = useSelector(state => state.session.user.id);
     const userTasks = useSelector(state => state.task)
@@ -38,13 +40,13 @@ function UserHomepage () {
     const [num, setNum] = useState()
     const [showTask, setShowTask] = useState(false)
     const [compNum, setCompNum] = useState()
-    console.log("STATE@@@@@@@", selectedList)
+    console.log("STATE@@@@@@@", tasks)
 
     useEffect(() => {
         // const id = user.id
         (async () => {
             const response = await dispatch(getAllTasks(userId))
-            setTasks(response);
+            setTasks(response.json);
             const responseLists = await dispatch(getAllLists(userId))
             setLists(responseLists)
             // const tasks = await response.json();
@@ -108,8 +110,19 @@ function UserHomepage () {
       const deleteList = async (e) => {
         e.preventDefault()
         await dispatch(deleteOneList(selectedListId))
-        dispatch(getAllLists(userId))
-        setShowTask(false)
+        // await dispatch(deleteOneTask(selectedListId))
+        // dispatch(getAllLists(userId))
+        .then
+          setSelectedList(undefined)
+          setSelectedListTitle("All Tasks")
+          setShowTask(false)
+          const num = tasksArr.filter( task => !task.complete)
+          const comp = tasksArr.filter(task => task.complete)
+          setNum(num.length)
+          setCompNum(comp.length)
+          dispatch(getAllTasks(userId))
+          history.push('/')
+
       }
       const updateListTitle = e => {
           setListTitle(e.target.value)

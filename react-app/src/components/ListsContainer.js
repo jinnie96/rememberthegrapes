@@ -13,6 +13,7 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
     const [newListName, setNewListName] = useState()
     const [newListId, setNewListId] = useState()
     const [errors, setErrors] = useState([])
+    const [editErrors, setEditErrors] = useState([])
     // const [num, setNum] = useState()
 
 
@@ -43,7 +44,8 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
         const updateListTitle = e => {
             setListTitle(e.target.value)
         }
-
+        console.log("USERRRRRRRRRR", userTasks)
+        console.log("USERRRRRRRRRR", userLists)
         const listsArr = Object.values(userLists)
         const tasksArr = Object.values(userTasks)
 
@@ -55,67 +57,94 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
         }
 
         const getSingleListInfo =  async(id) => {
-            const response = await fetch (`/api/lists/${id}`)
-            if (response.ok) {
-                const data = await response.json();
-                setSelectedListId(data.id)
-                console.log("NULLTITLE", data.id)
-                setSelectedListTitle(data.title)
-                const filterTasks = tasksArr.filter(task => task.list_id == data.id)
-                const num = filterTasks.filter( task => !task.complete)
-                const comp = filterTasks.filter(task => task.complete)
+            if (id === "all") {
+                const num = tasksArr.filter( task => !task.complete)
+                const comp = tasksArr.filter(task => task.complete)
                 setNum(num.length)
                 setCompNum(comp.length)
-                if (data.errors) {
-                    return;
-                };
+                tasksArr.map(task => console.log("WASSUP", task.title))
+            } else {
+                const response = await fetch (`/api/lists/${id}`)
+                if (response.ok) {
+                    const data = await response.json();
+                    setSelectedListId(data.id)
+                    console.log("NULLTITLE", data.id)
+                    setSelectedListTitle(data.title)
+                    const filterTasks = tasksArr.filter(task => task.list_id == data.id)
+                    const num = filterTasks.filter( task => !task.complete)
+                    const comp = filterTasks.filter(task => task.complete)
+                    setNum(num.length)
+                    setCompNum(comp.length)
+                    if (data.errors) {
+                        return;
+                    };
+                }
             }
         }
 
         const cancelListChange = async(e) => {
-            e.target.parentElement.childNodes[0].style.display="block"
-            e.target.parentElement.childNodes[1].style.display="block"
-            e.target.parentElement.childNodes[2].style.display="none"
-            e.target.parentElement.childNodes[3].style.display="none"
-            e.target.parentElement.childNodes[4].style.display="none"
+            // e.target.parentElement.childNodes[0].style.display="block"
+            // e.target.parentElement.childNodes[1].style.display="block"
+            // e.target.parentElement.childNodes[2].style.display="none"
+            // e.target.parentElement.childNodes[3].style.display="none"
+            // e.target.parentElement.childNodes[4].style.display="none"
 
+            e.target.parentElement.parentElement.childNodes[0].style.display="block"
+            e.target.parentElement.parentElement.childNodes[1].style.display="block"
+            e.target.parentElement.childNodes[0].style.display="none"
+            e.target.parentElement.childNodes[1].style.display="none"
+            e.target.parentElement.childNodes[2].style.display="none"
         }
 
         const changeListName = async (e) => {
-            console.log(e.target.parentElement.childNodes[3])
+            console.log("FORMNODE", e.target.parentElement.childNodes[2].childNodes)
+            // e.target.parentElement.childNodes[0].style.display="none"
+            // e.target.parentElement.childNodes[1].style.display="none"
+            // e.target.parentElement.childNodes[2].style.display="block"
+            // e.target.parentElement.childNodes[3].style.display="block"
+            // e.target.parentElement.childNodes[4].style.display="block"
+
             e.target.parentElement.childNodes[0].style.display="none"
             e.target.parentElement.childNodes[1].style.display="none"
-            e.target.parentElement.childNodes[2].style.display="block"
-            e.target.parentElement.childNodes[3].style.display="block"
-            e.target.parentElement.childNodes[4].style.display="block"
+            e.target.parentElement.childNodes[2].childNodes[0].style.display="block"
+            e.target.parentElement.childNodes[2].childNodes[1].style.display="block"
+            e.target.parentElement.childNodes[2].childNodes[2].style.display="block"
+
         }
 
         const changeListNameState = async (e) => {
             console.log(e.target.value)
-            console.log(e.target.parentElement.childNodes[0].id)
+            console.log(e.target.parentElement.parentElement.childNodes[0].id)
             setNewListName(e.target.value)
-            setNewListId(e.target.parentElement.childNodes[0].id)
+            setNewListId(e.target.parentElement.parentElement.childNodes[0].id)
         }
 
         const updateNewList = async(e) => {
             console.log(e.target.parentElement.childNodes[0].id)
             console.log(newListId)
+            console.log("naaaaaame", newListName)
             const list = {
                 id: newListId,
                 user_id: user.id,
                 title: newListName
             }
             console.log(list)
-            const res = dispatch(updateOneList(newListId, list))
+            const res = await dispatch(updateOneList(newListId, list))
             if (res) {
+                console.log("EDITRESS%%%%%", res)
                 cancelListChange(e)
             }
+            setEditErrors(res)
         }
 
         const getTasksAll = (e) => {
             setSelectedList(undefined)
             setSelectedListTitle("All Tasks")
             setShowTask(false)
+
+            getSingleListInfo("all")
+            // setListId(e.target.id)
+
         }
 
 
@@ -151,9 +180,14 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
                             <div className="listBtns" key={list.id}>
                                 <p id={list.id} onClick={changeSelectedList}>{list.title}</p>
                                 <i id ="fa-edit" className="fa-solid fa-pen-to-square" onClick={changeListName}></i>
-                                <input id="editListInput" onChange ={changeListNameState} defaultValue = {list.title}></input>
-                                <i id="updateListName" class="fa-solid fa-square-check" onClick={updateNewList}></i>
-                                <i id="editListCancelBtn" onClick={cancelListChange} class="fa-solid fa-rectangle-xmark"></i>
+                                    {editErrors?.map((error, ind) => (
+                                    <li id="errorMsg" key={ind}>{error}</li>
+                                 ))}
+                                <form id={list.id}>
+                                    <input id="editListInput" onChange ={changeListNameState} defaultValue = {list.title} required></input>
+                                    <i id="updateListName" class="fa-solid fa-square-check" type="submit" onClick={updateNewList}></i>
+                                    <i id="editListCancelBtn" onClick={cancelListChange} class="fa-solid fa-rectangle-xmark"></i>
+                                </form>
                             </div>
 
                         )}

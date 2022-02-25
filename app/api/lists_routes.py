@@ -3,6 +3,7 @@ from app.models import db, List
 from flask_login import current_user, login_required
 # from app.s3_helpers import (upload_file_to_s3, allowed_file, get_unique_filename)
 from app.forms.add_list_form import AddListForm
+from app.forms.edit_list_form import EditListForm
 
 lists_routes = Blueprint("lists", __name__)
 
@@ -61,11 +62,18 @@ def editList(id):
     print("IN rutes")
     list = List.query.get(id)
     data = request.get_json()
+    form = EditListForm()
     print(data, "NEW TITLE")
-    if data["title"]:
-        list.title=data["title"]
-    db.session.commit()
-    return list.to_dict()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        print ("FORMEDITTT", form.data)
+        if data["title"]:
+            list.title=data["title"]
+        db.session.commit()
+        return list.to_dict()
+    else:
+        print(form.errors, "EDITERRORS")
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 @lists_routes.route('/<int:id>', methods=["DELETE"])

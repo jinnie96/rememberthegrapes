@@ -105,7 +105,13 @@ export const updateOneList = (id, list) => async dispatch => {
         const data = await response.json();
         console.log(data, "UPADTE DATA")
         dispatch(updateList(data));
-        return data;
+        return null;
+    } else {
+        const data = await response.json()
+        console.log("YOYODATALIST", data)
+        if (data.errors) {
+            return data.errors
+        }
     }
 }
 
@@ -163,8 +169,10 @@ export default function listReducer(state = initialState, action) {
         };
         case DELETE_LIST: {
             newState = { ...state };
-            console.log("ACTION DELETE", action.payload)
+            console.log("OLDSTATE", newState)
+            console.log("ACTION DELETE@@@@@@", action.payload)
             delete newState[action.payload];
+            console.log("NEWSTATE", newState)
             return newState;
         };
 
