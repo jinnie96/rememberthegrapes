@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addOneTask, deleteOneTask, getAllTasks, updateOneTask } from '../store/tasks';
 import './ListTaskContainer.css'
-function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDueBy, setTitle, updateTitle, updateDate, dueBy, changeNewTaskListId, showTaskDetails, editing, updateTaskTitle, updateNewDate, editTask, editingTask, deleteTask, deleteList}) {
+function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDueBy, setTitle, updateTitle, updateDate, dueBy, changeNewTaskListId, showTaskDetails, editing, updateTaskTitle, updateNewDate, editTask, editingTask, deleteTask, deleteList, selectedTaskId}) {
     const dispatch = useDispatch()
     const [showComp, setShowComp] = useState(false)
     const userId= user.id
@@ -33,7 +33,7 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
       };
       const userLists = useSelector(state => state.list)
       const userTasks = useSelector(state => state.task)
-
+      console.log(selectedTaskId, "OINK")
       const listsArr = Object.values(userLists)
       const tasksArr = Object.values(userTasks)
 
@@ -104,7 +104,7 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
                         <div className="checkboxTitle" key={task.id}>
                         {console.log(selectedList, "NULL")}
                     <div>
-                    <input type="checkbox"></input>
+                    <input type="checkbox" checked={task.id === selectedTaskId}></input>
                     <div id={task.id} onClick={showTaskDetails}>{task.title}</div>
                     </div>
                 {/* Due By: {task.due_by} */}
@@ -116,9 +116,9 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
                     )}
                     {(selectedList && task.list_id == selectedList && task.complete === false) && (
                         <div className="checkboxTitle" key={task.id}>
-                            {console.log("TASKID", task.list_id, "selectedLIST", selectedList)}
                         <div>
-                        <input type="checkbox"></input>
+                        {console.log("TASKID", task.id, "selectedLIST", selectedTaskId)}
+                        <input type="checkbox" checked={task.id === selectedTaskId}></input>
                         <div id={task.id} onClick={showTaskDetails}>{task.title}</div>
                         </div>
                         {/* Due By: {task.due_by} */}
@@ -141,9 +141,9 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
                 {tasksArr && (tasksArr.map(task => (
                     <div>
                 {(!selectedList && task.complete === true) && (
-                    <div className="checkboxTitle"key={task.id}>
+                    <div className="checkboxTitle" key={task.id}>
                         <div>
-                        <input type="checkbox"></input>
+                        <input type="checkbox" checked={task.id === selectedTaskId}></input>
                         <div id={task.id} class="doneTask" onClick={showTaskDetails}>{task.title}</div>
                         </div>
                     {/* Due By: {task.due_by} */}
@@ -154,7 +154,7 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
                     {(selectedList && task.complete === true && selectedList == task.list_id) && (
                         <div className="checkboxTitle">
                             <div>
-                            <input type="checkbox"></input>
+                            <input type="checkbox" checked={task.id === selectedTaskId}></input>
                             <div id={task.id} class="doneTask" onClick={showTaskDetails}>{task.title}</div>
                             </div>
                         </div>

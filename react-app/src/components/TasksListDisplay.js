@@ -4,7 +4,7 @@ import { useHistory } from 'react-router';
 import { addOneTask, deleteOneTask, getAllTasks, updateOneTask } from '../store/tasks';
 import './TasksListDisplay.css'
 
-function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle, editingTaskTitle, selectedTaskDue, editingTask, listsArr, selectedTaskId, setShowTask, showTaskDetails, setSelectedTaskTitle, setSelectedTaskDue, setSelectedListTitle, selectedList}) {
+function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle, editingTaskTitle, selectedTaskDue, editingTask, listsArr, selectedTaskId, setShowTask, showTaskDetails, setSelectedTaskTitle, setSelectedTaskDue, setSelectedListTitle, selectedList, compNum}) {
     console.log(selectedTaskId,"moooooooooo")
 
     const [newTitleVal, setNewTitleVal] = useState("")
@@ -146,7 +146,7 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
             {!showTask && (
                 <div className="taskInfoContainer">
                     <p>{selectedListTitle}</p><br></br>
-                    <h3>{num} tasks</h3><h3>completed</h3>
+                    <h3>{num} tasks</h3><h3> {compNum} completed</h3>
                 </div>
             )}
             {showTask && (

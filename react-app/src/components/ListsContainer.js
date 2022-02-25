@@ -4,7 +4,7 @@ import { addOneTask, deleteOneTask, getAllTasks, updateOneTask } from '../store/
 import { addOneList, getAllLists, deleteOneList, updateOneList } from '../store/lists';
 import './ListsContainer.css'
 
-function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, setSelectedNewTaskId, listTitle, setListTitle, selectedList, setSelectedList, listId, setListId, selectedListTitle, setSelectedListTitle, selectedListId, setSelectedListId, num, setNum, setShowTask}) {
+function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, setSelectedNewTaskId, listTitle, setListTitle, selectedList, setSelectedList, listId, setListId, selectedListTitle, setSelectedListTitle, selectedListId, setSelectedListId, num, setNum, setShowTask, compNum, setCompNum}) {
     console.log(listId, "UUUUUUUU")
     const dispatch = useDispatch()
     const userId = user.id
@@ -48,10 +48,8 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
         const tasksArr = Object.values(userTasks)
 
         const changeSelectedList = e => {
-            console.log("SELECTEDLIST", e.target.id)
             setShowTask(false)
             setSelectedList(e.target.id)
-            console.log(selectedList,"EEEEEEE")
             getSingleListInfo(e.target.id)
             setListId(e.target.id)
         }
@@ -64,8 +62,10 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
                 console.log("NULLTITLE", data.id)
                 setSelectedListTitle(data.title)
                 const filterTasks = tasksArr.filter(task => task.list_id == data.id)
-                const num = filterTasks.filter( task => task.user_id === userId)
+                const num = filterTasks.filter( task => !task.complete)
+                const comp = filterTasks.filter(task => task.complete)
                 setNum(num.length)
+                setCompNum(comp.length)
                 if (data.errors) {
                     return;
                 };
@@ -115,6 +115,7 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
         const getTasksAll = (e) => {
             setSelectedList(undefined)
             setSelectedListTitle("All Tasks")
+            setShowTask(false)
         }
 
 
