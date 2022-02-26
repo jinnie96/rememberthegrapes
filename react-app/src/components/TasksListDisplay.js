@@ -44,11 +44,23 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
         console.log("PARENTTTT", e.target.parentElement)
     }
 
+    const cancelTaskDueChange = (e) => {
+        console.log("YOOOOO", e.target)
+        e.target.style.display="none"
+        e.target.parentElement.childNodes[0].style.display="block"
+    }
+
     const cancelTitleChange = (e) => {
         console.log("ONE", e.target.parentElement.childNodes[0])
         console.log("TWO", e.target.parentElement.childNodes[1])
-        e.target.parentElement.childNodes[0].style.display="block"
-        e.target.parentElement.childNodes[1].style.display="none"
+        // e.target.parentElement.childNodes[0].style.display="block"
+        // e.target.parentElement.childNodes[1].style.display="none"
+
+        e.target.style.display = "none"
+        e.target.parentElement.childNodes[0].style.display = "none"
+        e.target.parentElement.style.display="none"
+        e.target.parentElement.parentElement.childNodes[0].style.display = "block"
+
     }
 
     const cancelTitleValChange = (e) => {
@@ -67,7 +79,13 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
         setNewTitleVal(e.target.innerText)
         e.target.style.display="none"
         e.target.parentElement.childNodes[1].style.display="block"
-        e.target.parentElement.childNodes[2].style.display="block"
+        e.target.parentElement.childNodes[1].childNodes[0].style.display="block"
+        e.target.parentElement.childNodes[1].childNodes[1].style.display="block"
+
+
+        // e.target.style.display="none"
+        // e.target.parentElement.childNodes[1].style.display="block"
+        // e.target.parentElement.childNodes[2].style.display="block"
     }
 
     const changeDueTime = async(e) => {
@@ -81,7 +99,7 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
         console.log("RESSSSS", res)
         setSelectedTaskDue(res.due_by)
         if (res) {
-            cancelTitleChange(e)
+            cancelTaskDueChange(e)
         }
         // setShowTask(!showTask)
         // setShowTask(!showTask)
@@ -151,14 +169,14 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
             )}
             {showTask && (
                 <div class="taskSelectedInfoContainer">
-                    <div className="editBtn">
-                        <button className="editTask" id="editTaskBtn">Edit Task</button>
-                    </div>
                     <div>
                         <div id="titlename" onClick={editingTitle}>{selectedTaskTitle}</div>
-                            <input id="titleChange" name="title" defaultValue={selectedTaskTitle} onChange={setTitleVal} required="required"></input>
-                            <button type="submit" id="confirmTitle" onClick={changeTitleName} class="fa-solid fa-square-check">Submit</button>
+                        <form onSubmit={changeTitleName}>
+                            <input id="titleChange" name="title" defaultValue={selectedTaskTitle} onChange={setTitleVal} value={newTitleVal} required></input>
+                            <button type="submit" id="confirmTitle" class="fa-solid fa-square-check">Submit</button>
+                        </form>
                     </div>
+
                     <div>
                         <div onClick={editingTaskDue} id="taskdue">due:{selectedTaskDue}</div>
                         <input id="dueTimeChange" onChange={changeDueTime} type="datetime-local" defaultValue={today}></input>

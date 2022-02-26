@@ -169,10 +169,10 @@ export default function listReducer(state = initialState, action) {
         };
         case DELETE_LIST: {
             newState = { ...state };
-            console.log("OLDSTATE", newState)
-            console.log("ACTION DELETE@@@@@@", action.payload)
+            // console.log("OLDSTATE", newState)
+            // console.log("ACTION DELETE@@@@@@", action.payload)
             delete newState[action.payload];
-            console.log("NEWSTATE", newState)
+            // console.log("NEWSTATE", newState)
             return newState;
         };
 
