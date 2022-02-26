@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addOneTask, deleteOneTask, getAllTasks, updateOneTask } from '../store/tasks';
 import './ListTaskContainer.css'
-function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDueBy, setTitle, updateTitle, updateDate, dueBy, changeNewTaskListId, showTaskDetails, editing, updateTaskTitle, updateNewDate, editTask, editingTask, deleteTask, deleteList, selectedTaskId}) {
+function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDueBy, setTitle, updateTitle, updateDate, dueBy, changeNewTaskListId, showTaskDetails, editing, updateTaskTitle, updateNewDate, editTask, editingTask, deleteTask, deleteList, selectedTaskId, selectedTaskDue, setSelectedTaskDue}) {
     const dispatch = useDispatch()
     const [showComp, setShowComp] = useState(false)
     const userId= user.id
     const [errors, setErrors] = useState([])
     const taskval = document.getElementById("taskInput")
     const dateval = document.getElementById("dateInput")
+    const [deletedTasks, setDeletedTasks] = useState([])
     const addTask = async (e) => {
         e.preventDefault();
         const dueDate = dueBy.split("T")
@@ -31,20 +32,44 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
         //   setErrors(data);
         // }
       };
+    //   useEffect(() => {
+    //     // const id = user.id
+    //     (async () => {
+    //         dispatch(getAllTasks(userId))
+    //     })();
+    // }, [listsArr]);
+    const taskComplete = async (e) => {
+        console.log(e.target.parentElement.childNodes[0].id, "COMPLETE")
+        const compTask = {
+            complete: true
+        }
+
+        const res = await dispatch(updateOneTask(e.target.parentElement.childNodes[0].id, compTask))
+        const response = await dispatch(getAllTasks(userId))
+        if (res) {
+            console.log("updatecheck", res)
+        }
+        if (response) {
+            console.log("ALL", response.tasks)
+            setDeletedTasks(response.tasks)
+        }
+    }
+    useEffect(() => {
+        (async () => {
+            const res = await dispatch(getAllTasks(userId))
+            if (res) {
+                console.log("ALLTASKSRES", res.tasks)
+                setDeletedTasks(res.tasks)
+                console.log("DEEEEEEE", deletedTasks)
+            }
+        })()
+    }, [selectedList, dispatch, errors, selectedTaskDue, setSelectedTaskDue])
       const userLists = useSelector(state => state.list)
       const userTasks = useSelector(state => state.task)
-      console.log(selectedTaskId, "OINK")
+      console.log(userTasks, "deleteusertasks")
       const listsArr = Object.values(userLists)
       const tasksArr = Object.values(userTasks)
 
-      const taskComplete = async (e) => {
-          console.log(e.target.parentElement.childNodes[0].id, "COMPLETE")
-          const compTask = {
-              complete: true
-          }
-
-          const res = await dispatch(updateOneTask(e.target.parentElement.childNodes[0].id, compTask))
-      }
 
       const setIncomplete = e => {
           setShowComp(false)
@@ -98,7 +123,8 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
         <div className="listContainer">
             {!showComp && (
                 <div>
-            {tasksArr && (tasksArr.map(task => (
+
+            {deletedTasks && (deletedTasks.map(task => (
                 <div className="deleteBtns">
                     {(selectedList === undefined && task.complete === false) && (
                         <div className="checkboxTitle" key={task.id}>
@@ -139,7 +165,7 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
 
             {showComp && (
                 <div>
-                {tasksArr && (tasksArr.map(task => (
+                {deletedTasks && (deletedTasks.map(task => (
                     <div>
                 {(!selectedList && task.complete === true) && (
                     <div className="checkboxTitle" key={task.id}>

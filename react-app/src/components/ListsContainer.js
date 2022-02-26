@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 import { addOneTask, deleteOneTask, getAllTasks, updateOneTask } from '../store/tasks';
 import { addOneList, getAllLists, deleteOneList, updateOneList } from '../store/lists';
 import './ListsContainer.css'
@@ -7,6 +8,7 @@ import './ListsContainer.css'
 function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, setSelectedNewTaskId, listTitle, setListTitle, selectedList, setSelectedList, listId, setListId, selectedListTitle, setSelectedListTitle, selectedListId, setSelectedListId, num, setNum, setShowTask, compNum, setCompNum}) {
     console.log(listId, "UUUUUUUU")
     const dispatch = useDispatch()
+    const history = useHistory()
     const userId = user.id
     const userLists = useSelector(state => state.list)
     const userTasks = useSelector(state => state.task)
@@ -133,6 +135,7 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
             if (res) {
                 console.log("EDITRESS%%%%%", res)
                 cancelListChange(e)
+                history.push('/')
             }
             setEditErrors(res)
         }
@@ -183,12 +186,16 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
                                     {editErrors?.map((error, ind) => (
                                     <li id="errorMsg" key={ind}>{error}</li>
                                  ))}
-                                <form id={list.id}>
+                                <form id={list.id} onSubmit={updateNewList}>
+
                                     <input id="editListInput" onChange ={changeListNameState} defaultValue = {list.title} required></input>
-                                    <i id="updateListName" class="fa-solid fa-square-check" type="submit" onClick={updateNewList}></i>
+                                    <button id="updateListName" class="fa-solid fa-square-check" type="submit"></button>
+                                    {/* <input id="editListInput" name="title" type="text" defaultValue={list.title} value={newListName} onChange ={changeListNameState} required></input>
+                                    <button id="updateListName" class="fa-solid fa-square-check" type="submit" onClick={updateNewList}></button> */}
                                     <i id="editListCancelBtn" onClick={cancelListChange} class="fa-solid fa-rectangle-xmark"></i>
                                 </form>
                             </div>
+
 
                         )}
                     </div>
@@ -199,3 +206,6 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
 }
 
 export default ListsContainer
+
+{/* <input id="editListInput" name="title" type="text" defaultValue={list.title} value={newListName} onChange ={changeListNameState}></input> */}
+{/* <button id="updateListName" class="fa-solid fa-square-check" type="submit" onClick={updateNewList}></button> */}
