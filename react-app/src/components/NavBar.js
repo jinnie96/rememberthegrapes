@@ -28,9 +28,11 @@ const user = useSelector(state => state.session.user)
   return (
     <nav>
       <ul class="navbar">
+        <h1 id="welcome">Welcome {user.firstName}</h1>
         {/* <li> */}
           <NavLink to='/' exact={true} activeClassName='active'>
-            <i id = "homeBtn" className="fas fa-home i-img fa-2x"></i>
+          {/* <img id ="homeBtn" src="https://i.ibb.co/C7qPLpK/remember-the-grapes-logos-preview-rev-1.jpg"></img> */}
+            {/* <i id = "homeBtn" className="fas fa-home i-img fa-2x"></i> */}
           </NavLink>
         {/* </li> */}
         {!user && (
@@ -48,18 +50,18 @@ const user = useSelector(state => state.session.user)
           </div>
 
         )}
-        <div class="searchBar">
+        {/* <div class="searchBar">
         <i className="fa-solid fa-magnifying-glass"></i>
           <input type="text" placeholder="Search" />
-        </div>
+        </div> */}
         {/* <li>
           <NavLink to='/users' exact={true} activeClassName='active'>
           Users
           </NavLink>
         </li> */}
-        <li>
+        {/* <li> */}
           <LogoutButton />
-        </li>
+        {/* </li> */}
       </ul>
     </nav>
   );

@@ -89,15 +89,19 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
             <p onClick = {setComplete} id="comp">Completed</p>
         </div>
         <form onSubmit={addTask}>
-        <ul className="errors">
+        {/* <ul className="errors">
                     {errors?.map((error, ind) => (
                         <li id="errorMsg" key={ind}>{error}</li>
                     ))}
-        </ul>
+        </ul> */}
+        {/* <div> */}
+        <div className="formContainer">
+        <div id="newTaskInput">
             <input id="taskInput" name='title' required="true" type='text' placeholder="Add a task.." value={title} onChange={updateTitle}></input><br></br>
+        </div>
             <div className="icons">
 
-                <label for="due"><button>Due By</button></label>
+                {/* <label for="due"><button>Due By</button></label> */}
                 <input name="due_by" id="dateInput" type="datetime-local" onChange={updateDate} value={dueBy} required></input>
                 <label defaultValue="null" for="lists"></label>
                 <select name="lists" id="listOptions" onChange={changeNewTaskListId}>
@@ -110,12 +114,10 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
                     )))}
                 </select>
                 <div class="addTaskBtnContainer">
-                    <button id="addTaskBtn" type="submit">Add Task</button>
+                    <button id="addTaskBtn" type="submit">Add</button>
                 </div>
             </div>
-            <div>
-
-</div>
+        </div>
 
         </form>
         {/* <button>Edit List</button> */}
@@ -130,10 +132,9 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
                         <div className="checkboxTitle" key={task.id}>
                         {console.log(task.title, "NULL")}
                     <div>
-                    <input type="checkbox" checked={task.id === selectedTaskId}></input>
+                    <input id="selectedCheck" type="checkbox" checked={task.id === selectedTaskId}></input>
                     <div id={task.id} onClick={showTaskDetails}>{task.title}</div>
                     </div>
-                {/* Due By: {task.due_by} */}
                 <div>
 
                 <button id={task.id} className="deleteTaskBtn" onClick={deleteTask} key={task.id}>Delete Task</button>
@@ -145,10 +146,9 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
                         <div className="checkboxTitle" key={task.id}>
                         <div>
                         {console.log("TASKID", task.id, "selectedLIST", selectedTaskId)}
-                        <input type="checkbox" checked={task.id === selectedTaskId}></input>
+                        <input id="selectedCheck" type="checkbox" checked={task.id === selectedTaskId}></input>
                         <div id={task.id} onClick={showTaskDetails}>{task.title}</div>
                         </div>
-                        {/* Due By: {task.due_by} */}
                         <div>
                         <button id={task.id} onClick={deleteTask} key={task.id}>Delete Task</button>
                         <i onClick={taskComplete} id="completed" class="fa-solid fa-check"></i>
@@ -170,7 +170,7 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
                 {(!selectedList && task.complete === true) && (
                     <div className="checkboxTitle" key={task.id}>
                         <div>
-                        <input type="checkbox" checked={task.id === selectedTaskId}></input>
+                        <input id="selectedCheck" type="checkbox" checked={task.id === selectedTaskId}></input>
                         <div id={task.id} class="doneTask" onClick={showTaskDetails}>{task.title}</div>
                         </div>
                     {/* Due By: {task.due_by} */}
@@ -181,7 +181,7 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
                     {(selectedList && task.complete === true && selectedList == task.list_id) && (
                         <div className="checkboxTitle">
                             <div>
-                            <input type="checkbox" checked={task.id === selectedTaskId}></input>
+                            <input id="selectedCheck" type="checkbox" checked={task.id === selectedTaskId}></input>
                             <div id={task.id} class="doneTask" onClick={showTaskDetails}>{task.title}</div>
                             </div>
                         </div>

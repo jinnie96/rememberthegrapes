@@ -14,12 +14,23 @@
 
 }
 */
+
+.tasksListDisplay {
+    margin-left: 5px
+}
+
 .taskSelectedInfoContainer {
     display:flex;
     flex-direction: column;
     box-shadow: -2px 0 0 #d9d9d9;
     border-radius: 1%;
 
+}
+
+.showContainer, .unshowContainer {
+    margin-left: 25px;
+    margin-top: 40px;
+    top: 9px;
 }
 
 .editBtn {
@@ -34,8 +45,33 @@
     align-self: flex-start;
 }
 
-#taskdue, #listName, #titlename {
+#taskdue, #listName {
     width: fit-content;
+}
+
+#titlename {
+    font-size: 18px;
+    font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Helvetica,Arial,clean,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"!important;
+    margin-left: 5px;
+}
+
+#titleChange {
+    height: 18px;
+    font-size: 18px;
+}
+
+.dueListContainer {
+    margin-top: 15px;
+    margin-left: 25px;
+}
+
+.changeListContainer {
+    margin-top: 20px;
+}
+
+.changeTitleContainer {
+    border-left: 2px solid #ccc;
+    /* margin-left: 5px; */
 }
 
 #taskdue:hover, #listName:hover, #titlename:hover {
@@ -60,4 +96,44 @@
 
 #confirmTitle {
     display: none;
+}
+
+.incCompleteTasks {
+    display: flex;
+}
+
+#complete {
+    color: #0060bf;
+    font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Helvetica,Arial,clean,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"!important;
+}
+
+.incompletedNum {
+    color: rgba(0,0,0,0.4);
+    background-color: #dbe8f6;
+    vertical-align: top;
+    display: inline-block;
+    padding: 9px 13px;
+    margin-right: 5px;
+    /* line-height: 100%; */
+    border-radius: 5px;
+    height: fit-content;
+}
+
+.completedNum {
+    background-color: #dbe8f6;
+    vertical-align: top;
+    display: inline-block;
+    padding: 9px 13px;
+    margin-right: 5px;
+    /* line-height: 100%; */
+    border-radius: 5px;
+    height: fit-content;
+}
+
+#tasksText, #completedText {
+    font-size: .75rem
+}
+
+#complete, #incomplete {
+    font-size: 1.1875rem;
 }

@@ -7,7 +7,7 @@
     /* text-align: center; */
     margin-top: 0;
     background-color: #0060bf;
-    height: 40px;
+    /* height: fit-content; */
     /* display: block; */
     /* color: white; */
 }
@@ -16,14 +16,20 @@ li {
     color: white
 }
 
+#welcome {
+    font-size: 17px;
+    color: white
+}
+
 .searchBar {
     color: #4383CC;
     /* justify-content:left; */
-    width: 70px
+    width: 70px;
+    /* height:fit-content */
 }
 
 #homeBtn {
-    /* height: 50px;
-    width: 50px */
+    height: 47px;
+    width: 47px;
     color:black;
 }

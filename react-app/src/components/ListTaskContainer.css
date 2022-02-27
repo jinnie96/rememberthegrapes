@@ -43,7 +43,9 @@ button {
     font-size: 15px;
     padding: 5px;
     display: flex;
-    align-self: flex-end;
+    align-self: center;
+    height: fit-content;
+    font-size: 15px;
 }
 
 .deleteBtns button {
@@ -59,22 +61,62 @@ button {
     margin-right: 104px;
 }
 
-#taskInput {
+/* #taskInput {
     width: 80%;
     height: 50px;
     margin-left: 10px;
-}
+} */
 
 form {
     display: flex;
     justify-content: flex-start;
 }
 
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%
+}
+
+#newTaskInput {
+    width: 98%;
+    margin-left: 10px;
+    margin-right: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+#taskInput {
+    width: 100%;
+    font-size: 15px;
+    height: 20px;
+    margin-bottom: 5px;
+}
+
+#dateInput {
+    height: 20px;
+    font-size: 15px;
+    width: 50%
+}
+
+#listOptions {
+    width: 50%;
+    height: 25px;
+    font-size: 15px;
+
+}
+
+.checkboxTitle {
+    border-bottom: solid 1px #E4EEF8;
+}
+
 .icons {
     margin-left: 10px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-content: flex-end;
+    justify-content: space-between;
+    /* width:fit-content; */
 }
 
 .completeInc {
@@ -112,7 +154,7 @@ form {
 .checkboxTitle {
     display: flex;
     justify-content: space-between;
-    margin-top: 4px;
+    /* margin-top: 2px; */
 }
 
 .checkboxTitle > div {
@@ -123,4 +165,8 @@ form {
 #errorMsg {
     color: red;
     background-color: transparent;
+}
+
+#selectedCheck {
+    width: 15px;
 }

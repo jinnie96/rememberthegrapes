@@ -155,7 +155,8 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
     return (
         <div className="listsContainer">
             {console.log(tasksArr, "TASKS")}
-            <h1>Remember the ???</h1>
+            <img id ="logoPic" src="https://i.ibb.co/DrMTMqL/remember-the-grapes-logos-preview-rev-2.jpg"></img>
+                <div className="lists">
                 <p id="inbox">Inbox</p>
                 <p id="allTasks" onClick={getTasksAll}>All Tasks</p>
                 <div className="addList">
@@ -200,6 +201,7 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
                         )}
                     </div>
                 )))}
+                </div>
                 </div>
             </div>
     )

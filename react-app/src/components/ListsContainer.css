@@ -38,7 +38,8 @@
 #plusfa {
     margin-left: 5px;
     margin-top: 17px;
-    /* align-self: flex-end; */
+    display: flex;
+    /* justify-content: flex-end; */
 }
 
 #updateListName {
@@ -58,6 +59,11 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+
+}
+
+.lists {
+    margin-left: 10px;
 }
 
 /* .listBtns {

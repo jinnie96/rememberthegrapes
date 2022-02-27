@@ -163,33 +163,47 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
 
             {!showTask && (
                 <div className="taskInfoContainer">
+                    <div className="unshowContainer">
                     <p>{selectedListTitle}</p><br></br>
-                    <h3>{num} tasks</h3><h3> {compNum} completed</h3>
+                    <div className="incCompleteTasks">
+                        <div class="completedNum">
+                            <h3 id="complete">{num}</h3>
+                            <h3 id="tasksText">tasks</h3>
+                        </div>
+                        <div className="incompletedNum">
+                            <h3 id="incomplete"> {compNum}</h3>
+                            <h3 id="completedText">completed</h3>
+                        </div>
+                    </div>
+                    </div>
                 </div>
             )}
             {showTask && (
                 <div class="taskSelectedInfoContainer">
-                    <div>
+                    <div className="showContainer">
+                    <div className="changeTitleContainer">
                         <div id="titlename" onClick={editingTitle}>{selectedTaskTitle}</div>
                         <form onSubmit={changeTitleName}>
                             <input id="titleChange" name="title" defaultValue={selectedTaskTitle} onChange={setTitleVal} value={newTitleVal} required></input>
                             <button type="submit" id="confirmTitle" class="fa-solid fa-square-check">Submit</button>
                         </form>
                     </div>
-
-                    <div>
-                        <div onClick={editingTaskDue} id="taskdue">due:{selectedTaskDue}</div>
-                        <input id="dueTimeChange" onChange={changeDueTime} type="datetime-local" defaultValue={today}></input>
+                    <div className="dueListContainer">
+                        <div className="changeDueContainer">
+                            <div onClick={editingTaskDue} id="taskdue">due:{selectedTaskDue}</div>
+                            <input id="dueTimeChange" onChange={changeDueTime} type="datetime-local" defaultValue={today}></input>
+                        </div>
+                        <div className="changeListContainer">
+                            <div onClick={editingList} id="listName">list: {selectedListTitle}</div>
+                            <select name="lists" id="newListOptions" onChange={changeTaskList}>
+                            <option disabled selected value> -- select an option -- </option>
+                                <option value="0">None</option>
+                                    {listsArr && (listsArr.map(list => (
+                                        <option value={list.id}>{list.title}</option>
+                                    )))}
+                            </select>
+                        </div>
                     </div>
-                    <div>
-                        <div onClick={editingList} id="listName">list: {selectedListTitle}</div>
-                        <select name="lists" id="newListOptions" onChange={changeTaskList}>
-                        <option disabled selected value> -- select an option -- </option>
-                            <option value="0">None</option>
-                                {listsArr && (listsArr.map(list => (
-                                    <option value={list.id}>{list.title}</option>
-                                )))}
-                        </select>
                     </div>
                 </div>
                 )}
