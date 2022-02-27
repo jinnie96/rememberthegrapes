@@ -23,7 +23,7 @@
 .listBtns {
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap;
+        flex-wrap: wrap;
 }
 
 #editListCancelBtn {
@@ -64,7 +64,6 @@
 
 .taskSelectedInfoContainer {
     background-color:#FFFFFF;
-    /* position:absolute; */
     bottom: 0;
     margin-bottom: 0;
     height: 100%;
