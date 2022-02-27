@@ -81,7 +81,7 @@ const SignUpForm = () => {
     </div>
     <div className="rightSide">
       <div className="loginBtn">
-        <a href="/log-in">
+        <a href="/login">
         <button id="logButton">Log in</button>
         </a>
       </div>
