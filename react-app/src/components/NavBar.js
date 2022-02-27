@@ -41,7 +41,7 @@ const user = useSelector(state => state.session.user)
               </NavLink>
             </li>
           <li>
-            <NavLink to='/sign-up' exact={true} activeClassName='active'>
+            <NavLink to='/signup' exact={true} activeClassName='active'>
               Sign Up
             </NavLink>
           </li>

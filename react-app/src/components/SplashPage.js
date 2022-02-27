@@ -10,21 +10,23 @@ const SplashPage = () => {
             {/* <div className="backgroundColor"> */}
                 <div className="splashNavBar">
                     <div className="navBarLogo">
-                        Remember the Grapes
+                        <img id = "logoId" src = "https://i.ibb.co/C7qPLpK/remember-the-grapes-logos-preview-rev-1.jpg"></img>
                     </div>
                     <div className="logSignUp">
                     <NavLink to='/login' exact={true} activeClassName='active'>
                         <p id="splashLogin">Log In</p>
                     </NavLink>
-                    <NavLink to='/sign-up' exact={true} activeClassName='active'>
-                        <p id="splashSignUp">Sign Up</p>
+                    <NavLink to='/signup' exact={true} activeClassName='active'>
+                        <p id="splashSignUp">Sign up for free</p>
                     </NavLink>
                     </div>
                 </div>
                 <div className="splashMiddle">
                     <div className="smartApp">
                         <h1 id="smartAppBusy">The smart to-do app for busy people.</h1>
-                        <button id="signUpFree">Sign Up Free</button>
+                        <NavLink to='/signup' exact={true} activeClassName='active'>
+                            <button id="signUpFree">Sign Up Free</button>
+                        </NavLink>
                     </div>
                     <div className="busyImg">
                         <img id ="busyPersonImg" src="https://media.istockphoto.com/vectors/cartoon-super-business-woman-vector-id923547126?k=20&m=923547126&s=612x612&w=0&h=y5BeyQDRVc9ueCrkhLB4HnrKvool4MLIyVgHXt58EqI="></img>

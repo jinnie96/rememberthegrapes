@@ -21,6 +21,11 @@
     background-color: #0060BF;
 }
 
+#logoId {
+    height:200px;
+    width: 200px
+}
+
 /* body {
     grid-template-rows: 10% 70% 20%;
 } */
@@ -35,9 +40,19 @@
 
 #splashLogin, #splashSignUp {
     color: #FFFFFF;
+    opacity: .8;
     font-family: MuseoSansRounded, "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 700;
 }
+
+#splashLogin:hover, #splashSignUp:hover {
+    opacity: 1
+}
+
+/* #splashSignUp {
+    border: 2px solid;
+    border-radius: 5px;
+} */
 
 .navBarLogo {
     color: #FFFFFF;
