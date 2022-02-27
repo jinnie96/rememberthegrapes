@@ -81,12 +81,12 @@ export const addOneList = (form) => async dispatch => {
         const data = await response.json();
         console.log("DATAAAAAAAAA", data)
         dispatch(addList(data));
-        return null;
+        return data.id;
     } else {
         const data = await response.json()
         console.log("YOYODATALIST", data)
         if (data.errors) {
-            return data.errors
+            return data
         }
     }
 }

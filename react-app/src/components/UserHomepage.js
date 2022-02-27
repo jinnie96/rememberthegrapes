@@ -147,7 +147,9 @@ function UserHomepage () {
         if (e.target.id == selectedTaskId) {
           setSelectedTaskId(0)
           setShowTask(false)
+          // e.target.style.fontWeight = "400"
         } else {
+          // e.target.style.fontWeight = "bold"
           const response = await fetch (`/api/tasks/${e.target.id}`)
           // console.log("RES", response.body)
           if (response.ok) {
