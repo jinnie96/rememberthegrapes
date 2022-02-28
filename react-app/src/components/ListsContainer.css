@@ -64,6 +64,12 @@
 
 .listBtns {
     width: 100%;
+    height: 40px;
+}
+
+.listBtns:hover, #allTasks:hover {
+    background-color: #BFD7EF;
+    cursor:pointer;
 }
 
 .addList {
@@ -71,9 +77,15 @@
     width: 100%;
     flex-direction: row;
     justify-content: space-between;
+    height: 20px;
     /* display: flex;
     width: 100%;
     justify-content: space-between; */
+}
+
+.lists {
+    font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Helvetica,Arial,clean,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 13px;
 }
 
 #horizLine {

@@ -175,14 +175,17 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
     return (
         <div className="listsContainer">
             {console.log(tasksArr, "TASKS")}
+            <a href="/">
             <img id ="logoPic" src="https://i.ibb.co/vkFbq2C/RTGlogo.jpg"></img>
+
+            </a>
                 <div className="lists">
                 <p id="inbox">Inbox</p>
                 <p id="allTasks" onClick={getTasksAll}>All Tasks</p>
                 <hr id="horizLine"></hr>
                 <div className="addList">
 
-                <p id="lists">Lists:</p><i id="plusfa" class="fa-solid fa-square-plus" onClick={changeAdding}></i>
+                <p id="lists">Lists</p><i id="plusfa" class="fa-solid fa-square-plus" onClick={changeAdding}></i>
                 </div>
                 {/* <button onClick={changeAdding}>Add List</button> */}
                 {/* <i className="fa-solid fa-plus"></i> */}

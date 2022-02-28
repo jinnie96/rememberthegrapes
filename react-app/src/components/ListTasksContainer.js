@@ -126,7 +126,7 @@ function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, sele
                 <label defaultValue="null" for="lists"></label>
                 List: <select name="lists" id="listOptions" onChange={changeNewTaskListId}>
                 {/* <option disabled selected value> select an option </option> */}
-                <option value="" selected disabled >Select an Option</option>
+                <option value="" selected disabled >Select an Option (optional)</option>
 
                     {/* <option value={0}>None</option> */}
                 {listsArr && (listsArr.map(list => (
