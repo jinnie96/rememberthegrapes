@@ -121,8 +121,9 @@ export const deleteOneList = (id) => async dispatch => {
         method: 'DELETE',
     })
     if (response.ok) {
+        console.log("HEEHRES", response.tasks)
         dispatch(deleteList(id));
-        return "Deleted";
+        return response.json();
     }
 }
 

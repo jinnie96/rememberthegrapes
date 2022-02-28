@@ -29,7 +29,7 @@ function UserHomepage () {
     const [addingList, setAddingList] = useState(false)
     const [selectedList, setSelectedList] = useState()
     const [selectedListId, setSelectedListId] = useState()
-    const [selectedNewTaskId, setSelectedNewTaskId] = useState()
+    const [selectedNewTaskId, setSelectedNewTaskId] = useState(null)
     const [selectedListTitle, setSelectedListTitle] = useState("All Tasks")
     const [selectedTaskId, setSelectedTaskId] = useState()
     const [selectedTaskTitle, setSelectedTaskTitle] = useState("")
@@ -108,11 +108,14 @@ function UserHomepage () {
       }
       const deleteList = async (e) => {
         e.preventDefault()
-        await dispatch(deleteOneList(selectedListId))
+        const res = await dispatch(deleteOneList(selectedListId))
+        console.log("JFJF", res)
+        window.location.href = '/'
         await dispatch(getAllTasks(userId))
         // await dispatch(deleteOneTask(selectedListId))
 
         .then
+          setSelectedList(1)
           setSelectedList(undefined)
           setSelectedListTitle("All Tasks")
           setShowTask(false)
@@ -122,8 +125,7 @@ function UserHomepage () {
           setNum(num.length)
           setCompNum(comp.length)
           // dispatch(getAllTasks(userId))
-          // await dispatch(getAllTasks(userId))
-          // window.location.href = '/'
+          await dispatch(getAllTasks(userId))
       }
       const updateListTitle = e => {
           setListTitle(e.target.value)
@@ -138,7 +140,13 @@ function UserHomepage () {
       }
 
       const changeNewTaskListId = e => {
-        setSelectedNewTaskId(e.target.value)
+        console.log("EEEEEEYY", typeof(e.target.value))
+        if (e.target.value === "0") {
+          setSelectedNewTaskId(null)
+        } else {
+
+          setSelectedNewTaskId(e.target.value)
+        }
       }
 
       const showTaskDetails = async (e) => {
@@ -212,7 +220,7 @@ function UserHomepage () {
     return (
         <div className="homePage">
             <ListsContainer user={user} addingList={addingList} setAddingList={setAddingList} selectedNewTaskId={selectedNewTaskId} setSelectedNewTaskId={setSelectedNewTaskId} listTitle={listTitle} setListTitle={setListTitle} selectedList={selectedList} setSelectedList={setSelectedList} listId={listId} setListId={setListId} selectedListTitle={selectedListTitle} setSelectedListTitle={setSelectedListTitle} selectedListId={selectedListId} setSelectedListId={setSelectedListId} num={num} setNum={setNum} setShowTask={setShowTask} compNum={compNum} setCompNum={setCompNum} />
-            <ListTasksContainer user={user} selectedNewTaskId={selectedNewTaskId} setTitle={setTitle} setDueBy={setDueBy} title={title} updateTitle={updateTitle} updateDate={updateDate} dueBy={dueBy} changeNewTaskListId={changeNewTaskListId} listsArr={listsArr} tasksArr={tasksArr} selectedList={selectedList} showTaskDetails={showTaskDetails} editing={editing} updateTaskTitle = {updateTaskTitle} updateNewDate={updateNewDate} editTask = {editTask} editingTask = {editingTask} deleteTask={deleteTask} deleteList={deleteList} userTasks={userTasks} userLists={userLists} selectedTaskId={selectedTaskId} selectedTaskDue={selectedTaskDue} setSelectedTaskDue={setSelectedTaskDue}/>
+            <ListTasksContainer user={user} selectedNewTaskId={selectedNewTaskId} setSelectedNewTaskId={setSelectedNewTaskId} setTitle={setTitle} setDueBy={setDueBy} title={title} updateTitle={updateTitle} updateDate={updateDate} dueBy={dueBy} changeNewTaskListId={changeNewTaskListId} listsArr={listsArr} tasksArr={tasksArr} selectedList={selectedList} showTaskDetails={showTaskDetails} editing={editing} updateTaskTitle = {updateTaskTitle} updateNewDate={updateNewDate} editTask = {editTask} editingTask = {editingTask} deleteTask={deleteTask} deleteList={deleteList} userTasks={userTasks} userLists={userLists} selectedTaskId={selectedTaskId} selectedTaskDue={selectedTaskDue} setSelectedTaskDue={setSelectedTaskDue}/>
             <TasksListDisplay showTask={showTask} selectedListTitle={selectedListTitle} num={num} selectedTaskTitle={selectedTaskTitle} editingTaskTitle={editingTaskTitle} selectedTaskDue={selectedTaskDue} editingTask={editingTask} listsArr={listsArr} selectedTaskId={selectedTaskId} setShowTask={setShowTask} showTaskDetails={showTaskDetails} setSelectedTaskTitle={setSelectedTaskTitle} selectedTaskDue={selectedTaskDue} setSelectedTaskDue={setSelectedTaskDue} setSelectedListTitle={setSelectedListTitle} selectedList={selectedList} compNum={compNum} setCompNum={setCompNum}/>
         </div>
     )

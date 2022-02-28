@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addOneTask, deleteOneTask, getAllTasks, updateOneTask } from '../store/tasks';
 import './ListTaskContainer.css'
-function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDueBy, setTitle, updateTitle, updateDate, dueBy, changeNewTaskListId, showTaskDetails, editing, updateTaskTitle, updateNewDate, editTask, editingTask, deleteTask, deleteList, selectedTaskId, selectedTaskDue, setSelectedTaskDue}) {
+function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, selectedList, title, setDueBy, setTitle, updateTitle, updateDate, dueBy, changeNewTaskListId, showTaskDetails, editing, updateTaskTitle, updateNewDate, editTask, editingTask, deleteTask, deleteList, selectedTaskId, selectedTaskDue, setSelectedTaskDue}) {
     const dispatch = useDispatch()
     const [showComp, setShowComp] = useState(false)
     const userId= user.id
@@ -13,7 +13,11 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
     const addTask = async (e) => {
         e.preventDefault();
         const dueDate = dueBy.split("T")
-        console.log("DUEDATE", dueBy)
+        console.log((selectedNewTaskId ==="0"))
+        // if (selectedNewTaskId === "0") {
+        //     selectedNewTaskId = null
+        // }
+        console.log("YOOO", selectedNewTaskId)
         const newTask = {
             user_id: user.id,
             list_id: selectedNewTaskId,
@@ -28,6 +32,11 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
         setDueBy("0000-00-00T00:00")
         taskval.value = ""
         dateval.value = "0000-00-00T00:00"
+        const selectTag = document.getElementById("listOptions")
+        selectTag.value = "null"
+        // setSelectedNewTaskId(null)
+        console.log(selectedNewTaskId)
+
         // if (data) {
         //   setErrors(data);
         // }
@@ -54,6 +63,8 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
             setDeletedTasks(response.tasks)
         }
     }
+    const userLists = useSelector(state => state.list)
+    const userTasks = useSelector(state => state.task)
     useEffect(() => {
         (async () => {
             const res = await dispatch(getAllTasks(userId))
@@ -62,13 +73,19 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
                 setDeletedTasks(res.tasks)
                 console.log("DEEEEEEE", deletedTasks)
             }
+            const listsArr = Object.values(userLists)
+            const tasksArr = Object.values(userTasks)
+            console.log(listsArr)
+            console.log(tasksArr)
+
         })()
     }, [selectedList, dispatch, errors, selectedTaskDue, setSelectedTaskDue])
-      const userLists = useSelector(state => state.list)
-      const userTasks = useSelector(state => state.task)
+    // dispatch(getAllTasks(userId))
       console.log(userTasks, "deleteusertasks")
       const listsArr = Object.values(userLists)
       const tasksArr = Object.values(userTasks)
+      console.log(listsArr)
+      console.log(tasksArr)
 
 
       const setIncomplete = e => {
@@ -89,11 +106,11 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
             <p onClick = {setComplete} id="comp">Completed</p>
         </div>
         <form onSubmit={addTask}>
-        {/* <ul className="errors">
+        <ul className="errors">
                     {errors?.map((error, ind) => (
                         <li id="errorMsg" key={ind}>{error}</li>
                     ))}
-        </ul> */}
+        </ul>
         {/* <div> */}
         <div className="formContainer">
         <div id="newTaskInput">
@@ -107,7 +124,7 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
                 <select name="lists" id="listOptions" onChange={changeNewTaskListId}>
                 <option disabled selected value> select an option </option>
 
-                    <option value="None">None</option>
+                    <option value={0}>None</option>
                 {listsArr && (listsArr.map(list => (
 
                     <option value={list.id}>{list.title}</option>
@@ -126,7 +143,7 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
             {!showComp && (
                 <div>
 
-            {deletedTasks && (deletedTasks.map(task => (
+            {tasksArr && (tasksArr.map(task => (
                 <div className="deleteBtns">
                     {(selectedList === undefined && task.complete === false) && (
                         <div className="checkboxTitle" key={task.id}>

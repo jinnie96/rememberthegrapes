@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from app.models import db, List
+from app.models import db, List, Task
 from flask_login import current_user, login_required
 # from app.s3_helpers import (upload_file_to_s3, allowed_file, get_unique_filename)
 from app.forms.add_list_form import AddListForm
@@ -81,10 +81,13 @@ def editList(id):
 def deleteList(id):
     print("IDDEL", id)
     list = List.query.get(id)
-    print("BEFORE@", list)
+    tasks = Task.query.filter(id == Task.list_id).all()
+    print("BEFORE TASKS", tasks)
+    print("BEFORE@", list.to_dict())
     db.session.delete(list)
     db.session.commit()
     print("DELETED")
     return {
-        "id": id
+        "id": id,
+        "tasks": [task.to_dict() for task in tasks]
     }
