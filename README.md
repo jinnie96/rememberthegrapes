@@ -1,6 +1,6 @@
 # Remember the Grapes
 
-Remember the Grapes is a clone of the popular to-do website, [Remember the Milk](www.rememberthemilk.com).
+Remember the Grapes is a clone of the popular to-do list website, [Remember the Milk](www.rememberthemilk.com).
 
 Check out Remember the Grapes at the live site: [Remember the Grapes](https://remember-the-grapes.herokuapp.com/).
 
