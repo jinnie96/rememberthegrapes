@@ -122,11 +122,11 @@ function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, sele
             <div className="icons">
 
                 {/* <label for="due"><button>Due By</button></label> */}
-                <input name="due_by" id="dateInput" type="datetime-local" onChange={updateDate} value={dueBy} required></input>
+                Due Date: <input name="due_by" id="dateInput" type="datetime-local" onChange={updateDate} value={dueBy} required></input>
                 <label defaultValue="null" for="lists"></label>
-                <select name="lists" id="listOptions" onChange={changeNewTaskListId}>
+                List: <select name="lists" id="listOptions" onChange={changeNewTaskListId}>
                 {/* <option disabled selected value> select an option </option> */}
-                <option value="" selected disabled hidden>Select an Option</option>
+                <option value="" selected disabled >Select an Option</option>
 
                     {/* <option value={0}>None</option> */}
                 {listsArr && (listsArr.map(list => (
@@ -157,11 +157,11 @@ function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, sele
                     {(selectedList === undefined && task.complete === false) && (
                         <div className="checkboxTitle" key={task.id}>
                         {console.log(task.title, "NULL")}
-                    <div>
+                    <div className="pointer">
                     <input id="selectedCheck" type="checkbox" checked={task.id === selectedTaskId}></input>
                     <div id={task.id} onClick={showTaskDetails}>{task.title}</div>
                     </div>
-                <div>
+                <div className="dltAndCompBtn">
 
                 <button id={task.id} className="deleteTaskBtn" onClick={deleteTask} key={task.id}>Delete Task</button>
                 <i onClick={taskComplete} id="completed" class="fa-solid fa-check"></i>

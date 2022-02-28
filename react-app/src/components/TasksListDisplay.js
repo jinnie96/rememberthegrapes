@@ -239,6 +239,12 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
                         </div>
                     </div>
                     </div>
+                    <div className="footer">
+                        <footer>
+                        © 2022 Remember The Grapes
+                        </footer>
+                    </div>
+
                 </div>
             )}
             {showTask && (

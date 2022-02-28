@@ -5,7 +5,7 @@ import { addOneTask, deleteOneTask, getAllTasks, updateOneTask } from '../store/
 import { addOneList, getAllLists, deleteOneList, updateOneList } from '../store/lists';
 import './ListsContainer.css'
 
-function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, setSelectedNewTaskId, listTitle, setListTitle, selectedList, setSelectedList, listId, setListId, selectedListTitle, setSelectedListTitle, selectedListId, setSelectedListId, num, setNum, setShowTask, compNum, setCompNum}) {
+function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, setSelectedNewTaskId, listTitle, setListTitle, selectedList, setSelectedList, listId, setListId, selectedListTitle, setSelectedListTitle, selectedListId, setSelectedListId, num, setNum, setShowTask, compNum, setCompNum, setSelectedTaskId}) {
     console.log(listId, "UUUUUUUU")
     const dispatch = useDispatch()
     const history = useHistory()
@@ -56,6 +56,7 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
 
         const changeSelectedList = e => {
             setShowTask(false)
+            setSelectedTaskId(0)
             setSelectedList(e.target.id)
             getSingleListInfo(e.target.id)
             setListId(e.target.id)
@@ -174,13 +175,14 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
     return (
         <div className="listsContainer">
             {console.log(tasksArr, "TASKS")}
-            <img id ="logoPic" src="https://i.ibb.co/DrMTMqL/remember-the-grapes-logos-preview-rev-2.jpg"></img>
+            <img id ="logoPic" src="https://i.ibb.co/vkFbq2C/RTGlogo.jpg"></img>
                 <div className="lists">
                 <p id="inbox">Inbox</p>
                 <p id="allTasks" onClick={getTasksAll}>All Tasks</p>
+                <hr id="horizLine"></hr>
                 <div className="addList">
 
-                <p id="lists">Lists:</p><i id="plusfa" class="fa-solid fa-plus" onClick={changeAdding}></i>
+                <p id="lists">Lists:</p><i id="plusfa" class="fa-solid fa-square-plus" onClick={changeAdding}></i>
                 </div>
                 {/* <button onClick={changeAdding}>Add List</button> */}
                 {/* <i className="fa-solid fa-plus"></i> */}
@@ -193,7 +195,7 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
                 )}
                 <ul className="errors">
                 {errors?.map((error, ind) => (
-                    <li id="errorMsg" key={ind}>{error}</li>
+                    <h3 id="errorMsg" key={ind}>{error}</h3>
                     ))}
                     </ul>
                 <div className="userLists">
