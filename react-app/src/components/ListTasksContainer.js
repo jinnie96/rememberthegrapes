@@ -89,10 +89,14 @@ function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, sele
 
 
       const setIncomplete = e => {
+        e.target.style.color ="black"
+        e.target.parentElement.childNodes[1].style.color = "#0060bf"
           setShowComp(false)
       }
 
       const setComplete = e => {
+          e.target.style.color ="black"
+          e.target.parentElement.childNodes[0].style.color = "#0060bf"
           setShowComp(true)
       }
 
@@ -134,6 +138,11 @@ function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, sele
                     <button id="addTaskBtn" type="submit">Add</button>
                 </div>
             </div>
+                <ul className="errors">
+                    {errors?.map((error, ind) => (
+                        <h2 id="errorMsg" key={ind}>{error}</h2>
+                    ))}
+        </ul>
         </div>
 
         </form>
