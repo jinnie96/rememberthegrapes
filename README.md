@@ -50,7 +50,8 @@ To view and use this application, you can either navigate to the [live hosted si
 ![image](https://user-images.githubusercontent.com/90893496/155971844-eb0fa0e7-188a-4dcf-9d0d-4f0b0380e681.png)
 
 ### Homepage
-![image](![Screen Shot 2022-02-28 at 2 59 26 AM](https://user-images.githubusercontent.com/90893496/155973656-fde3c8c3-444e-41fa-82e3-2b4c6438e2f0.png))
+![image](https://user-images.githubusercontent.com/90893496/156006901-869f1607-6779-416a-9b7e-ff882c78c46f.png)
+
 
 ## Functionality
 
