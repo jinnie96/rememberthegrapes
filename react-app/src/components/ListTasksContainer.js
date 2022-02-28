@@ -72,10 +72,14 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
 
 
       const setIncomplete = e => {
+        e.target.style.color ="black"
+        e.target.parentElement.childNodes[1].style.color = "#0060bf"
           setShowComp(false)
       }
 
       const setComplete = e => {
+          e.target.style.color ="black"
+          e.target.parentElement.childNodes[0].style.color = "#0060bf"
           setShowComp(true)
       }
 
@@ -89,11 +93,6 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
             <p onClick = {setComplete} id="comp">Completed</p>
         </div>
         <form onSubmit={addTask}>
-        {/* <ul className="errors">
-                    {errors?.map((error, ind) => (
-                        <li id="errorMsg" key={ind}>{error}</li>
-                    ))}
-        </ul> */}
         {/* <div> */}
         <div className="formContainer">
         <div id="newTaskInput">
@@ -117,6 +116,11 @@ function ListTasksContainer({user, selectedNewTaskId, selectedList, title, setDu
                     <button id="addTaskBtn" type="submit">Add</button>
                 </div>
             </div>
+                <ul className="errors">
+                    {errors?.map((error, ind) => (
+                        <h2 id="errorMsg" key={ind}>{error}</h2>
+                    ))}
+        </ul>
         </div>
 
         </form>

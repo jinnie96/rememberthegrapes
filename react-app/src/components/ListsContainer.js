@@ -22,9 +22,11 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
 
           const changeAdding = e => {
           setAddingList(!addingList)
+        //   setErrors([])
           }
           const addList = async (e) => {
             e.preventDefault()
+            setErrors([])
             console.log("YOOOOOOOOO")
             const newList = {
                 user_id: user.id,
@@ -32,13 +34,14 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
             }
 
             const data = await dispatch(addOneList(newList))
-            if (data) {
+            if (data.errors) {
                 console.log("DATUR", data)
+                setErrors(data.errors)
             }
             console.log("DATUR", data)
-            setErrors(data)
             console.log("HEHE", errors)
             dispatch(getAllLists(userId))
+            setSelectedListId(data)
             setListTitle("")
             changeAdding()
         }
