@@ -154,6 +154,7 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
             }
             setShowTask(!showTask)
             selectedTaskList = res.list_id
+            alert("list updated!")
 
         } else {
             const newList = {
@@ -165,6 +166,7 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
             }
             setShowTask(!showTask)
             console.log(selectedList, (e.target.id))
+            alert("list updated!")
             // setSelectedList(e.target.id)
         }
 
