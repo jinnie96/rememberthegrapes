@@ -12,18 +12,14 @@ const EditTaskModal = ({ setShowModal, listsArr, selectedTaskId, toggleModal }) 
     const dispatch = useDispatch()
     const history = useHistory()
 
-    console.log("INSIDE HANDLE", listsArr)
-    console.log("taskkk", selectedTaskId)
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("TITLE", newTitle, "TASKID", selectedTaskId, "DUEBY", newDueBy)
         const newTask = {
             title: newTitle,
             due_by: newDueBy
         }
         await dispatch(updateOneTask(selectedTaskId, newTask))
         toggleModal()
-        console.log("NEWONE", newTask)
     }
 
     const newTitleFunc = async (e) => {

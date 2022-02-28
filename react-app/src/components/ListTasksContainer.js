@@ -13,11 +13,9 @@ function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, sele
     const addTask = async (e) => {
         e.preventDefault();
         const dueDate = dueBy.split("T")
-        console.log((selectedNewTaskId ==="0"))
         // if (selectedNewTaskId === "0") {
         //     selectedNewTaskId = null
         // }
-        console.log("YOOO", selectedNewTaskId)
         const newTask = {
             user_id: user.id,
             list_id: selectedNewTaskId,
@@ -25,7 +23,6 @@ function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, sele
             due_by: dueBy
         }
         const data = await dispatch(addOneTask(newTask));
-        console.log("DATAAAA", data)
         setErrors(data)
         dispatch(getAllTasks(userId))
         setTitle("")
@@ -37,7 +34,6 @@ function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, sele
         selectTag.value = 0
         setSelectedNewTaskId(null)
         // setSelectedNewTaskId(null)
-        console.log(selectedNewTaskId)
 
         // if (data) {
         //   setErrors(data);
@@ -50,7 +46,6 @@ function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, sele
     //     })();
     // }, [listsArr]);
     const taskComplete = async (e) => {
-        console.log(e.target.parentElement.childNodes[0].id, "COMPLETE")
         const compTask = {
             complete: true
         }
@@ -58,10 +53,8 @@ function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, sele
         const res = await dispatch(updateOneTask(e.target.parentElement.childNodes[0].id, compTask))
         const response = await dispatch(getAllTasks(userId))
         if (res) {
-            console.log("updatecheck", res)
         }
         if (response) {
-            console.log("ALL", response.tasks)
             setDeletedTasks(response.tasks)
         }
     }
@@ -71,23 +64,14 @@ function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, sele
         (async () => {
             const res = await dispatch(getAllTasks(userId))
             if (res) {
-                console.log("ALLTASKSRES", res.tasks)
                 setDeletedTasks(res.tasks)
-                console.log("DEEEEEEE", deletedTasks)
             }
-            // const listsArr = Object.values(userLists)
-            // const tasksArr = Object.values(userTasks)
-            // console.log(listsArr)
-            // console.log(tasksArr)
 
         })()
     }, [selectedList, dispatch, errors, selectedTaskDue, setSelectedTaskDue])
     // dispatch(getAllTasks(userId))
-      console.log(userTasks, "deleteusertasks")
       const listsArr = Object.values(userLists)
       const tasksArr = Object.values(userTasks)
-      console.log(listsArr)
-      console.log(tasksArr)
 
 
       const setIncomplete = e => {
@@ -102,13 +86,14 @@ function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, sele
           setShowComp(true)
       }
 
-      console.log("ALL TASKS@#####", tasksArr)
-
     return (
         <div className="listTasksContainer">
+        {selectedList && (
+
         <div className="deleteBtnList">
             <button id="deleteBtn" onClick = {deleteList}>Delete List</button>
         </div>
+        )}
         <div className="completeInc">
             <p onClick = {setIncomplete} id="incomp">Incomplete</p>
             <p onClick = {setComplete} id="comp">Completed</p>
@@ -156,7 +141,6 @@ function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, sele
                 <div className="deleteBtns">
                     {(selectedList === undefined && task.complete === false) && (
                         <div className="checkboxTitle" key={task.id}>
-                        {console.log(task.title, "NULL")}
                     <div className="pointer">
                     <input id="selectedCheck" type="checkbox" checked={task.id === selectedTaskId}></input>
                     <div id={task.id} onClick={showTaskDetails}>{task.title}</div>
@@ -171,7 +155,6 @@ function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, sele
                     {(selectedList && task.list_id == selectedList && task.complete === false) && (
                         <div className="checkboxTitle" key={task.id}>
                         <div>
-                        {console.log("TASKID", task.id, "selectedLIST", selectedTaskId)}
                         <input id="selectedCheck" type="checkbox" checked={task.id === selectedTaskId}></input>
                         <div id={task.id} onClick={showTaskDetails}>{task.title}</div>
                         </div>
@@ -203,7 +186,6 @@ function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, sele
                     {/* <button id={task.id} className="deleteTaskBtn" onClick={deleteTask} key={task.id}>Delete Task</button> */}
                     </div>
                     )}
-                        {console.log(selectedList, "LISTSELECT", task.list_id, "TASKLISTID", selectedList == task.list_id)}
                     {(selectedList && task.complete === true && selectedList == task.list_id) && (
                         <div className="checkboxTitle">
                             <div>

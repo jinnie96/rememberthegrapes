@@ -111,6 +111,7 @@ form {
 
 .checkboxTitle {
     border-bottom: solid 1px #e5e5e5;
+    cursor: pointer;
 }
 
 .checkboxTitle:hover {

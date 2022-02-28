@@ -30,7 +30,6 @@ export const authenticate = () => async (dispatch) => {
 }
 
 export const login = (email, password) => async (dispatch) => {
-  console.log("EMAILPASSWORD", email, password)
   const response = await fetch('/api/auth/login', {
     method: 'POST',
     headers: {
@@ -72,7 +71,6 @@ export const logout = () => async (dispatch) => {
 
 
 export const signUp = (firstName, lastName, username, email, password, confirmPassword) => async (dispatch) => {
-  console.log(firstName, lastName, email, username, password, confirmPassword, "@@@@@@@@@@@@@@")
   const response = await fetch('/api/auth/signup', {
     method: 'POST',
     headers: {

@@ -67,7 +67,6 @@ export const getSingleTask = (id) => async dispatch => {
 }
 
 export const addOneTask = (form) => async dispatch => {
-    console.log("FORM@!#!@#!#", form)
     const response = await fetch (`/api/tasks/`, {
         method: 'POST',
         headers: {
@@ -77,12 +76,10 @@ export const addOneTask = (form) => async dispatch => {
     })
     if (response.ok) {
         const data = await response.json();
-        console.log("DATAAAAAAAAA", data)
         dispatch(addTask(data));
         return null;
     } else {
         const data = await response.json()
-        console.log("YOYODATA", data)
         if (data.errors) {
             return data.errors
         }
@@ -90,7 +87,6 @@ export const addOneTask = (form) => async dispatch => {
 }
 
 export const updateOneTask = (id, task) => async dispatch => {
-    console.log("IN STORE", id, task)
     const response = await fetch (`/api/tasks/${id}`, {
         method: 'PATCH',
         headers: {
@@ -98,10 +94,8 @@ export const updateOneTask = (id, task) => async dispatch => {
         },
         body: JSON.stringify(task)
     })
-    console.log("UDPDATE RES", response)
     if (response.ok) {
         const data = await response.json();
-        console.log(data, "UPADTE DATA")
         dispatch(updateTask(data));
         return data;
     }
@@ -131,7 +125,6 @@ export default function taskReducer(state = initialState, action) {
             // for (const key in action.payload) {
             //     newState[action.payload[key].id] = action.payload[key]
             // }
-            console.log(action.payload.tasks,"!!@#@!#@!#!#!#")
             action.payload.tasks.forEach(task => {
                 newState[task.id] = task
             })

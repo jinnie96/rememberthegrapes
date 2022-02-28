@@ -20,7 +20,6 @@ def validation_errors_to_error_messages(validation_errors):
 @lists_routes.route('/user/<int:id>')
 @login_required
 def getUserLists(id):
-    print(" IN LIST API")
     lists = List.query.filter(id == List.user_id).all()
     return {
         "lists": [list.to_dict() for list in lists]
@@ -30,7 +29,6 @@ def getUserLists(id):
 @lists_routes.route('/<int:id>')
 @login_required
 def getSingleList(id):
-    print("INNNNNNN", id)
     list = List.query.get(id)
     return {
         "id": list.id,
@@ -40,13 +38,10 @@ def getSingleList(id):
 @lists_routes.route('/', methods=["POST"])
 @login_required
 def postList():
-    print("IN API!!!!!!", request.get_json()["title"])
     data = request.get_json()
     form = AddListForm()
-    print(form.data, "FORM DATA@!@#!#!@")
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        print("FORM@@@@@", form.data)
         lists = List(user_id=current_user.id, title=form.data["title"])
         db.session.add(lists)
         db.session.commit()
@@ -59,11 +54,9 @@ def postList():
 @lists_routes.route('/<int:id>', methods=["PUT"])
 @login_required
 def editList(id):
-    print("IN rutes")
     list = List.query.get(id)
     data = request.get_json()
     form = EditListForm()
-    print(data, "NEW TITLE")
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         print ("FORMEDITTT", form.data)
@@ -79,14 +72,10 @@ def editList(id):
 @lists_routes.route('/<int:id>', methods=["DELETE"])
 @login_required
 def deleteList(id):
-    print("IDDEL", id)
     list = List.query.get(id)
     tasks = Task.query.filter(id == Task.list_id).all()
-    print("BEFORE TASKS", tasks)
-    print("BEFORE@", list.to_dict())
     db.session.delete(list)
     db.session.commit()
-    print("DELETED")
     return {
         "id": id,
         "tasks": [task.to_dict() for task in tasks]

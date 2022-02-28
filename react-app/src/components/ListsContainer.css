@@ -4,8 +4,8 @@
 
 #editListInput {
     display:none;
-    height: 15px;
-    font-size: 16px;
+    height: 13px;
+    font-size: 13px;
     width: 65%;
 }
 
@@ -17,6 +17,8 @@
 #addListPlus {
     font-size: 1.3em;
 }
+
+
 
 #updateListName {
     display: none;
@@ -59,7 +61,13 @@
 
 #fa-edit {
     z-index: 1;
-    margin-top: 16px
+    /* margin-top: 16px */
+}
+
+#submitList {
+    background-color:#2F8CEB;
+    color: white;
+    border-radius: 10px;
 }
 
 .listBtns {
@@ -77,7 +85,7 @@
     width: 100%;
     flex-direction: row;
     justify-content: space-between;
-    height: 20px;
+    /* height: 20px; */
     /* display: flex;
     width: 100%;
     justify-content: space-between; */
@@ -99,7 +107,7 @@
 #plusfa {
     /* margin-left: 3px; */
     margin-right: 3px;
-    margin-top: 19px;
+    margin-top: 15px;
     display: flex;
     /* justify-content: flex-end; */
 }
@@ -131,6 +139,7 @@
     margin-left: 10px;
 }
 
-/* .listBtns {
+.listBtns {
     display: flex;
-} */
+    align-items: center;
+}

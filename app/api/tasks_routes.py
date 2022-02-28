@@ -26,7 +26,6 @@ def getAllListTasks():
 @tasks_routes.route('/user/<int:id>')
 @login_required
 def getUserTasks(id):
-    print(id, "ID@!~!!!!!~!~~!")
     tasks = Task.query.filter(id == Task.user_id).all()
     return {
         "tasks": [task.to_dict() for task in tasks]
@@ -35,23 +34,18 @@ def getUserTasks(id):
 @tasks_routes.route('/<int:id>')
 @login_required
 def getSingleTask(id):
-    print("IN API")
     task = Task.query.filter(id == Task.id).first()
     return {"task": task.to_dict()}
 
 @tasks_routes.route('/', methods=["POST"])
 @login_required
 def postTask():
-    print("IN API!!!!!!", request.get_json()["due_by"])
     # data = json.loads(request.data.decode("utf-8"))
     # data = request.json()
     data = request.get_json()
-    print("DATA JSON@@!!!!!!!!", data["list_id"])
     form = AddTaskForm()
-    print(form.data, "FORM DATA@!@#!#!@")
     # if len(request.get_json()["due_by"][0].split("-")[1]) is 1:
     lists = List.query.all()
-    print("LISSSTTTTTT", lists[0].to_dict())
     # year = request.get_json()["due_by"][0].split("-")[0]
     # month = request.get_json()["due_by"][0].split("-")[1]
     # day = request.get_json()["due_by"][0].split("-")[2]
@@ -64,11 +58,9 @@ def postTask():
     # print("YEARRRRRRRRRR", type(int((f"{int(month):02d}"))))
     # print("YEARRRRRRRRRR", int(day))
 # date(int(year), int((f"{int(month):02d}")
-    print("YEARRRRRRRRRR", type(9))
     form['csrf_token'].data = request.cookies['csrf_token']
     # form['title'].data = "test"
     if form.validate_on_submit():
-        print("FORM@@@@@", form.data)
         task = Task(user_id=current_user.id, list_id=data["list_id"], title=form.data["title"], due_by=request.get_json()["due_by"], complete=False)
         db.session.add(task)
         db.session.commit()
@@ -94,11 +86,8 @@ def postTask():
 @tasks_routes.route('/<int:id>', methods=["PATCH"])
 @login_required
 def editTask(id):
-    print("iN EDIT")
     task = Task.query.get(id)
-    print("TASK", task)
     data = request.get_json()
-    print("DATRIRRRR", data)
     if 'title' in data:
         task.title=data["title"]
     if 'due_by' in data:
@@ -116,12 +105,9 @@ def editTask(id):
 @tasks_routes.route('/<int:id>', methods=["DELETE"])
 @login_required
 def deleteTask(id):
-    print("ID", id)
     task = Task.query.get(id)
-    print("BEFORE@", task)
     db.session.delete(task)
     db.session.commit()
-    print("DELETED")
     return {
         "id": id
     }

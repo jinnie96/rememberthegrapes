@@ -41,7 +41,6 @@ const getUserList = list => ({
 // THUNK CREATORS
 
 export const getAllLists = (id) => async dispatch => {
-    console.log("IN DPSATCH------")
     const response = await fetch (`/api/lists/user/${id}`)
     if (response.ok) {
         const data = await response.json();
@@ -68,7 +67,6 @@ export const getSingleLists = (id) => async dispatch => {
 }
 
 export const addOneList = (form) => async dispatch => {
-    console.log("FORM@!#!@#!#", form)
     const response = await fetch (`/api/lists/`, {
         method: 'POST',
         headers: {
@@ -79,12 +77,10 @@ export const addOneList = (form) => async dispatch => {
     // console.log(response.json(), "JSON!!")
     if (response.ok) {
         const data = await response.json();
-        console.log("DATAAAAAAAAA", data)
         dispatch(addList(data));
         return data.id;
     } else {
         const data = await response.json()
-        console.log("YOYODATALIST", data)
         if (data.errors) {
             return data
         }
@@ -92,7 +88,6 @@ export const addOneList = (form) => async dispatch => {
 }
 
 export const updateOneList = (id, list) => async dispatch => {
-    console.log("IN API")
     const response = await fetch (`/api/lists/${id}`, {
         method: 'PUT',
         headers: {
@@ -100,15 +95,12 @@ export const updateOneList = (id, list) => async dispatch => {
         },
         body: JSON.stringify(list)
     })
-    console.log("UDPDATE RES", response)
     if (response.ok) {
         const data = await response.json();
-        console.log(data, "UPADTE DATA")
         dispatch(updateList(data));
         return null;
     } else {
         const data = await response.json()
-        console.log("YOYODATALIST", data)
         if (data.errors) {
             return data.errors
         }
@@ -116,12 +108,10 @@ export const updateOneList = (id, list) => async dispatch => {
 }
 
 export const deleteOneList = (id) => async dispatch => {
-    console.log("INSIDE API DELETE", id)
     const response = await fetch (`/api/lists/${id}`, {
         method: 'DELETE',
     })
     if (response.ok) {
-        console.log("HEEHRES", response.tasks)
         dispatch(deleteList(id));
         return response.json();
     }

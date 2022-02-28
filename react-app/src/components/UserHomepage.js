@@ -41,7 +41,6 @@ function UserHomepage () {
     const [num, setNum] = useState()
     const [showTask, setShowTask] = useState(false)
     const [compNum, setCompNum] = useState()
-    console.log("STATE@@@@@@@", tasks)
 
     useEffect(() => {
         // const id = user.id
@@ -58,7 +57,6 @@ function UserHomepage () {
     useEffect(() => {
       const num = tasksArr.filter( task => !task.complete)
       const comp = tasksArr.filter(task => task.complete)
-      num.map(task => console.log(task))
       setNum(num.length)
       setCompNum(comp.length)
 
@@ -111,15 +109,12 @@ function UserHomepage () {
           setTitle(e.target.value)
       }
       const updateTaskTitle = e => {
-          console.log(e.target.id)
           const updateTitleTag = document.getElementById({e})
-          console.log(e)
           setNewEditTask(e.target.value)
       }
       const deleteList = async (e) => {
         e.preventDefault()
         const res = await dispatch(deleteOneList(selectedListId))
-        console.log("JFJF", res)
         window.location.href = '/'
         await dispatch(getAllTasks(userId))
         // await dispatch(deleteOneTask(selectedListId))
@@ -131,7 +126,6 @@ function UserHomepage () {
           setShowTask(false)
           const num = tasksArr.filter( task => !task.complete)
           const comp = tasksArr.filter(task => task.complete)
-          num.map(task => console.log(task))
           setNum(num.length)
           setCompNum(comp.length)
           // dispatch(getAllTasks(userId))
@@ -156,7 +150,6 @@ function UserHomepage () {
       }
 
       const changeNewTaskListId = e => {
-        console.log("EEEEEEYY", typeof(e.target.value))
         if (e === "0") {
           setSelectedNewTaskId(null)
         }
@@ -170,7 +163,6 @@ function UserHomepage () {
 
       const showTaskDetails = async (e) => {
         setShowTask(true)
-        console.log("IN SHOWTASK", e.target.id, "SELECT", selectedTaskId)
         if (e.target.id == selectedTaskId) {
           setSelectedTaskId(0)
           setShowTask(false)
@@ -178,10 +170,8 @@ function UserHomepage () {
         } else {
           // e.target.style.fontWeight = "bold"
           const response = await fetch (`/api/tasks/${e.target.id}`)
-          // console.log("RES", response.body)
           if (response.ok) {
               const data = await response.json();
-              console.log("DATABOI", data.task.list_id)
               setSelectedTaskId(data.task.id)
               if (!data.task.list_id) {
                 // setSelectedListTitle("null")
@@ -192,7 +182,6 @@ function UserHomepage () {
               }
               // const listTitle = await fetch(`api/lists/${data.task.list_id}`)
               // console.log("LISSSSS", listTitle.json())
-              console.log("HEHEHEHEHEEHEHEHE", new Date(data.task.due_by).toLocaleString())
               setSelectedTaskTitle(data.task.title)
               setSelectedTaskDue(new Date(data.task.due_by).toLocaleString())
           }
@@ -205,7 +194,6 @@ function UserHomepage () {
         if (listTitle.ok) {
           const data = await listTitle.json()
           setSelectedTaskList(data.title)
-          console.log("LISSSSS", data.title)
 
         }
       }
@@ -219,12 +207,8 @@ function UserHomepage () {
           setEditing(!editing)
 
       }
-      console.log("USERTASKS", userTasks)
-      console.log("USERLISTS", userLists)
     const tasksArr = Object.values(userTasks)
     const listsArr = Object.values(userLists)
-      console.log(tasksArr)
-      console.log(listsArr)
     const listName = document.getElementById("Weekendlist")
     const editListBtn = document.getElementById("editListBtn")
     const listInput = document.getElementById("editListInput")
@@ -236,8 +220,6 @@ function UserHomepage () {
         editListBtn.style.display = "block"
         listName.style.display = "block"
     }
-    console.log(selectedTaskId,"UOOOOOOOOOOO")
-    console.log(selectedTaskTitle,"sup")
 
     return (
         <div className="homePage">

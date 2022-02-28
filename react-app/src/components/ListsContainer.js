@@ -6,7 +6,6 @@ import { addOneList, getAllLists, deleteOneList, updateOneList } from '../store/
 import './ListsContainer.css'
 
 function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, setSelectedNewTaskId, listTitle, setListTitle, selectedList, setSelectedList, listId, setListId, selectedListTitle, setSelectedListTitle, selectedListId, setSelectedListId, num, setNum, setShowTask, compNum, setCompNum, setSelectedTaskId}) {
-    console.log(listId, "UUUUUUUU")
     const dispatch = useDispatch()
     const history = useHistory()
     const userId = user.id
@@ -27,7 +26,6 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
           const addList = async (e) => {
             e.preventDefault()
             setErrors([])
-            console.log("YOOOOOOOOO")
             const newList = {
                 user_id: user.id,
                 title: listTitle
@@ -35,11 +33,8 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
 
             const data = await dispatch(addOneList(newList))
             if (data.errors) {
-                console.log("DATUR", data)
                 setErrors(data.errors)
             }
-            console.log("DATUR", data)
-            console.log("HEHE", errors)
             dispatch(getAllLists(userId))
             setSelectedListId(data)
             setListTitle("")
@@ -49,8 +44,6 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
         const updateListTitle = e => {
             setListTitle(e.target.value)
         }
-        console.log("USERRRRRRRRRR", userTasks)
-        console.log("USERRRRRRRRRR", userLists)
         const listsArr = Object.values(userLists)
         const tasksArr = Object.values(userTasks)
 
@@ -68,13 +61,11 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
                 const comp = tasksArr.filter(task => task.complete)
                 setNum(num.length)
                 setCompNum(comp.length)
-                tasksArr.map(task => console.log("WASSUP", task.title))
             } else {
                 const response = await fetch (`/api/lists/${id}`)
                 if (response.ok) {
                     const data = await response.json();
                     setSelectedListId(data.id)
-                    console.log("NULLTITLE", data.id)
                     setSelectedListTitle(data.title)
                     const filterTasks = tasksArr.filter(task => task.list_id == data.id)
                     const num = filterTasks.filter( task => !task.complete)
@@ -94,7 +85,6 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
             // e.target.parentElement.childNodes[2].style.display="none"
             // e.target.parentElement.childNodes[3].style.display="none"
             // e.target.parentElement.childNodes[4].style.display="none"
-            console.log("CURRRRRR", e.target)
             e.target.parentElement.childNodes[0].style.display="block"
             e.target.parentElement.childNodes[1].style.display="block"
             e.target.childNodes[0].style.display="none"
@@ -115,7 +105,6 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
         }
 
         const changeListName = async (e) => {
-            console.log("FORMNODE", e.target.parentElement.childNodes[2].childNodes)
             // e.target.parentElement.childNodes[0].style.display="none"
             // e.target.parentElement.childNodes[1].style.display="none"
             // e.target.parentElement.childNodes[2].style.display="block"
@@ -132,28 +121,19 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
         }
 
         const changeListNameState = async (e) => {
-            console.log(e.target.value)
-            console.log(e.target.parentElement.parentElement.childNodes[0].id)
             setNewListName(e.target.value)
             setNewListId(e.target.parentElement.parentElement.childNodes[0].id)
         }
 
         const updateNewList = async(e) => {
             e.preventDefault()
-            console.log("CURR", e.target)
-            console.log(e.target.parentElement.childNodes[0].id)
-            console.log(newListId)
-            console.log("naaaaaame", newListName)
             const list = {
                 id: newListId,
                 user_id: user.id,
                 title: newListName
             }
-            console.log(list)
             const res = await dispatch(updateOneList(newListId, list))
-            console.log("REEEEEEE", res)
             if (!res) {
-                console.log("EDITRESS%%%%%", res)
                 cancelListChange(e)
                 history.push('/')
             }
@@ -174,7 +154,6 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
 
     return (
         <div className="listsContainer">
-            {console.log(tasksArr, "TASKS")}
             <a href="/">
             <img id ="logoPic" src="https://i.ibb.co/vkFbq2C/RTGlogo.jpg"></img>
 
@@ -192,7 +171,7 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
                 {addingList && (
                     <form onSubmit={addList}>
                         <input name='title' id="newListInput" placeholder="Enter new list..."type="text" value ={listTitle} onChange={updateListTitle} required></input><br></br>
-                        <button type="submit">Submit</button>
+                        <button id="submitList" type="submit">Submit</button>
                         <i id="addListPlus" onClick={changeAdding} class="fa-solid fa-rectangle-xmark fa-1x"></i>
                     </form>
                 )}

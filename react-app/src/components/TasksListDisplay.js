@@ -5,31 +5,24 @@ import { addOneTask, deleteOneTask, getAllTasks, updateOneTask } from '../store/
 import './TasksListDisplay.css'
 
 function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle, editingTaskTitle, selectedTaskDue, editingTask, listsArr, selectedTaskId, setShowTask, showTaskDetails, setSelectedTaskTitle, setSelectedTaskDue, setSelectedListTitle, selectedList, setSelectedList, compNum, selectedTaskList}) {
-    console.log(selectedTaskId,"moooooooooo")
 
     const [newTitleVal, setNewTitleVal] = useState("")
     const history = useHistory()
     const [today, setToday] = useState("")
     const dispatch = useDispatch()
     const tasks = useSelector(state => state.task)
-    console.log("SHOWWW TASKKK", showTask)
-    // console.log("Taaaaaaasks", tasks)
-    console.log(typeof(selectedList))
     let complete = 0
     let incomplete = 0
     // useEffect(() => {
     //     (async () => {
             for (const task in tasks) {
-                console.log(tasks[task], selectedList,"EEEEEEEEEEEEEEE")
                 if (selectedList === undefined) {
-                    console.log("UNSELECTED")
                     if (tasks[task].complete) {
                         complete++
                     } else {
                         incomplete++
                     }
                 } else {
-                    console.log("SELECTED", tasks[task].complete, tasks[task].list_id == (selectedList))
                     if (tasks[task].complete && tasks[task].list_id == (selectedList)) {
                         complete++
                     }
@@ -41,7 +34,6 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
     //             })()
     // }, [selectedList, dispatch])
 
-    console.log(complete, incomplete)
     function getToday() {
         const date = new Date();
 
@@ -62,22 +54,16 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
     }
 
     const editingTaskDue = (e) => {
-        console.log(e.target)
-        console.log(e.target.parentElement.childNodes)
         e.target.style.display="none"
         e.target.parentElement.childNodes[1].style.display="block"
-        console.log("PARENTTTT", e.target.parentElement)
     }
 
     const cancelTaskDueChange = (e) => {
-        console.log("YOOOOO", e.target)
         e.target.style.display="none"
         e.target.parentElement.childNodes[0].style.display="block"
     }
 
     const cancelTitleChange = (e) => {
-        console.log("ONE", e.target.parentElement.childNodes[0])
-        console.log("TWO", e.target.parentElement.childNodes[1])
         // e.target.parentElement.childNodes[0].style.display="block"
         // e.target.parentElement.childNodes[1].style.display="none"
 
@@ -101,7 +87,6 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
     }
 
     const editingTitle = (e) => {
-        console.log("test", e.target.innerText)
         setNewTitleVal(e.target.innerText)
         e.target.style.display="none"
         e.target.parentElement.childNodes[1].style.display="block"
@@ -118,11 +103,7 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
         const newDate = {
             due_by: e.target.value
         }
-        console.log(e.target.value)
-        console.log(selectedTaskId)
         const res = await dispatch(updateOneTask(selectedTaskId, newDate))
-        console.log(e.target.parentElement.childNodes[0],"HUUUUUUUH")
-        console.log("RESSSSS", res.due_by)
         setSelectedTaskDue(new Date(res.due_by).toLocaleString())
         if (res) {
             cancelTaskDueChange(e)
@@ -133,15 +114,12 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
     }
 
     const cancelListChange = (e) => {
-        console.log(e.target)
         e.target.style.display="none"
         e.target.parentElement.childNodes[0].style.display="block"
     }
 
     const changeTaskList = async(e) => {
-        console.log("YEEEEEEEE", e.target.value == 0)
         // if (e.target.value === "0") {
-        //     console.log("ZERO")
         //      const newList = {
         //          list_id:undefined
         //      }
@@ -167,13 +145,11 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
 
         // }
         if (e.target.value == 0) {
-            console.log("ZERO")
              const newList = {
                  list_id:null
              }
              const res = await dispatch(updateOneTask(selectedTaskId, newList))
              if (res) {
-                 console.log(res)
                 cancelTitleChange(e)
             }
             setShowTask(!showTask)
@@ -196,7 +172,6 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
 
     const changeTitleName = async(e) => {
         e.preventDefault()
-        console.log("UEEEOOOE", newTitleVal)
         const newTitle = {
             title: newTitleVal
         }
@@ -212,7 +187,6 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
     }
 
     const setTitleVal = (e) => {
-        console.log("OOOOOOOOO", e.target.value)
         setNewTitleVal(e.target.value)
     }
 
