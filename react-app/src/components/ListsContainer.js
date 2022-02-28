@@ -108,6 +108,7 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
             e.target.parentElement.childNodes[0].style.display="none"
             e.target.parentElement.childNodes[1].style.display="none"
             e.target.parentElement.childNodes[2].style.display="none"
+            e.target.parentElement.style.display="none"
             e.target.style.display="none"
 
         }
@@ -122,10 +123,10 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
 
             e.target.parentElement.childNodes[0].style.display="none"
             e.target.parentElement.childNodes[1].style.display="none"
-            e.target.parentElement.childNodes[2].style.display="block"
-            e.target.parentElement.childNodes[2].childNodes[0].style.display="block"
-            e.target.parentElement.childNodes[2].childNodes[1].style.display="block"
-            e.target.parentElement.childNodes[2].childNodes[2].style.display="block"
+            e.target.parentElement.childNodes[2].style.display="inline-block"
+            e.target.parentElement.childNodes[2].childNodes[0].style.display="inline-block"
+            e.target.parentElement.childNodes[2].childNodes[1].style.display="inline-block"
+            e.target.parentElement.childNodes[2].childNodes[2].style.display="inline-block"
 
         }
 
@@ -205,13 +206,13 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
                                     {editErrors?.map((error, ind) => (
                                     <li id="errorMsg" key={ind}>{error}</li>
                                  ))}
-                                <form id={list.id} onSubmit={updateNewList}>
+                                <form id={list.id} className="editingBtns" onSubmit={updateNewList}>
 
                                     <input id="editListInput" onChange ={changeListNameState} defaultValue = {list.title} required></input>
                                     <button id="updateListName" class="fa-solid fa-square-check" type="submit"></button>
+                                    <button id="editListCancelBtn" onClick={cancelListChangeBefore} class="fa-solid fa-rectangle-xmark"></button>
                                     {/* <input id="editListInput" name="title" type="text" defaultValue={list.title} value={newListName} onChange ={changeListNameState} required></input>
                                     <button id="updateListName" class="fa-solid fa-square-check" type="submit" onClick={updateNewList}></button> */}
-                                    <i id="editListCancelBtn" onClick={cancelListChangeBefore} class="fa-solid fa-rectangle-xmark"></i>
                                 </form>
                             </div>
 

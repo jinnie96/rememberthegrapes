@@ -256,8 +256,9 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
                         </div>
                         <div className="changeListContainer">
                             <div onClick={editingList} id="listName">list: {selectedListTitle}</div>
-                            <select name="lists" id="newListOptions" onChange={changeTaskList}>
-                            <option disabled selected value> -- select an option -- </option>
+                            <select defaultValue="none" name="lists" id="newListOptions" onChange={changeTaskList}>
+                            <option disabled selected hidden value> -- select an option (optional) -- </option>
+                            {/* <option value="none" selected disabled hidden>Select an Option</option> */}
                                 <option value="0">None</option>
                                     {listsArr && (listsArr.map(list => (
                                         <option value={list.id}>{list.title}</option>

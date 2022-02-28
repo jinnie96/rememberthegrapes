@@ -6,7 +6,7 @@
     display:none;
     height: 15px;
     font-size: 16px;
-    width: 80%;
+    width: 65%;
 }
 
 #newListInput {
@@ -20,6 +20,26 @@
 
 #updateListName {
     display: none;
+    width: 30px;
+    height: 20px;
+    color: white;
+    background-color: green;
+}
+
+.listBtns > form {
+    display: flex;
+    justify-content: space-between;
+    width: fit-content;
+    display: none;
+}
+
+.btns {
+    display: flex;
+}
+
+.editingBtns {
+    display: flex;
+    width: 100px;
 }
 
 .listBtns > p:hover {
@@ -54,12 +74,15 @@
     /* justify-content: flex-end; */
 }
 
-#updateListName {
-    color: green;
-}
-
 #editListCancelBtn {
-    color: red;
+    color: white;
+    background-color: red;
+    width: 30px;
+    height: 20px;
+    margin-left: 1px;
+    /* padding-top: 4px;
+    margin-left: 4px;
+    margin-top: 3px; */
 }
 
 #errorMsg {

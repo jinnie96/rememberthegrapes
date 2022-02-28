@@ -156,6 +156,9 @@ function UserHomepage () {
 
       const changeNewTaskListId = e => {
         console.log("EEEEEEYY", typeof(e.target.value))
+        if (e === "0") {
+          setSelectedNewTaskId(null)
+        }
         if (e.target.value === "0") {
           setSelectedNewTaskId(null)
         } else {

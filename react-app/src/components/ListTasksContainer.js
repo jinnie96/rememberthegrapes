@@ -34,7 +34,8 @@ function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, sele
         taskval.value = ""
         dateval.value = "0000-00-00T00:00"
         const selectTag = document.getElementById("listOptions")
-        selectTag.value = "null"
+        selectTag.value = 0
+        setSelectedNewTaskId(null)
         // setSelectedNewTaskId(null)
         console.log(selectedNewTaskId)
 
@@ -124,9 +125,10 @@ function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, sele
                 <input name="due_by" id="dateInput" type="datetime-local" onChange={updateDate} value={dueBy} required></input>
                 <label defaultValue="null" for="lists"></label>
                 <select name="lists" id="listOptions" onChange={changeNewTaskListId}>
-                <option disabled selected value> select an option </option>
+                {/* <option disabled selected value> select an option </option> */}
+                <option value="" selected disabled hidden>Select an Option</option>
 
-                    <option value={0}>None</option>
+                    {/* <option value={0}>None</option> */}
                 {listsArr && (listsArr.map(list => (
 
                     <option value={list.id}>{list.title}</option>
