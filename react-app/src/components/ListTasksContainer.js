@@ -30,7 +30,7 @@ function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, sele
         dispatch(getAllTasks(userId))
         setTitle("")
         setDueBy("0000-00-00T00:00")
-        
+
         taskval.value = ""
         dateval.value = "0000-00-00T00:00"
         const selectTag = document.getElementById("listOptions")
@@ -74,10 +74,10 @@ function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, sele
                 setDeletedTasks(res.tasks)
                 console.log("DEEEEEEE", deletedTasks)
             }
-            const listsArr = Object.values(userLists)
-            const tasksArr = Object.values(userTasks)
-            console.log(listsArr)
-            console.log(tasksArr)
+            // const listsArr = Object.values(userLists)
+            // const tasksArr = Object.values(userTasks)
+            // console.log(listsArr)
+            // console.log(tasksArr)
 
         })()
     }, [selectedList, dispatch, errors, selectedTaskDue, setSelectedTaskDue])
@@ -101,6 +101,8 @@ function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, sele
           setShowComp(true)
       }
 
+      console.log("ALL TASKS@#####", tasksArr)
+
     return (
         <div className="listTasksContainer">
         <div className="deleteBtnList">
@@ -111,11 +113,6 @@ function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, sele
             <p onClick = {setComplete} id="comp">Completed</p>
         </div>
         <form onSubmit={addTask}>
-        <ul className="errors">
-                    {errors?.map((error, ind) => (
-                        <li id="errorMsg" key={ind}>{error}</li>
-                    ))}
-        </ul>
         {/* <div> */}
         <div className="formContainer">
         <div id="newTaskInput">

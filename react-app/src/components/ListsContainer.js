@@ -93,12 +93,23 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
             // e.target.parentElement.childNodes[2].style.display="none"
             // e.target.parentElement.childNodes[3].style.display="none"
             // e.target.parentElement.childNodes[4].style.display="none"
+            console.log("CURRRRRR", e.target)
+            e.target.parentElement.childNodes[0].style.display="block"
+            e.target.parentElement.childNodes[1].style.display="block"
+            e.target.childNodes[0].style.display="none"
+            e.target.childNodes[1].style.display="none"
+            e.target.childNodes[2].style.display="none"
+            e.target.style.display="none"
+        }
 
+        const cancelListChangeBefore = async (e) => {
             e.target.parentElement.parentElement.childNodes[0].style.display="block"
             e.target.parentElement.parentElement.childNodes[1].style.display="block"
             e.target.parentElement.childNodes[0].style.display="none"
             e.target.parentElement.childNodes[1].style.display="none"
             e.target.parentElement.childNodes[2].style.display="none"
+            e.target.style.display="none"
+
         }
 
         const changeListName = async (e) => {
@@ -111,6 +122,7 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
 
             e.target.parentElement.childNodes[0].style.display="none"
             e.target.parentElement.childNodes[1].style.display="none"
+            e.target.parentElement.childNodes[2].style.display="block"
             e.target.parentElement.childNodes[2].childNodes[0].style.display="block"
             e.target.parentElement.childNodes[2].childNodes[1].style.display="block"
             e.target.parentElement.childNodes[2].childNodes[2].style.display="block"
@@ -125,7 +137,8 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
         }
 
         const updateNewList = async(e) => {
-            // e.preventDefault()
+            e.preventDefault()
+            console.log("CURR", e.target)
             console.log(e.target.parentElement.childNodes[0].id)
             console.log(newListId)
             console.log("naaaaaame", newListName)
@@ -136,7 +149,8 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
             }
             console.log(list)
             const res = await dispatch(updateOneList(newListId, list))
-            if (res) {
+            console.log("REEEEEEE", res)
+            if (!res) {
                 console.log("EDITRESS%%%%%", res)
                 cancelListChange(e)
                 history.push('/')
@@ -169,18 +183,18 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
                 </div>
                 {/* <button onClick={changeAdding}>Add List</button> */}
                 {/* <i className="fa-solid fa-plus"></i> */}
+                {addingList && (
+                    <form onSubmit={addList}>
+                        <input name='title' id="newListInput" placeholder="Enter new list..."type="text" value ={listTitle} onChange={updateListTitle} required></input><br></br>
+                        <button type="submit">Submit</button>
+                        <i id="addListPlus" onClick={changeAdding} class="fa-solid fa-rectangle-xmark fa-1x"></i>
+                    </form>
+                )}
                 <ul className="errors">
                 {errors?.map((error, ind) => (
                     <li id="errorMsg" key={ind}>{error}</li>
                     ))}
                     </ul>
-                {addingList && (
-                    <form onSubmit={addList}>
-                        <input name='title' placeholder="Enter new list..."type="text" value ={listTitle} onChange={updateListTitle} required></input><br></br>
-                        <button type="submit">Submit</button>
-                        <i id="addListPlus" onClick={changeAdding} class="fa-solid fa-rectangle-xmark"></i>
-                    </form>
-                )}
                 <div className="userLists">
                 {listsArr && (listsArr.map(list => (
                     <div>
@@ -197,7 +211,7 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
                                     <button id="updateListName" class="fa-solid fa-square-check" type="submit"></button>
                                     {/* <input id="editListInput" name="title" type="text" defaultValue={list.title} value={newListName} onChange ={changeListNameState} required></input>
                                     <button id="updateListName" class="fa-solid fa-square-check" type="submit" onClick={updateNewList}></button> */}
-                                    <i id="editListCancelBtn" onClick={cancelListChange} class="fa-solid fa-rectangle-xmark"></i>
+                                    <i id="editListCancelBtn" onClick={cancelListChangeBefore} class="fa-solid fa-rectangle-xmark"></i>
                                 </form>
                             </div>
 
