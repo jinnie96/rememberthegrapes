@@ -90,7 +90,7 @@ export const addOneTask = (form) => async dispatch => {
 }
 
 export const updateOneTask = (id, task) => async dispatch => {
-    console.log("IN STORE")
+    console.log("IN STORE", id, task)
     const response = await fetch (`/api/tasks/${id}`, {
         method: 'PATCH',
         headers: {

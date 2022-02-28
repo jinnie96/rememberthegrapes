@@ -4,7 +4,7 @@ import { useHistory } from 'react-router';
 import { addOneTask, deleteOneTask, getAllTasks, updateOneTask } from '../store/tasks';
 import './TasksListDisplay.css'
 
-function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle, editingTaskTitle, selectedTaskDue, editingTask, listsArr, selectedTaskId, setShowTask, showTaskDetails, setSelectedTaskTitle, setSelectedTaskDue, setSelectedListTitle, selectedList, setSelectedList, compNum}) {
+function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle, editingTaskTitle, selectedTaskDue, editingTask, listsArr, selectedTaskId, setShowTask, showTaskDetails, setSelectedTaskTitle, setSelectedTaskDue, setSelectedListTitle, selectedList, setSelectedList, compNum, selectedTaskList}) {
     console.log(selectedTaskId,"moooooooooo")
 
     const [newTitleVal, setNewTitleVal] = useState("")
@@ -139,7 +139,7 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
     }
 
     const changeTaskList = async(e) => {
-        console.log("YEEEEEEEE", e.target.value)
+        console.log("YEEEEEEEE", e.target.value == 0)
         // if (e.target.value === "0") {
         //     console.log("ZERO")
         //      const newList = {
@@ -166,16 +166,18 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
         //     // setSelectedListTitle(res.title)
 
         // }
-        if (e.target.value === "0") {
+        if (e.target.value == 0) {
             console.log("ZERO")
              const newList = {
-                 list_id:undefined
+                 list_id:null
              }
              const res = await dispatch(updateOneTask(selectedTaskId, newList))
              if (res) {
+                 console.log(res)
                 cancelTitleChange(e)
             }
             setShowTask(!showTask)
+            selectedTaskList = res.list_id
 
         } else {
             const newList = {
@@ -255,10 +257,11 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
                             <input id="dueTimeChange" onChange={changeDueTime} type="datetime-local" defaultValue={today}></input>
                         </div>
                         <div className="changeListContainer">
-                            <div onClick={editingList} id="listName">list: {selectedListTitle}</div>
+                            <div onClick={editingList} id="listName">list: {selectedTaskList}</div>
                             <select defaultValue="none" name="lists" id="newListOptions" onChange={changeTaskList}>
                             <option disabled selected hidden value> -- select an option (optional) -- </option>
                             {/* <option value="none" selected disabled hidden>Select an Option</option> */}
+                                <option value={selectedTaskId}>{selectedTaskList}</option>
                                 <option value="0">None</option>
                                     {listsArr && (listsArr.map(list => (
                                         <option value={list.id}>{list.title}</option>
