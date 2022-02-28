@@ -33,7 +33,10 @@ function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, sele
         const selectTag = document.getElementById("listOptions")
         selectTag.value = 0
         setSelectedNewTaskId(null)
-        alert("Task added!")
+        if (!data) {
+            alert("Task added!")
+
+        }
         // setSelectedNewTaskId(null)
 
         // if (data) {

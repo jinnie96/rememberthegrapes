@@ -6,12 +6,13 @@
     display:none;
     height: 13px;
     font-size: 13px;
-    width: 65%;
+    width: 57%;
 }
 
 #newListInput {
     height: 15px;
     font-size: 15px;
+    /* width: 30%; */
 }
 
 #addListPlus {
