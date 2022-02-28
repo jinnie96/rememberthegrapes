@@ -54,6 +54,15 @@ function UserHomepage () {
         })();
     }, [dispatch]);
 
+    useEffect(() => {
+      const num = tasksArr.filter( task => !task.complete)
+      const comp = tasksArr.filter(task => task.complete)
+      num.map(task => console.log(task))
+      setNum(num.length)
+      setCompNum(comp.length)
+
+    }, [dispatch])
+
     function showCalendar () {
         setShowDate(!showDate)
     }
@@ -127,6 +136,12 @@ function UserHomepage () {
           // dispatch(getAllTasks(userId))
           await dispatch(getAllTasks(userId))
       }
+      // const num = tasksArr.filter( task => !task.complete)
+      // const comp = tasksArr.filter(task => task.complete)
+      // num.map(task => console.log(task))
+      // setNum(num.length)
+      // setCompNum(comp.length)
+
       const updateListTitle = e => {
           setListTitle(e.target.value)
       }
@@ -172,9 +187,9 @@ function UserHomepage () {
               }
               // const listTitle = await fetch(`api/lists/${data.task.list_id}`)
               // console.log("LISSSSS", listTitle.json())
-              console.log("HEHEHEHEHEEHEHEHE", data.task.title)
+              console.log("HEHEHEHEHEEHEHEHE", new Date(data.task.due_by).toLocaleString())
               setSelectedTaskTitle(data.task.title)
-              setSelectedTaskDue(data.task.due_by)
+              setSelectedTaskDue(new Date(data.task.due_by).toLocaleString())
           }
         }
 
@@ -223,7 +238,7 @@ function UserHomepage () {
         <div className="homePage">
             <ListsContainer user={user} addingList={addingList} setAddingList={setAddingList} selectedNewTaskId={selectedNewTaskId} setSelectedNewTaskId={setSelectedNewTaskId} listTitle={listTitle} setListTitle={setListTitle} selectedList={selectedList} setSelectedList={setSelectedList} listId={listId} setListId={setListId} selectedListTitle={selectedListTitle} setSelectedListTitle={setSelectedListTitle} selectedListId={selectedListId} setSelectedListId={setSelectedListId} num={num} setNum={setNum} setShowTask={setShowTask} compNum={compNum} setCompNum={setCompNum} />
             <ListTasksContainer user={user} selectedNewTaskId={selectedNewTaskId} setSelectedNewTaskId={setSelectedNewTaskId} setTitle={setTitle} setDueBy={setDueBy} title={title} updateTitle={updateTitle} updateDate={updateDate} dueBy={dueBy} changeNewTaskListId={changeNewTaskListId} listsArr={listsArr} tasksArr={tasksArr} selectedList={selectedList} showTaskDetails={showTaskDetails} editing={editing} updateTaskTitle = {updateTaskTitle} updateNewDate={updateNewDate} editTask = {editTask} editingTask = {editingTask} deleteTask={deleteTask} deleteList={deleteList} userTasks={userTasks} userLists={userLists} selectedTaskId={selectedTaskId} selectedTaskDue={selectedTaskDue} setSelectedTaskDue={setSelectedTaskDue}/>
-            <TasksListDisplay showTask={showTask} selectedListTitle={selectedListTitle} num={num} selectedTaskTitle={selectedTaskTitle} editingTaskTitle={editingTaskTitle} selectedTaskDue={selectedTaskDue} editingTask={editingTask} listsArr={listsArr} selectedTaskId={selectedTaskId} setShowTask={setShowTask} showTaskDetails={showTaskDetails} setSelectedTaskTitle={setSelectedTaskTitle} selectedTaskDue={selectedTaskDue} setSelectedTaskDue={setSelectedTaskDue} setSelectedListTitle={setSelectedListTitle} selectedList={selectedList} compNum={compNum} setCompNum={setCompNum}/>
+            <TasksListDisplay showTask={showTask} selectedListTitle={selectedListTitle} num={num} selectedTaskTitle={selectedTaskTitle} editingTaskTitle={editingTaskTitle} selectedTaskDue={selectedTaskDue} editingTask={editingTask} listsArr={listsArr} selectedTaskId={selectedTaskId} setShowTask={setShowTask} showTaskDetails={showTaskDetails} setSelectedTaskTitle={setSelectedTaskTitle} selectedTaskDue={selectedTaskDue} setSelectedTaskDue={setSelectedTaskDue} setSelectedListTitle={setSelectedListTitle} selectedList={selectedList} setSelectedList={setSelectedList} compNum={compNum} setCompNum={setCompNum}/>
         </div>
     )
 

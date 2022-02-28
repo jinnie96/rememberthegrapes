@@ -125,6 +125,7 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
         }
 
         const updateNewList = async(e) => {
+            // e.preventDefault()
             console.log(e.target.parentElement.childNodes[0].id)
             console.log(newListId)
             console.log("naaaaaame", newListName)
@@ -168,13 +169,13 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
                 </div>
                 {/* <button onClick={changeAdding}>Add List</button> */}
                 {/* <i className="fa-solid fa-plus"></i> */}
+                <ul className="errors">
                 {errors?.map((error, ind) => (
                     <li id="errorMsg" key={ind}>{error}</li>
-                ))}
+                    ))}
+                    </ul>
                 {addingList && (
                     <form onSubmit={addList}>
-                        <ul className="errors">
-                     </ul>
                         <input name='title' placeholder="Enter new list..."type="text" value ={listTitle} onChange={updateListTitle} required></input><br></br>
                         <button type="submit">Submit</button>
                         <i id="addListPlus" onClick={changeAdding} class="fa-solid fa-rectangle-xmark"></i>

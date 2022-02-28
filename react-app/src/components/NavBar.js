@@ -28,7 +28,7 @@ const user = useSelector(state => state.session.user)
   return (
     <nav>
       <ul class="navbar">
-        <h1 id="welcome">Welcome {user.firstName}</h1>
+        <h1 id="welcome">{user.username}</h1>
         {/* <li> */}
           <NavLink to='/' exact={true} activeClassName='active'>
           {/* <img id ="homeBtn" src="https://i.ibb.co/C7qPLpK/remember-the-grapes-logos-preview-rev-1.jpg"></img> */}

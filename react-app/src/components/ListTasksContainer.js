@@ -30,6 +30,7 @@ function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, sele
         dispatch(getAllTasks(userId))
         setTitle("")
         setDueBy("0000-00-00T00:00")
+        
         taskval.value = ""
         dateval.value = "0000-00-00T00:00"
         const selectTag = document.getElementById("listOptions")
