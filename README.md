@@ -1,134 +1,70 @@
-# Flask React Project
+# Remember the Grapes
 
-This is the starter for the Flask React project.
+Remember the Grapes is a clone of the popular to-do website, [Remember the Milk](www.rememberthemilk.com).
 
-## Getting started
+Check out Remember the Grapes at the live site: [Remember the Grapes](https://remember-the-grapes.herokuapp.com/).
 
-1. Clone this repository (only this branch)
 
-   ```bash
-   git clone https://github.com/appacademy-starters/python-project-starter.git
-   ```
+## Getting Started
+To view and use this application, you can either navigate to the [live hosted site](https://remember-the-grapes.herokuapp.com/) and login as a new or demo user, or download the project locally:
+1. Clone this repository ```git clone https://github.com/jinnie96/rememberthegrapes```
 
-2. Install dependencies
+2. Open the file and install dependencies with ```pipenv install```
 
-      ```bash
-      pipenv install --dev -r dev-requirements.txt && pipenv install -r requirements.txt
-      ```
+3. ```cd``` into ```/react-app``` and install dependencies ```npm install```
 
-3. Create a **.env** file based on the example with proper settings for your
-   development environment
-4. Setup your PostgreSQL user, password and database and make sure it matches your **.env** file. testingg
+4.  Create a .env file based on the .env.example given
 
-5. Get into your pipenv, migrate your database, seed your database, and run your flask app
+5.  Setup a PostgresSQL user + database:
+    ```javascript
+    psql -c "CREATE USER <username> PASSWORD '<password>' CREATEDB"
+    psql -c "CREATE DATABASE <database name> WITH OWNER <username>"
+    ```
 
-   ```bash
-   pipenv shell
-   ```
+6. Start shell + migrate database + seed database + run flask ```/python-project```
+    ```javascript
+    pipenv shell
+    flask db upgrade
+    flask db migrate
+    flask db seed all
+    flask run
+    ```
 
-   ```bash
-   flask db upgrade
-   ```
+6. Keeping flask running, start the app by running ```npm start``` in ```/react-app```
 
-   ```bash
-   flask seed all
-   ```
+7. Enjoy!
 
-   ```bash
-   flask run
-   ```
+## Libraries Used
+Remember the Grapes is a full stack application that is built using a React/Redux frontend and a Flask/Python backend. PostgreSQL is utilized for data storage.
+<img  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" height=40/><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" height=40/><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" height=40/><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" height=40/><img  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" height=40/><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlalchemy/sqlalchemy-original.svg" height=40/><img  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" height=40/><img  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" height=40/><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" height=40/><img  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" height=40/>
 
-6. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
+## Features
 
-***
-*IMPORTANT!*
-   If you add any python dependencies to your pipfiles, you'll need to regenerate your requirements.txt before deployment.
-   You can do this by running:
+### Splash Page
+![image](https://user-images.githubusercontent.com/90893496/155971605-ed4d89c6-5231-47b6-98f1-22b8cf04f989.png)
 
-   ```bash
-   pipenv lock -r > requirements.txt
-   ```
+### Login
+![image](https://user-images.githubusercontent.com/90893496/155971723-9fed6c99-33fc-4dae-ad04-ac869a95e64e.png)
 
-*ALSO IMPORTANT!*
-   psycopg2-binary MUST remain a dev dependency because you can't install it on apline-linux.
-   There is a layer in the Dockerfile that will install psycopg2 (not binary) for us.
-***
+### Sign-Up
+![image](https://user-images.githubusercontent.com/90893496/155971844-eb0fa0e7-188a-4dcf-9d0d-4f0b0380e681.png)
 
-## Deploy to Heroku
+### Homepage
+![image](https://user-images.githubusercontent.com/90893496/155971912-ae26ce25-8118-45ca-85da-4d4cde90050f.png)
 
-1. Before you deploy, don't forget to run the following command in order to
-ensure that your production environment has all of your up-to-date
-dependencies. You only have to run this command when you have installed new
-Python packages since your last deployment, but if you aren't sure, it won't
-hurt to run it again.
+## Functionality
 
-   ```bash
-   pipenv lock -r > requirements.txt
-   ```
+### Lists (Create, Read, Update, Delete)
+Users can implement full CRUD functionality on lists.
 
-2. Create a new project on Heroku
-3. Under Resources click "Find more add-ons" and add the add on called "Heroku Postgres"
-4. Install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command-line)
-5. Run
+### Tasks (Create, Read, Update, Delete)
+Users can implement full CRUD functionality on tasks. Tasks that belong to a list will be shown under that list.
 
-   ```bash
-   heroku login
-   ```
+### List Summary (Read, Update)
+Users can view the details of their list. The list summary update as the user creates, updates, or deletes lists/tasks.
 
-6. Login to the heroku container registry
-
-   ```bash
-   heroku container:login
-   ```
-
-7. Update the `REACT_APP_BASE_URL` variable in the Dockerfile.
-   This should be the full URL of your Heroku app: i.e. "https://flask-react-aa.herokuapp.com"
-8. Push your docker container to heroku from the root directory of your project.
-   (If you are using an M1 mac, follow [these steps below](#for-m1-mac-users) instead, then continue on to step 9.)
-   This will build the Dockerfile and push the image to your heroku container registry.
-
-   ```bash
-   heroku container:push web -a {NAME_OF_HEROKU_APP}
-   ```
-
-9. Release your docker container to heroku
-
-      ```bash
-      heroku container:release web -a {NAME_OF_HEROKU_APP}
-      ```
-
-10. set up your database
-
-      ```bash
-      heroku run -a {NAME_OF_HEROKU_APP} flask db upgrade
-      heroku run -a {NAME_OF_HEROKU_APP} flask seed all
-      ```
-
-11. Under Settings find "Config Vars" and add any additional/secret .env
-variables.
-
-12. profit
-
-### For M1 Mac users
-
-(Replaces **Step 8**)
-
-1. Build image with linux platform for heroku servers. Replace
-{NAME_OF_HEROKU_APP} with your own tag:
-
-   ```bash=
-   docker buildx build --platform linux/amd64 -t {NAME_OF_HEROKU_APP} .
-   ```
-
-2. Tag your app with the url for your apps registry. Make sure to use the name
-of your Heroku app in the url and tag name:
-
-   ```bash=2
-   docker tag {NAME_OF_HEROKU_APP} registry.heroku.com/{NAME_OF_HEROKU_APP}/web
-   ```
-
-3. Use docker to push the image to the Heroku container registry:
-
-   ```bash=3
-   docker push registry.heroku.com/{NAME_OF_HEROKU_APP}/web
-   ```
+## Future Features
+- Search
+    - Users will be able to search for tasks and lists that they've created.
+- Subtasks
+    - Users will be able to add subtasks onto their tasks.
