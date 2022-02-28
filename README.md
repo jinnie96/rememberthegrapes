@@ -50,7 +50,7 @@ Remember the Grapes is a full stack application that is built using a React/Redu
 ![image](https://user-images.githubusercontent.com/90893496/155971844-eb0fa0e7-188a-4dcf-9d0d-4f0b0380e681.png)
 
 ### Homepage
-![image](https://user-images.githubusercontent.com/90893496/155971912-ae26ce25-8118-45ca-85da-4d4cde90050f.png)
+![image](![Screen Shot 2022-02-28 at 2 59 26 AM](https://user-images.githubusercontent.com/90893496/155973656-fde3c8c3-444e-41fa-82e3-2b4c6438e2f0.png))
 
 ## Functionality
 
