@@ -158,7 +158,7 @@ function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, sele
                         <input id="selectedCheck" type="checkbox" checked={task.id === selectedTaskId}></input>
                         <div id={task.id} onClick={showTaskDetails}>{task.title}</div>
                         </div>
-                        <div>
+                        <div className="dltAndCompBtn">
                         <button id={task.id} onClick={deleteTask} key={task.id}>Delete Task</button>
                         <i onClick={taskComplete} id="completed" class="fa-solid fa-check"></i>
                         </div>

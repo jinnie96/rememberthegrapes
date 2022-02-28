@@ -55,12 +55,12 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
 
     const editingTaskDue = (e) => {
         e.target.style.display="none"
-        e.target.parentElement.childNodes[1].style.display="block"
+        e.target.parentElement.childNodes[2].style.display="block"
     }
 
     const cancelTaskDueChange = (e) => {
         e.target.style.display="none"
-        e.target.parentElement.childNodes[0].style.display="block"
+        e.target.parentElement.childNodes[1].style.display="block"
     }
 
     const cancelTitleChange = (e) => {
@@ -83,7 +83,7 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
 
     const editingList = (e) => {
         e.target.style.display="none"
-        e.target.parentElement.childNodes[1].style.display="block"
+        e.target.parentElement.childNodes[2].style.display="block"
     }
 
     const editingTitle = (e) => {
@@ -115,7 +115,7 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
 
     const cancelListChange = (e) => {
         e.target.style.display="none"
-        e.target.parentElement.childNodes[0].style.display="block"
+        e.target.parentElement.childNodes[1].style.display="block"
     }
 
     const changeTaskList = async(e) => {
@@ -150,7 +150,7 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
              }
              const res = await dispatch(updateOneTask(selectedTaskId, newList))
              if (res) {
-                cancelTitleChange(e)
+                cancelListChange(e)
             }
             setShowTask(!showTask)
             selectedTaskList = res.list_id
@@ -161,9 +161,11 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
             }
             const res = await dispatch(updateOneTask(selectedTaskId, newList))
             if (res) {
-                cancelTitleChange(e)
+                cancelListChange(e)
             }
             setShowTask(!showTask)
+            console.log(selectedList, (e.target.id))
+            // setSelectedList(e.target.id)
         }
 
 
@@ -233,11 +235,15 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
                     </div>
                     <div className="dueListContainer">
                         <div className="changeDueContainer">
-                            <div onClick={editingTaskDue} id="taskdue">due: {selectedTaskDue} Local Time</div>
-                            <input id="dueTimeChange" onChange={changeDueTime} type="datetime-local" defaultValue={today}></input>
+                            <div class="editingDue">
+                                <div id="dueText">due: </div>
+                                <div onClick={editingTaskDue} id="taskdue">{selectedTaskDue} Local Time</div>
+                                <input id="dueTimeChange" onChange={changeDueTime} type="datetime-local" defaultValue={today}></input>
+                            </div>
                         </div>
                         <div className="changeListContainer">
-                            <div onClick={editingList} id="listName">list: {selectedTaskList}</div>
+                            <div id="listText">list: </div>
+                            <div onClick={editingList} id="listName">{selectedTaskList}</div>
                             <select defaultValue="none" name="lists" id="newListOptions" onChange={changeTaskList}>
                             <option disabled selected hidden value> -- select an option (optional) -- </option>
                             {/* <option value="none" selected disabled hidden>Select an Option</option> */}

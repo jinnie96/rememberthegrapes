@@ -72,6 +72,7 @@
 }
 
 .changeListContainer {
+    display:flex;
     margin-top: 20px;
 }
 
@@ -106,7 +107,19 @@
 }
 
 #taskdue {
-    display:block;
+    display:inline-block;
+}
+
+#dueText {
+    display: inline-block;
+    margin-right: 20px;
+    color: #999;
+}
+
+#listText {
+    margin-right: 27px;
+    color: #999;
+
 }
 
 #newListOptions {
@@ -121,6 +134,11 @@
     display: none;
     background-color: #0060BF;
     color: white;
+}
+
+.editingDue {
+    display:flex;
+
 }
 
 .incCompleteTasks {
