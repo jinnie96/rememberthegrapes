@@ -80,13 +80,13 @@ function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, sele
 
       const setIncomplete = e => {
         e.target.style.color ="black"
-        e.target.parentElement.childNodes[1].style.color = "#0060bf"
+        e.target.parentElement.childNodes[1].style.color = "#5E44B2"
           setShowComp(false)
       }
 
       const setComplete = e => {
           e.target.style.color ="black"
-          e.target.parentElement.childNodes[0].style.color = "#0060bf"
+          e.target.parentElement.childNodes[0].style.color = "#5E44B2"
           setShowComp(true)
       }
 
@@ -152,7 +152,7 @@ function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, sele
                 <div className="dltAndCompBtn">
 
                 <button id={task.id} className="deleteTaskBtn" onClick={deleteTask} key={task.id}>Delete Task</button>
-                <i onClick={taskComplete} id="completed" class="fa-solid fa-check"></i>
+                <i onClick={taskComplete} id="completed" class="fa-solid fa-square-check"></i>
                 </div>
                 </div>
                     )}
@@ -164,7 +164,7 @@ function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, sele
                         </div>
                         <div className="dltAndCompBtn">
                         <button id={task.id} onClick={deleteTask} key={task.id}>Delete Task</button>
-                        <i onClick={taskComplete} id="completed" class="fa-solid fa-check"></i>
+                        <i onClick={taskComplete} id="completed" class="fa-solid fa-square-check"></i>
                         </div>
                 </div>
 

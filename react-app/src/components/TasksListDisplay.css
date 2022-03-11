@@ -130,9 +130,9 @@
     display: none;
 }
 
-#confirmTitle {
+#confirmTitleBtn {
     display: none;
-    background-color: #0060BF;
+    background-color: #5E44B2;
     color: white;
 }
 
@@ -146,13 +146,13 @@
 }
 
 #complete {
-    color: #0060bf;
+    color: #5f43b2;
     font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Helvetica,Arial,clean,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"!important;
 }
 
 .incompletedNum {
     color: rgba(0,0,0,0.4);
-    background-color: #dbe8f6;
+    background-color: #B1AEBB;
     vertical-align: top;
     display: inline-block;
     padding: 9px 13px;
@@ -163,7 +163,7 @@
 }
 
 .completedNum {
-    background-color: #dbe8f6;
+    background-color: #B1AEBB;
     vertical-align: top;
     display: inline-block;
     padding: 9px 13px;
