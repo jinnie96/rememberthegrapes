@@ -15,6 +15,7 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
     const [newListId, setNewListId] = useState()
     const [errors, setErrors] = useState([])
     const [editErrors, setEditErrors] = useState([])
+    const [editingTitle, setEditingTitle] = useState("")
     // const [num, setNum] = useState()
 
 
@@ -122,21 +123,25 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
 
         const changeListNameState = async (e) => {
             setNewListName(e.target.value)
-            setNewListId(e.target.parentElement.parentElement.childNodes[0].id)
+            console.log(e.target.parentElement)
+            // setNewListId(e.target.parentElement.parentElement.childNodes[0].id)
         }
 
         const updateNewList = async(e) => {
             e.preventDefault()
+            console.log(newListId, newListName, "HEHEEHEEHEHEHEHEHEHEHE")
             const list = {
                 id: newListId,
                 user_id: user.id,
                 title: newListName
             }
             const res = await dispatch(updateOneList(newListId, list))
+            console.log(res)
             if (!res) {
-                cancelListChange(e)
+                // cancelListChange(e)
                 history.push('/')
             }
+            removeActiveClass(e)
             setEditErrors(res)
         }
 
@@ -150,7 +155,29 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
 
         }
 
+        const editListBtn = document.querySelector(".fa-solid fa-pen-to-square")
+        const saveListBtn = document.querySelector("#saveNewListName")
+        const cancelListBtn = document.querySelector(".modelClose")
+        const modal = document.querySelector(".modal")
 
+        function addActiveClass (e) {
+            e.target.parentElement.childNodes[2].classList.add('active')
+            console.log(e.target.parentElement.childNodes[2], e.target.parentElement.childNodes[0].innerText)
+            setNewListId(e.target.parentElement.childNodes[0].id)
+            setEditingTitle(e.target.parentElement.childNodes[0].innerText)
+            console.log(editingTitle)
+        }
+
+        function removeActiveClass (e) {
+            console.log(e.target.innerText)
+            if (e.target.innerText === "Cancel") {
+                e.target.parentElement.parentElement.parentElement.classList.remove('active')
+            } else {
+                e.target.parentElement.parentElement.classList.remove('active')
+            }
+            console.log(e.target.parentElement.parentElement.parentElement)
+            setEditingTitle("")
+        }
 
     return (
         <div className="listsContainer">
@@ -186,18 +213,29 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
                         {list.user_id === userId && (
                             <div className="listBtns" key={list.id}>
                                 <p id={list.id} onClick={changeSelectedList}>{list.title}</p>
-                                <i id ="fa-edit" className="fa-solid fa-pen-to-square" onClick={changeListName}></i>
-                                    {editErrors?.map((error, ind) => (
+                                <i id ="fa-edit" className="fa-solid fa-pen-to-square" onClick={addActiveClass}></i>
+                                 <div className={`modal`}>
+                                        <div className="modalForm">
+                                            <form id={list.id} className="editingBtns" onSubmit={updateNewList}>
+                                            {console.log(editErrors)}
+                                            {editErrors?.map((error, ind) => (
                                     <li id="errorMsg" key={ind}>{error}</li>
                                  ))}
-                                <form id={list.id} className="editingBtns" onSubmit={updateNewList}>
+                                                <h1 id="renameList">Rename list</h1>
+                                                <h3 id="listNameText">List name</h3>
+                                                {console.log("HEEEEEE", editingTitle)}
+                                                <input id="editListInput" onChange ={changeListNameState} defaultValue={editingTitle} required></input>
+                                                <button id="saveNewListName" type="submit">Save</button>
+                                                <button id="cancelNewListName" className="closeModal" onClick={removeActiveClass} type="button">Cancel</button>
+                                            </form>
+                                        </div>
+                                 </div>
+                                {/* <form id={list.id} className="editingBtns" onSubmit={updateNewList}>
 
                                     <input id="editListInput" onChange ={changeListNameState} defaultValue = {list.title} required></input>
                                     <button id="updateListName" class="fa-solid fa-square-check" type="submit"></button>
                                     <button id="editListCancelBtn" onClick={cancelListChangeBefore} class="fa-solid fa-rectangle-xmark"></button>
-                                    {/* <input id="editListInput" name="title" type="text" defaultValue={list.title} value={newListName} onChange ={changeListNameState} required></input>
-                                    <button id="updateListName" class="fa-solid fa-square-check" type="submit" onClick={updateNewList}></button> */}
-                                </form>
+                                </form> */}
                             </div>
 
 
