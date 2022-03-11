@@ -232,7 +232,7 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
                         <div id="titlename" onClick={editingTitle}>{selectedTaskTitle}</div>
                         <form onSubmit={changeTitleName}>
                             <input id="titleChange" name="title" defaultValue={selectedTaskTitle} onChange={setTitleVal} value={newTitleVal} required></input>
-                            <button type="submit" id="confirmTitle" class="fa-solid fa-square-check">Update</button>
+                            <button type="submit" id="confirmTitleBtn" >Update</button>
                         </form>
                     </div>
                     <div className="dueListContainer">

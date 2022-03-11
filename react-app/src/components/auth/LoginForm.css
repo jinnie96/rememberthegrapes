@@ -105,8 +105,8 @@ input {
 }
 
 input:hover {
-    border-color: #009dff;
-    box-shadow: 0 0 2px #009dff
+    border-color: #5f43b2;
+    box-shadow: 0 0 2px #5f43b2
 }
 
 #submitBtn {
@@ -115,7 +115,7 @@ input:hover {
     align-items: center;
     color: white;
     height: 48px;
-    background-color:#009dff;
+    background-color:#5f43b2;
     padding-top: 20px;
     padding-bottom: 20px;
     border-radius: 3px;

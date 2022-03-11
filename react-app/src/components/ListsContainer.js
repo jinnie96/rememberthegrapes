@@ -182,7 +182,7 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
     return (
         <div className="listsContainer">
             <a href="/">
-            <img id ="logoPic" src="https://i.ibb.co/vkFbq2C/RTGlogo.jpg"></img>
+            <img id ="logoPic" src="https://i.ibb.co/TqP2mD8/imageedit-5-3593153735.jpg"></img>
 
             </a>
                 <div className="lists">

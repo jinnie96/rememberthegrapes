@@ -75,9 +75,13 @@
 }
 
 #submitList {
-    background-color:#0060BF;
+    background-color:#5E44B2;
     color: white;
     border-radius: 10px;
+    margin-top: -2px;
+    /* padding: -2px; */
+    height: 25px
+    /* padding-right: -2px; */
 }
 
 .listBtns {
@@ -86,7 +90,7 @@
 }
 
 .listBtns:hover, #allTasks:hover {
-    background-color: #BFD7EF;
+    background-color: #C0BBC2;
     /* cursor:pointer; */
 }
 
@@ -224,7 +228,7 @@
 
 #saveNewListName {
     color: #fff;
-    background-color: #2e8ceb;
+    background-color: #5E44B2;
     margin-top: 10px;
     width: 327px;
 
@@ -248,7 +252,7 @@ form > button {
     position: relative;
     font-weight: bold;
     text-align: center;
-    padding: 6px 13px;
+    /* padding: 6px 13px; */
     min-width: 70px;
     vertical-align: middle;
     white-space: nowrap;
@@ -264,5 +268,5 @@ form > button {
 }
 
 #cancelNewListName:hover {
-    color: #2e8ceb
+    color: #5E44B2;
 }

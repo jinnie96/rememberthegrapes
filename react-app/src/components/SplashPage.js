@@ -10,7 +10,7 @@ const SplashPage = () => {
             {/* <div className="backgroundColor"> */}
                 <div className="splashNavBar">
                     <div className="navBarLogo">
-                        <img id = "logoId" src = "https://i.ibb.co/C7qPLpK/remember-the-grapes-logos-preview-rev-1.jpg"></img>
+                        <img id = "logoId" src = "https://i.ibb.co/FHqpBL1/remember-the-grapes-logos-preview-rev-1-removebg-preview-1.jpg"></img>
                     </div>
                     <div className="logSignUp">
                     <NavLink to='/login' exact={true} activeClassName='active'>
@@ -29,7 +29,7 @@ const SplashPage = () => {
                         </NavLink>
                     </div>
                     <div className="busyImg">
-                        <img id ="busyPersonImg" src="https://media.istockphoto.com/vectors/cartoon-super-business-woman-vector-id923547126?k=20&m=923547126&s=612x612&w=0&h=y5BeyQDRVc9ueCrkhLB4HnrKvool4MLIyVgHXt58EqI="></img>
+                        <img id ="busyPersonImg" src="https://i.ibb.co/wwW48c2/6876341-preview-removebg-preview-1.jpg"></img>
                     </div>
                 {/* </div> */}
             </div>

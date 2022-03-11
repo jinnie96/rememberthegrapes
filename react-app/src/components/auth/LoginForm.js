@@ -44,7 +44,7 @@ const LoginForm = () => {
     <div className="leftSide">
       <div className="logo">
         <a href="/">
-        <img id ="logoPic" src="https://i.ibb.co/C7qPLpK/remember-the-grapes-logos-preview-rev-1.jpg"></img>
+        <img id ="logoPic" src="https://i.ibb.co/FHqpBL1/remember-the-grapes-logos-preview-rev-1-removebg-preview-1.jpg"></img>
         </a>
         {/* <h1 id="topLogo">remember the grapes</h1> */}
       </div>
