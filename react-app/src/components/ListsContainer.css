@@ -3,10 +3,19 @@
 }
 
 #editListInput {
-    display:none;
+    /* display:none; */
     height: 13px;
     font-size: 13px;
-    width: 57%;
+    width: 100%;
+    cursor: text;
+    outline: none;
+    border: 1px solid #d0d3d6;
+    padding: 5px 6px;
+    height: 16px;
+    line-height: 16px;
+    line-height: 1rem;
+    border-radius: 3px;
+    width: 314px;
 }
 
 #newListInput {
@@ -78,7 +87,7 @@
 
 .listBtns:hover, #allTasks:hover {
     background-color: #BFD7EF;
-    cursor:pointer;
+    /* cursor:pointer; */
 }
 
 .addList {
@@ -143,4 +152,117 @@
 .listBtns {
     display: flex;
     align-items: center;
+}
+
+.modal {
+    position:fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.modalForm {
+    background-color: white;
+    /* width: 60%;
+    height: 60%; */
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    flex-direction: column;
+    box-shadow: 0 6px 12px rgb(0 0 0 / 10%);
+    z-index: 11;
+    border: 1px solid #d1d1d1;
+    border-radius: 5px;
+    background: white;
+    background-clip: padding-box;
+    padding: 29px 37px;
+}
+
+.editingBtns {
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    /* justify-content: center;
+    align-items: center; */
+    flex-direction: column;
+}
+
+#renameList {
+    font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Helvetica,Arial,clean,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"!important;
+    color: black;
+    cursor: default;
+    font-size: 18px;
+    font-size: 1.125rem;
+    font-weight: normal;
+    line-height: 24px;
+    line-height: 1.5rem;
+    width: 314px
+}
+
+#listNameText {
+    display: inline-block;
+    width: 100%;
+    font-size: .8125rem;
+    font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Helvetica,Arial,clean,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"!important;
+    line-height: 1.231;
+    font-weight: normal;
+}
+
+#saveNewListName {
+    color: #fff;
+    background-color: #2e8ceb;
+    margin-top: 10px;
+    width: 327px;
+
+}
+
+
+
+form > button {
+    border: none;
+    text-shadow: 0 1px 0 rgb(0 0 0 / 8%);
+    margin: 0 8px 0 0;
+    cursor: pointer;
+    font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Helvetica,Arial,clean,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"!important;
+    font-size: 14px;
+    font-size: .875rem;
+    line-height: 14px;
+    line-height: .875rem;
+    outline: none;
+    border-radius: 3px;
+    height: 32px;
+    position: relative;
+    font-weight: bold;
+    text-align: center;
+    padding: 6px 13px;
+    min-width: 70px;
+    vertical-align: middle;
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+
+#cancelNewListName {
+    background-color: #fbfbfa;
+    color: #444;
+    margin: 0 8px 0 0;
+    border: 1px solid #d0d3d6;
+    width: 327px;
+}
+
+#cancelNewListName:hover {
+    color: #2e8ceb
 }
