@@ -34,7 +34,7 @@ function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, sele
         selectTag.value = 0
         setSelectedNewTaskId(null)
         if (!data) {
-            alert("Task added!")
+            // alert("Task added!")
 
         }
         // setSelectedNewTaskId(null)
