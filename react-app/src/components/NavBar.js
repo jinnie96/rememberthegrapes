@@ -14,6 +14,7 @@ const NavBar = () => {
 }
 
 const user = useSelector(state => state.session.user)
+const input = document.getElementById("inputSearch")
 
 // const onLogin = async (e) => {
 //   e.preventDefault();
@@ -47,8 +48,8 @@ const user = useSelector(state => state.session.user)
 
         )}
         <div class="searchBar">
-        <i className="fa-solid fa-magnifying-glass"></i>
-          <input type="text">
+        {/* <i className="fa-solid fa-magnifying-glass"></i> */}
+          <input id="inputSearch" placeholder="Search..." type="text">
 
           </input>
         </div>
