@@ -112,6 +112,10 @@ def deleteTask(id):
         "id": id
     }
 
-@tasks_routes.route('/user/search/<int:id>', methods=["DELETE"])
+@tasks_routes.route('/search/<int:id>/<str>')
 @login_required
-def searchedTasks(term, id)
+def searchedTasks(id, str):
+    print("IN API",id, str )
+    term = request.get_json()
+    print("!@@@@@@@@@@@@@@", term)
+    return {}

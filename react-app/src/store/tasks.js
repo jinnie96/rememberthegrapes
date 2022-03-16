@@ -53,8 +53,9 @@ export const getAllTasks = (id) => async dispatch => {
     }
 }
 
-export const getSearchTermTasks = (id, term) => async dispatch => {
-    const response = await fetch (`api/tasks/user/search/${id}`)
+export const searchInput = (id, term) => async dispatch => {
+    console.log("IN STORE")
+    const response = await fetch (`/api/tasks/search/${id}/${term}`)
     if (response.ok) {
         const data = await response.json();
         if (data.errors) {
