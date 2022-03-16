@@ -58,10 +58,12 @@ export const searchInput = (id, term) => async dispatch => {
     const response = await fetch (`/api/tasks/search/${id}/${term}`)
     if (response.ok) {
         const data = await response.json();
+        console.log(data)
         if (data.errors) {
             return
         };
-
+        dispatch(getUserTask(data))
+        return data
         // dispatch()
     }
 }

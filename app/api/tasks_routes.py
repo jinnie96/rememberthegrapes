@@ -118,8 +118,10 @@ def searchedTasks(id, str):
     print("IN API",id, str )
     term = request.get_json()
     print("eight" in (str))
-    tasks = Task.query.filter(Task.title.contains(str))
+    tasks = Task.query.filter(Task.title.contains(str)).filter(Task.user_id == id)
     for task in tasks:
         print(task.to_dict())
     # print("!@@@@@@@@@@@@@@", tasks.to_dict())
-    return {}
+    return {
+        "tasks": [task.to_dict() for task in tasks]
+    }

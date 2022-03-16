@@ -64,6 +64,7 @@ function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, sele
     }
     const userLists = useSelector(state => state.list)
     const userTasks = useSelector(state => state.task)
+    console.log(userTasks,"HUHUHUHUHUHUH")
     useEffect(() => {
         (async () => {
             const res = await dispatch(getAllTasks(userId))
