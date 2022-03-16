@@ -5,7 +5,7 @@ import LogoutButton from './auth/LogoutButton';
 import { login } from "../store/session"
 import { useDispatch, useSelector } from 'react-redux';
 import './NavBar.css'
-import {searchInput} from "../store/tasks"
+import {getAllTasks, searchInput} from "../store/tasks"
 
 const NavBar = () => {
   const dispatch = useDispatch()
@@ -26,6 +26,17 @@ console.log(searchInput)
 //   }
 // };
 
+const searchTerm = async(e) => {
+  console.log("YOOOOOOO", !e.target.value)
+  if (!e.target.value) {
+    await dispatch(getAllTasks(user.id))
+  } else {
+    const data = await dispatch(searchInput(user.id, e.target.value))
+    {console.log(data)}
+
+  }
+
+}
 
 
   return (
@@ -53,8 +64,7 @@ console.log(searchInput)
         {/* <i className="fa-solid fa-magnifying-glass"></i> */}
           <input id="inputSearch" placeholder="Search..." type="text" onKeyDown = {e => {
             if (e.key === "Enter") {
-              {console.log(e.key==="Enter")}
-              dispatch(searchInput(user.id, e.target.value))
+              searchTerm(e)
             }
           }}>
 
