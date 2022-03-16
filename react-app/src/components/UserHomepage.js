@@ -41,6 +41,7 @@ function UserHomepage () {
     const [num, setNum] = useState()
     const [showTask, setShowTask] = useState(false)
     const [compNum, setCompNum] = useState()
+    const [searchTerm, setSearchTerm] = useState("")
 
     useEffect(() => {
         // const id = user.id

@@ -111,3 +111,7 @@ def deleteTask(id):
     return {
         "id": id
     }
+
+@tasks_routes.route('/user/search/<int:id>', methods=["DELETE"])
+@login_required
+def searchedTasks(term, id)

@@ -53,6 +53,18 @@ export const getAllTasks = (id) => async dispatch => {
     }
 }
 
+export const getSearchTermTasks = (id, term) => async dispatch => {
+    const response = await fetch (`api/tasks/user/search/${id}`)
+    if (response.ok) {
+        const data = await response.json();
+        if (data.errors) {
+            return
+        };
+
+        // dispatch()
+    }
+}
+
 export const getSingleTask = (id) => async dispatch => {
     const response = await fetch (`/api/tasks/${id}`)
     if (response.ok) {

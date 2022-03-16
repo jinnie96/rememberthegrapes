@@ -45,3 +45,7 @@ li {
 #inputSearch {
     background-color: #ad9fda;
 }
+
+#inputSearch:focus {
+    background-color: white;
+}

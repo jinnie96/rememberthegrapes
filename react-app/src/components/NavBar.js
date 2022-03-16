@@ -49,7 +49,11 @@ const input = document.getElementById("inputSearch")
         )}
         <div class="searchBar">
         {/* <i className="fa-solid fa-magnifying-glass"></i> */}
-          <input id="inputSearch" placeholder="Search..." type="text">
+          <input id="inputSearch" placeholder="Search..." type="text" onKeyDown = {e => {
+            if (e.key === "Enter") {
+              searchInput(e)
+            }
+          }}>
 
           </input>
         </div>
