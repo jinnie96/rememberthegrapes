@@ -17,6 +17,7 @@ function App() {
   const [selectedTask, setSelectedTask] = useState("")
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user)
+  const [searching, setSearching] = useState(false)
 
   useEffect(() => {
     (async() => {
@@ -32,7 +33,7 @@ function App() {
   return (
     <BrowserRouter>
       {user && (
-        <NavBar />
+        <NavBar/>
       )}
       <Switch>
         {!user && (

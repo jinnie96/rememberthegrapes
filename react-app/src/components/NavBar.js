@@ -26,6 +26,11 @@ console.log(searchInput)
 //   }
 // };
 
+const searchTerm = async(e) => {
+  const data = await dispatch(searchInput(user.id, e.target.value))
+  {console.log(data)}
+
+}
 
 
   return (
@@ -53,8 +58,7 @@ console.log(searchInput)
         {/* <i className="fa-solid fa-magnifying-glass"></i> */}
           <input id="inputSearch" placeholder="Search..." type="text" onKeyDown = {e => {
             if (e.key === "Enter") {
-              {console.log(e.key==="Enter")}
-              dispatch(searchInput(user.id, e.target.value))
+              searchTerm(e)
             }
           }}>
 

@@ -136,15 +136,17 @@ export default function taskReducer(state = initialState, action) {
     let newState;
     switch (action.type) {
         case GET_USER_TASK: {
-            newState = {...state};
+            newState = {};
             // for (const key in action.payload) {
             //     newState[action.payload[key].id] = action.payload[key]
             // }
+            console.log(action)
             action.payload.tasks.forEach(task => {
                 newState[task.id] = task
             })
             return newState
         }
+
         case GET_ONE_TASK: {
             newState = {
                 ...state,
