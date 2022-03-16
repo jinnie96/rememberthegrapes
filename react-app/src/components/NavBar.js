@@ -5,7 +5,7 @@ import LogoutButton from './auth/LogoutButton';
 import { login } from "../store/session"
 import { useDispatch, useSelector } from 'react-redux';
 import './NavBar.css'
-import {searchInput} from "../store/tasks"
+import {getAllTasks, searchInput} from "../store/tasks"
 
 const NavBar = () => {
   const dispatch = useDispatch()
@@ -27,8 +27,14 @@ console.log(searchInput)
 // };
 
 const searchTerm = async(e) => {
-  const data = await dispatch(searchInput(user.id, e.target.value))
-  {console.log(data)}
+  console.log("YOOOOOOO", !e.target.value)
+  if (!e.target.value) {
+    await dispatch(getAllTasks(user.id))
+  } else {
+    const data = await dispatch(searchInput(user.id, e.target.value))
+    {console.log(data)}
+
+  }
 
 }
 
