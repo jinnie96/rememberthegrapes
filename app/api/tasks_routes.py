@@ -117,5 +117,6 @@ def deleteTask(id):
 def searchedTasks(id, str):
     print("IN API",id, str )
     term = request.get_json()
-    print("!@@@@@@@@@@@@@@", term)
+    tasks = Task.query.filter(id == Task.user_id and str in Task.title )
+    print("!@@@@@@@@@@@@@@", tasks.to_dict())
     return {}
