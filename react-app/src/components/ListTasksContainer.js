@@ -145,7 +145,7 @@ function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, sele
             {tasksArr && (tasksArr.map(task => (
                 <div className="deleteBtns">
                     {(selectedList === undefined && task.complete === false) && (
-                        <div className="checkboxTitle" key={task.id}>
+                        <div className="checkboxTitle" onClick={showTaskDetails} id={task.id} key={task.id}>
                     <div className="pointer">
                     <input id="selectedCheck" type="checkbox" checked={task.id === selectedTaskId}></input>
                     <div id={task.id} onClick={showTaskDetails}>{task.title}</div>
