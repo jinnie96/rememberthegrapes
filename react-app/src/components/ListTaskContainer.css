@@ -46,6 +46,8 @@ button {
     align-self: center;
     height: 30px;
     font-size: 15px;
+    border-radius: 10px;
+
 }
 
 .deleteBtns button {
@@ -53,6 +55,7 @@ button {
     color: white;
     font-size: 15px;
     padding: 5px;
+    border-radius: 10px;
 }
 
 .addTaskBtnContainer {

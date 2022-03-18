@@ -145,7 +145,7 @@ function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, sele
             {tasksArr && (tasksArr.map(task => (
                 <div className="deleteBtns">
                     {(selectedList === undefined && task.complete === false) && (
-                        <div className="checkboxTitle" key={task.id}>
+                        <div className="checkboxTitle" onClick={showTaskDetails} id={task.id} key={task.id}>
                     <div className="pointer">
                     <input id="selectedCheck" type="checkbox" checked={task.id === selectedTaskId}></input>
                     <div id={task.id} onClick={showTaskDetails}>{task.title}</div>
@@ -158,13 +158,13 @@ function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, sele
                 </div>
                     )}
                     {(selectedList && task.list_id == selectedList && task.complete === false) && (
-                        <div className="checkboxTitle" key={task.id}>
+                        <div className="checkboxTitle" onClick={showTaskDetails} id={task.id} key={task.id}>
                         <div>
                         <input id="selectedCheck" type="checkbox" checked={task.id === selectedTaskId}></input>
                         <div id={task.id} onClick={showTaskDetails}>{task.title}</div>
                         </div>
                         <div className="dltAndCompBtn">
-                        <button id={task.id} onClick={deleteTask} key={task.id}>Delete Task</button>
+                        <button id={task.id} onClick={deleteTask} class="deleteTaskBtn" key={task.id}>Delete Task</button>
                         <i onClick={taskComplete} id="completed" class="fa-solid fa-square-check"></i>
                         </div>
                 </div>
@@ -182,7 +182,7 @@ function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, sele
                 {deletedTasks && (deletedTasks.map(task => (
                     <div>
                 {(!selectedList && task.complete === true) && (
-                    <div className="checkboxTitle" key={task.id}>
+                    <div className="checkboxTitle" onClick={showTaskDetails} id={task.id} key={task.id}>
                         <div>
                         <input id="selectedCheck" type="checkbox" checked={task.id === selectedTaskId}></input>
                         <div id={task.id} class="doneTask" onClick={showTaskDetails}>{task.title}</div>
@@ -192,7 +192,7 @@ function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, sele
                     </div>
                     )}
                     {(selectedList && task.complete === true && selectedList == task.list_id) && (
-                        <div className="checkboxTitle">
+                        <div className="checkboxTitle" onClick={showTaskDetails} id={task.id}>
                             <div>
                             <input id="selectedCheck" type="checkbox" checked={task.id === selectedTaskId}></input>
                             <div id={task.id} class="doneTask" onClick={showTaskDetails}>{task.title}</div>
