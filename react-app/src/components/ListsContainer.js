@@ -129,7 +129,7 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
 
         const updateNewList = async(e) => {
             e.preventDefault()
-            console.log(newListId, newListName, "HEHEEHEEHEHEHEHEHEHEHE")
+            console.log(newListId, newListName, selectedListId, "HEHEEHEEHEHEHEHEHEHEHE")
             const list = {
                 id: newListId,
                 user_id: user.id,
@@ -140,6 +140,9 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
             if (!res) {
                 // cancelListChange(e)
                 history.push('/')
+            }
+            if (selectedListId == newListId) {
+                setSelectedListTitle(newListName)
             }
             removeActiveClass(e)
             setEditErrors(res)
