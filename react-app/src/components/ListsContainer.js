@@ -25,6 +25,7 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
         //   setErrors([])
           }
           const addList = async (e) => {
+            console.log(e.target.parentElement.parentElement)
             e.preventDefault()
             setErrors([])
             const newList = {
@@ -40,6 +41,7 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
             setSelectedListId(data)
             setListTitle("")
             changeAdding()
+            removeActiveClass(e)
         }
 
         const updateListTitle = e => {
@@ -213,7 +215,7 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
                 <p id="lists">Lists</p><i id="plusfa" class="fa-solid fa-square-plus" onClick={addActiveClassAddList}></i>
                 <div className={`modal`}>
                     <div className="modalForm">
-                            <form className="editingBtns" onSubmit={updateNewList}>
+                            <form className="editingBtns" onSubmit={addList}>
                             {console.log(editErrors)}
                             {editErrors?.map((error, ind) => (
                     <li id="errorMsg" key={ind}>{error}</li>
@@ -221,7 +223,7 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
                                 <h1 id="renameList">Add a list</h1>
                                 <h3 id="listNameText">Please enter a new list name:</h3>
                                 {console.log("HEEEEEE", editingTitle)}
-                                <input id="editListInput" onChange ={changeListNameState} defaultValue={editingTitle} required></input>
+                                <input id="editListInput" value ={listTitle} onChange={updateListTitle} required></input>
                                 <button id="saveNewListName" type="submit">Add</button>
                                 <button id="cancelNewListName" className="closeModal" onClick={removeActiveClassAddList} type="button">Cancel</button>
                             </form>
@@ -230,13 +232,13 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
                 </div>
                 {/* <button onClick={changeAdding}>Add List</button> */}
                 {/* <i className="fa-solid fa-plus"></i> */}
-                {addingList && (
+                {/* {addingList && (
                     <form onSubmit={addList}>
                         <input name='title' id="newListInput" placeholder="Enter new list..."type="text" value ={listTitle} onChange={updateListTitle} required></input><br></br>
                         <button id="submitList" type="submit">Submit</button>
                         <i id="addListPlus" onClick={changeAdding} class="fa-solid fa-rectangle-xmark fa-1x"></i>
                     </form>
-                )}
+                )} */}
                 <ul className="errors">
                 {errors?.map((error, ind) => (
                     <h3 id="errorMsg" key={ind}>{error}</h3>
