@@ -158,12 +158,8 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
 
         }
 
-        const editListBtn = document.querySelector(".fa-solid fa-pen-to-square")
-        const saveListBtn = document.querySelector("#saveNewListName")
-        const cancelListBtn = document.querySelector(".modelClose")
-        const modal = document.querySelector(".modal")
-
         function addActiveClass (e) {
+            console.log("YOOOOOOOOOOO", e.target.parentElement.classList)
             e.target.parentElement.childNodes[2].classList.add('active')
             console.log(e.target.parentElement.childNodes[2], e.target.parentElement.childNodes[0].innerText)
             setNewListId(e.target.parentElement.childNodes[0].id)
@@ -172,6 +168,26 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
         }
 
         function removeActiveClass (e) {
+            console.log(e.target.innerText)
+            if (e.target.innerText === "Cancel") {
+                e.target.parentElement.parentElement.parentElement.classList.remove('active')
+            } else {
+                e.target.parentElement.parentElement.classList.remove('active')
+            }
+            console.log(e.target.parentElement.parentElement.parentElement)
+            setEditingTitle("")
+        }
+
+        function addActiveClassAddList (e) {
+            console.log("YOOOOOOOOOOO", e.target.parentElement.classList)
+            e.target.parentElement.childNodes[2].classList.add('active')
+            console.log(e.target.parentElement.childNodes[2], e.target.parentElement.childNodes[0].innerText)
+            setNewListId(e.target.parentElement.childNodes[0].id)
+            setEditingTitle(e.target.parentElement.childNodes[0].innerText)
+            console.log(editingTitle)
+        }
+
+        function removeActiveClassAddList (e) {
             console.log(e.target.innerText)
             if (e.target.innerText === "Cancel") {
                 e.target.parentElement.parentElement.parentElement.classList.remove('active')
@@ -194,7 +210,23 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
                 <hr id="horizLine"></hr>
                 <div className="addList">
 
-                <p id="lists">Lists</p><i id="plusfa" class="fa-solid fa-square-plus" onClick={changeAdding}></i>
+                <p id="lists">Lists</p><i id="plusfa" class="fa-solid fa-square-plus" onClick={addActiveClassAddList}></i>
+                <div className={`modal`}>
+                    <div className="modalForm">
+                            <form className="editingBtns" onSubmit={updateNewList}>
+                            {console.log(editErrors)}
+                            {editErrors?.map((error, ind) => (
+                    <li id="errorMsg" key={ind}>{error}</li>
+                    ))}
+                                <h1 id="renameList">Add a list</h1>
+                                <h3 id="listNameText">Please enter a new list name:</h3>
+                                {console.log("HEEEEEE", editingTitle)}
+                                <input id="editListInput" onChange ={changeListNameState} defaultValue={editingTitle} required></input>
+                                <button id="saveNewListName" type="submit">Add</button>
+                                <button id="cancelNewListName" className="closeModal" onClick={removeActiveClassAddList} type="button">Cancel</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
                 {/* <button onClick={changeAdding}>Add List</button> */}
                 {/* <i className="fa-solid fa-plus"></i> */}
