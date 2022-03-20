@@ -95,6 +95,10 @@
     /* cursor:pointer; */
 }
 
+.fa-square-plus, .fa-pen-to-square {
+    color: #5E44B2;
+}
+
 .addList {
     display: flex;
     width: 100%;
@@ -109,6 +113,7 @@
 .lists {
     font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Helvetica,Arial,clean,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
     font-size: 13px;
+    margin-right: 15px;
 }
 
 #horizLine {
