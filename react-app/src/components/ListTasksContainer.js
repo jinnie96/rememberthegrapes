@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addOneTask, deleteOneTask, getAllTasks, updateOneTask } from '../store/tasks';
+import { addOneTask, getAllTasks, updateOneTask } from '../store/tasks';
 import './ListTaskContainer.css'
 function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, selectedList, title, setDueBy, setTitle, updateTitle, updateDate, dueBy, changeNewTaskListId, showTaskDetails, editing, updateTaskTitle, updateNewDate, editTask, editingTask, deleteTask, deleteList, selectedTaskId, selectedTaskDue, setSelectedTaskDue}) {
     const dispatch = useDispatch()
@@ -12,10 +12,6 @@ function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, sele
     const [deletedTasks, setDeletedTasks] = useState([])
     const addTask = async (e) => {
         e.preventDefault();
-        const dueDate = dueBy.split("T")
-        // if (selectedNewTaskId === "0") {
-        //     selectedNewTaskId = null
-        // }
         const newTask = {
             user_id: user.id,
             list_id: selectedNewTaskId,

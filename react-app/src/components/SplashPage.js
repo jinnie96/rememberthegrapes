@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import './SplashPage.css'
 
@@ -10,7 +8,7 @@ const SplashPage = () => {
             {/* <div className="backgroundColor"> */}
                 <div className="splashNavBar">
                     <div className="navBarLogo">
-                        <img id = "logoId" src = "https://i.ibb.co/FHqpBL1/remember-the-grapes-logos-preview-rev-1-removebg-preview-1.jpg"></img>
+                        <img id = "logoId" src = "https://i.ibb.co/FHqpBL1/remember-the-grapes-logos-preview-rev-1-removebg-preview-1.jpg" alt="logo"></img>
                     </div>
                     <div className="logSignUp">
                     <NavLink to='/login' exact={true} activeClassName='active'>
@@ -29,7 +27,7 @@ const SplashPage = () => {
                         </NavLink>
                     </div>
                     <div className="busyImg">
-                        <img id ="busyPersonImg" src="https://i.ibb.co/wwW48c2/6876341-preview-removebg-preview-1.jpg"></img>
+                        <img id ="busyPersonImg" src="https://i.ibb.co/wwW48c2/6876341-preview-removebg-preview-1.jpg" alt="busy"></img>
                     </div>
                 {/* </div> */}
             </div>

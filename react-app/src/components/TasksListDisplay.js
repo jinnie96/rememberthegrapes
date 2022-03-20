@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { addOneTask, deleteOneTask, getAllTasks, updateOneTask } from '../store/tasks';
+import { updateOneTask } from '../store/tasks';
 import './TasksListDisplay.css'
 
 function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle, editingTaskTitle, selectedTaskDue, editingTask, listsArr, selectedTaskId, setShowTask, showTaskDetails, setSelectedTaskTitle, setSelectedTaskDue, setSelectedListTitle, selectedList, setSelectedList, compNum, selectedTaskList}) {
 
     const [newTitleVal, setNewTitleVal] = useState("")
-    const history = useHistory()
     const [today, setToday] = useState("")
     const dispatch = useDispatch()
     const tasks = useSelector(state => state.task)
@@ -61,17 +60,6 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
     const cancelTaskDueChange = (e) => {
         e.target.style.display="none"
         e.target.parentElement.childNodes[1].style.display="block"
-    }
-
-    const cancelTitleChange = (e) => {
-        // e.target.parentElement.childNodes[0].style.display="block"
-        // e.target.parentElement.childNodes[1].style.display="none"
-
-        e.target.style.display = "none"
-        e.target.parentElement.childNodes[0].style.display = "none"
-        e.target.parentElement.style.display="none"
-        e.target.parentElement.parentElement.childNodes[0].style.display = "block"
-
     }
 
     const cancelTitleValChange = (e) => {
