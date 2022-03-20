@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { addOneTask, deleteOneTask, getAllTasks, updateOneTask } from '../store/tasks';
-import { addOneList, getAllLists, deleteOneList, updateOneList } from '../store/lists';
+import { addOneList, getAllLists, updateOneList } from '../store/lists';
 import './ListsContainer.css'
 
 function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, setSelectedNewTaskId, listTitle, setListTitle, selectedList, setSelectedList, listId, setListId, selectedListTitle, setSelectedListTitle, selectedListId, setSelectedListId, num, setNum, setShowTask, compNum, setCompNum, setSelectedTaskId}) {
@@ -83,46 +82,6 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
             }
         }
 
-        const cancelListChange = async(e) => {
-            // e.target.parentElement.childNodes[0].style.display="block"
-            // e.target.parentElement.childNodes[1].style.display="block"
-            // e.target.parentElement.childNodes[2].style.display="none"
-            // e.target.parentElement.childNodes[3].style.display="none"
-            // e.target.parentElement.childNodes[4].style.display="none"
-            e.target.parentElement.childNodes[0].style.display="block"
-            e.target.parentElement.childNodes[1].style.display="block"
-            e.target.childNodes[0].style.display="none"
-            e.target.childNodes[1].style.display="none"
-            e.target.childNodes[2].style.display="none"
-            e.target.style.display="none"
-        }
-
-        const cancelListChangeBefore = async (e) => {
-            e.target.parentElement.parentElement.childNodes[0].style.display="block"
-            e.target.parentElement.parentElement.childNodes[1].style.display="block"
-            e.target.parentElement.childNodes[0].style.display="none"
-            e.target.parentElement.childNodes[1].style.display="none"
-            e.target.parentElement.childNodes[2].style.display="none"
-            e.target.parentElement.style.display="none"
-            e.target.style.display="none"
-
-        }
-
-        const changeListName = async (e) => {
-            // e.target.parentElement.childNodes[0].style.display="none"
-            // e.target.parentElement.childNodes[1].style.display="none"
-            // e.target.parentElement.childNodes[2].style.display="block"
-            // e.target.parentElement.childNodes[3].style.display="block"
-            // e.target.parentElement.childNodes[4].style.display="block"
-
-            e.target.parentElement.childNodes[0].style.display="none"
-            e.target.parentElement.childNodes[1].style.display="none"
-            e.target.parentElement.childNodes[2].style.display="inline-block"
-            e.target.parentElement.childNodes[2].childNodes[0].style.display="inline-block"
-            e.target.parentElement.childNodes[2].childNodes[1].style.display="inline-block"
-            e.target.parentElement.childNodes[2].childNodes[2].style.display="inline-block"
-
-        }
 
         const changeListNameState = async (e) => {
             setNewListName(e.target.value)
@@ -204,7 +163,7 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
     return (
         <div className="listsContainer">
             <a href="/">
-            <img id ="logoPic" src="https://i.ibb.co/TqP2mD8/imageedit-5-3593153735.jpg"></img>
+            <img id ="logoPic" src="https://i.ibb.co/TqP2mD8/imageedit-5-3593153735.jpg" alt="logo"></img>
 
             </a>
                 <div className="lists">

@@ -2,17 +2,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
-import { login } from "../store/session"
 import { useDispatch, useSelector } from 'react-redux';
 import './NavBar.css'
 import {getAllTasks, searchInput} from "../store/tasks"
 
 const NavBar = () => {
   const dispatch = useDispatch()
-  const demoLogin = async (e) => {
-    e.preventDefault()
-    await dispatch(login("demo@aa.io", "password"))
-}
 
 const user = useSelector(state => state.session.user)
 const input = document.getElementById("inputSearch")

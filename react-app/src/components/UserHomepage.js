@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
-import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addOneTask, deleteOneTask, getAllTasks, updateOneTask } from '../store/tasks';
 import './UserHomepage.css'
