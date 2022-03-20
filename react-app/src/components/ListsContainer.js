@@ -218,8 +218,8 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
                             <form className="editingBtns" onSubmit={addList}>
                             {console.log(editErrors)}
                             {editErrors?.map((error, ind) => (
-                    <li id="errorMsg" key={ind}>{error}</li>
-                    ))}
+                                <li id="errorMsg" key={ind}>{error}</li>
+                            ))}
                                 <h1 id="renameList">Add a list</h1>
                                 <h3 id="listNameText">Please enter a new list name:</h3>
                                 {console.log("HEEEEEE", editingTitle)}
@@ -248,8 +248,8 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
                 {listsArr && (listsArr.map(list => (
                     <div>
                         {list.user_id === userId && (
-                            <div className="listBtns" key={list.id}>
-                                <p id={list.id} onClick={changeSelectedList}>{list.title}</p>
+                            <div className="listBtns" id={list.id} onClick={changeSelectedList} key={list.id}>
+                                <p>{list.title}</p>
                                 <i id ="fa-edit" className="fa-solid fa-pen-to-square" onClick={addActiveClass}></i>
                                  <div className={`modal`}>
                                         <div className="modalForm">
