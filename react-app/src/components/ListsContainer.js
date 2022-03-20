@@ -51,6 +51,7 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
         const tasksArr = Object.values(userTasks)
 
         const changeSelectedList = e => {
+            console.log(e.target.id)
             setShowTask(false)
             setSelectedTaskId(0)
             setSelectedList(e.target.id)
@@ -249,7 +250,7 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
                     <div>
                         {list.user_id === userId && (
                             <div className="listBtns" id={list.id} onClick={changeSelectedList} key={list.id}>
-                                <p>{list.title}</p>
+                                <p id={list.id} onClick={changeSelectedList}>{list.title}</p>
                                 <i id ="fa-edit" className="fa-solid fa-pen-to-square" onClick={addActiveClass}></i>
                                  <div className={`modal`}>
                                         <div className="modalForm">
