@@ -196,6 +196,7 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
         if (response) {
             setDeletedTasks(response.tasks)
             setShowTask(false)
+
         }
     }
 
