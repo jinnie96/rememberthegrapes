@@ -263,9 +263,9 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
                             </select>
                         </div>
                     </div>
-                    <div>
-                        <button onClick={deleteTask} class="deleteTaskBtn">Delete Task</button>
-                        <i id = {selectedTaskId} onClick={taskComplete} class="fa-solid fa-square-check"></i>
+                    <div className="compDelBtns">
+                        <button id="deleteTaskBtn" onClick={deleteTask} className="deleteTaskBtn" class="fa-solid">Delete Task</button>
+                        <button id = {selectedTaskId} onClick={taskComplete} className="completeTaskBtn">Task Complete</button>
                     </div>
                     </div>
                 </div>
