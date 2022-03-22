@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { updateOneTask } from '../store/tasks';
+import { updateOneTask, getAllTasks } from '../store/tasks';
 import './TasksListDisplay.css'
 
-function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle, editingTaskTitle, selectedTaskDue, editingTask, listsArr, selectedTaskId, setShowTask, showTaskDetails, setSelectedTaskTitle, setSelectedTaskDue, setSelectedListTitle, selectedList, setSelectedList, compNum, selectedTaskList}) {
+function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle, editingTaskTitle, selectedTaskDue, editingTask, listsArr, selectedTaskId, setShowTask, showTaskDetails, setSelectedTaskTitle, setSelectedTaskDue, setSelectedListTitle, selectedList, setSelectedList, compNum, selectedTaskList, deleteTask, deletedTasks, setDeletedTasks}) {
 
     const [newTitleVal, setNewTitleVal] = useState("")
     const [today, setToday] = useState("")
     const dispatch = useDispatch()
     const tasks = useSelector(state => state.task)
+    const user = useSelector(state => state.user)
+    const userId = useSelector(state => state.session.user.id);
     let complete = 0
     let incomplete = 0
     // useEffect(() => {
@@ -182,6 +184,22 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
         setNewTitleVal(e.target.value)
     }
 
+    const taskComplete = async (e) => {
+        const compTask = {
+            complete: true
+        }
+        console.log("COMP", e.target.id)
+        const res = await dispatch(updateOneTask(e.target.id, compTask))
+        const response = await dispatch(getAllTasks(userId))
+        // if (res) {
+        // }
+        if (response) {
+            setDeletedTasks(response.tasks)
+            setShowTask(false)
+        }
+    }
+
+
     // console.log("YOIOOYOYOYOYOYOYOY", selectedTaskDue.toUTCString())
 
 
@@ -244,6 +262,10 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
                                     )))}
                             </select>
                         </div>
+                    </div>
+                    <div>
+                        <button onClick={deleteTask} class="deleteTaskBtn">Delete Task</button>
+                        <i id = {selectedTaskId} onClick={taskComplete} class="fa-solid fa-square-check"></i>
                     </div>
                     </div>
                 </div>
