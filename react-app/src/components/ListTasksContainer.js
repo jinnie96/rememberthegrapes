@@ -2,13 +2,37 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addOneTask, getAllTasks, updateOneTask } from '../store/tasks';
 import './ListTaskContainer.css'
-function ListTasksContainer({user, setSelectedNewTaskId, selectedNewTaskId, selectedList, title, setDueBy, setTitle, updateTitle, updateDate, dueBy, changeNewTaskListId, showTaskDetails, editing, updateTaskTitle, updateNewDate, editTask, editingTask, deleteTask, deleteList, selectedTaskId, selectedTaskDue, setSelectedTaskDue, deletedTasks, setDeletedTasks}) {
+function ListTasksContainer({ selectedList, showTaskDetails, editing, updateTaskTitle, updateNewDate, editTask, editingTask, deleteTask, deleteList, selectedTaskId, selectedTaskDue, setSelectedTaskDue, deletedTasks, setDeletedTasks}) {
     const dispatch = useDispatch()
     const [showComp, setShowComp] = useState(false)
+    const user = useSelector(state => state.session.user)
     const userId= user.id
     const [errors, setErrors] = useState([])
     const taskval = document.getElementById("taskInput")
     const dateval = document.getElementById("dateInput")
+    const [title, setTitle] = useState("")
+    const [dueBy, setDueBy] = useState("0000-00-00T00:00")
+    const updateDate = e => {
+        setDueBy(e.target.value)
+      }
+
+    const updateTitle = e => {
+        setTitle(e.target.value)
+    }
+    const [selectedNewTaskId, setSelectedNewTaskId] = useState(null)
+
+    const changeNewTaskListId = e => {
+        if (e === "0") {
+          setSelectedNewTaskId(null)
+        }
+        if (e.target.value === "0") {
+          setSelectedNewTaskId(null)
+        } else {
+
+          setSelectedNewTaskId(e.target.value)
+        }
+      }
+
     const addTask = async (e) => {
         e.preventDefault();
         const newTask = {

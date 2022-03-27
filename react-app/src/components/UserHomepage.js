@@ -11,24 +11,16 @@ import TasksListDisplay from './TasksListDisplay'
 
 function UserHomepage () {
     const dispatch = useDispatch()
-    const history = useHistory()
     const user = useSelector(state => state.session.user)
     const userId = useSelector(state => state.session.user.id);
     const userTasks = useSelector(state => state.task)
     const userLists = useSelector(state => state.list)
-    const state = useSelector(state => state)
-    const [tasks, setTasks] = useState()
-    const [lists, setLists] = useState()
     const [showDate, setShowDate] = useState(false)
-    const [title, setTitle] = useState("")
-    const [listTitle, setListTitle] = useState("")
-    const [listId, setListId] = useState(null)
+    // const [title, setTitle] = useState("")
     const [editing, setEditing] = useState(false)
     const [newEditTask, setNewEditTask] = useState("")
-    const [addingList, setAddingList] = useState(false)
     const [selectedList, setSelectedList] = useState()
     const [selectedListId, setSelectedListId] = useState()
-    const [selectedNewTaskId, setSelectedNewTaskId] = useState(null)
     const [selectedListTitle, setSelectedListTitle] = useState("All Tasks")
     const [selectedTaskId, setSelectedTaskId] = useState()
     const [selectedTaskTitle, setSelectedTaskTitle] = useState("")
@@ -47,9 +39,9 @@ function UserHomepage () {
         // const id = user.id
         (async () => {
             const response = await dispatch(getAllTasks(userId))
-            setTasks(response.json);
+            // setTasks(response.json);
             const responseLists = await dispatch(getAllLists(userId))
-            setLists(responseLists)
+            // setLists(responseLists)
             // const tasks = await response.json();
             //   setTasks(tasks);test
         })();
@@ -69,26 +61,6 @@ function UserHomepage () {
     const taskval = document.getElementById("taskInput")
     const dateval = document.getElementById("dateInput")
 
-    const addTask = async (e) => {
-        e.preventDefault();
-        const dueDate = dueBy.split("T")
-        const newTask = {
-            user_id: user.id,
-            list_id: selectedNewTaskId,
-            title: title,
-            due_by: dueBy
-        }
-        const data = await dispatch(addOneTask(newTask));
-        dispatch(getAllTasks(userId))
-        setTitle("")
-        setDueBy("0000-00-00T00:00")
-        taskval.value = ""
-        dateval.value = "0000-00-00T00:00"
-        // if (data) {
-        //   setErrors(data);
-        // }
-      };
-
       const deleteTask = async (e) => {
           e.preventDefault()
           console.log("HEEEEEEEEE", selectedTaskId)
@@ -107,9 +79,6 @@ function UserHomepage () {
         setEditing(false)
       }
 
-      const updateTitle = e => {
-          setTitle(e.target.value)
-      }
       const updateTaskTitle = e => {
           const updateTitleTag = document.getElementById({e})
           setNewEditTask(e.target.value)
@@ -139,29 +108,15 @@ function UserHomepage () {
       // setNum(num.length)
       // setCompNum(comp.length)
 
-      const updateListTitle = e => {
-          setListTitle(e.target.value)
-      }
+      // const updateListTitle = e => {
+      //     setListTitle(e.target.value)
+      // }
 
-      const updateDate = e => {
-        setDueBy(e.target.value)
-      }
 
       const updateNewDate = e => {
         setNewDueBy(e.target.value)
       }
 
-      const changeNewTaskListId = e => {
-        if (e === "0") {
-          setSelectedNewTaskId(null)
-        }
-        if (e.target.value === "0") {
-          setSelectedNewTaskId(null)
-        } else {
-
-          setSelectedNewTaskId(e.target.value)
-        }
-      }
 
       const showTaskDetails = async (e) => {
         setShowTask(true)
@@ -225,8 +180,8 @@ function UserHomepage () {
 
     return (
         <div className="homePage">
-            <ListsContainer user={user} addingList={addingList} setAddingList={setAddingList} selectedNewTaskId={selectedNewTaskId} setSelectedNewTaskId={setSelectedNewTaskId} listTitle={listTitle} setListTitle={setListTitle} selectedList={selectedList} setSelectedList={setSelectedList} listId={listId} setListId={setListId} selectedListTitle={selectedListTitle} setSelectedListTitle={setSelectedListTitle} selectedListId={selectedListId} setSelectedListId={setSelectedListId} num={num} setNum={setNum} setShowTask={setShowTask} compNum={compNum} setCompNum={setCompNum} setSelectedTaskId={setSelectedTaskId}/>
-            <ListTasksContainer user={user} selectedNewTaskId={selectedNewTaskId} setSelectedNewTaskId={setSelectedNewTaskId} setTitle={setTitle} setDueBy={setDueBy} title={title} updateTitle={updateTitle} updateDate={updateDate} dueBy={dueBy} changeNewTaskListId={changeNewTaskListId} listsArr={listsArr} tasksArr={tasksArr} selectedList={selectedList} showTaskDetails={showTaskDetails} editing={editing} updateTaskTitle = {updateTaskTitle} updateNewDate={updateNewDate} editTask = {editTask} editingTask = {editingTask} deleteTask={deleteTask} deleteList={deleteList} userTasks={userTasks} userLists={userLists} selectedTaskId={selectedTaskId} selectedTaskDue={selectedTaskDue} setSelectedTaskDue={setSelectedTaskDue} deletedTasks={deletedTasks} setDeletedTasks={setDeletedTasks}/>
+            <ListsContainer selectedList={selectedList} setSelectedList={setSelectedList} selectedListTitle={selectedListTitle} setSelectedListTitle={setSelectedListTitle} selectedListId={selectedListId} setSelectedListId={setSelectedListId} num={num} setNum={setNum} setShowTask={setShowTask} compNum={compNum} setCompNum={setCompNum} setSelectedTaskId={setSelectedTaskId}/>
+            <ListTasksContainer listsArr={listsArr} tasksArr={tasksArr} selectedList={selectedList} showTaskDetails={showTaskDetails} editing={editing} updateTaskTitle = {updateTaskTitle} updateNewDate={updateNewDate} editTask = {editTask} editingTask = {editingTask} deleteTask={deleteTask} deleteList={deleteList} userTasks={userTasks} userLists={userLists} selectedTaskId={selectedTaskId} selectedTaskDue={selectedTaskDue} setSelectedTaskDue={setSelectedTaskDue} deletedTasks={deletedTasks} setDeletedTasks={setDeletedTasks}/>
             <TasksListDisplay showTask={showTask} selectedListTitle={selectedListTitle} num={num} selectedTaskTitle={selectedTaskTitle} editingTaskTitle={editingTaskTitle} selectedTaskDue={selectedTaskDue} editingTask={editingTask} listsArr={listsArr} selectedTaskId={selectedTaskId} setShowTask={setShowTask} showTaskDetails={showTaskDetails} setSelectedTaskTitle={setSelectedTaskTitle} selectedTaskDue={selectedTaskDue} setSelectedTaskDue={setSelectedTaskDue} setSelectedListTitle={setSelectedListTitle} selectedList={selectedList} setSelectedList={setSelectedList} compNum={compNum} setCompNum={setCompNum} selectedTaskList={selectedTaskList} deleteTask={deleteTask} deletedTasks={deletedTasks} setDeletedTasks={setDeletedTasks}/>
         </div>
     )

@@ -4,9 +4,10 @@ import { useHistory } from 'react-router';
 import { addOneList, getAllLists, updateOneList } from '../store/lists';
 import './ListsContainer.css'
 
-function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, setSelectedNewTaskId, listTitle, setListTitle, selectedList, setSelectedList, listId, setListId, selectedListTitle, setSelectedListTitle, selectedListId, setSelectedListId, num, setNum, setShowTask, compNum, setCompNum, setSelectedTaskId}) {
+function ListsContainer( { setSelectedList, setSelectedListTitle, selectedListId, setSelectedListId, num, setNum, setShowTask, compNum, setCompNum, setSelectedTaskId}) {
     const dispatch = useDispatch()
     const history = useHistory()
+    const user = useSelector(state => state.session.user)
     const userId = user.id
     const userLists = useSelector(state => state.list)
     const userTasks = useSelector(state => state.task)
@@ -15,6 +16,10 @@ function ListsContainer( {user, addingList, setAddingList, selectedNewTaskId, se
     const [errors, setErrors] = useState([])
     const [editErrors, setEditErrors] = useState([])
     const [editingTitle, setEditingTitle] = useState("")
+    const [addingList, setAddingList] = useState(false)
+    const [listTitle, setListTitle] = useState("")
+    const [listId, setListId] = useState(null)
+
     // const [num, setNum] = useState()
 
 
