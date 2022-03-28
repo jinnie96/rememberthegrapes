@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addOneTask, getAllTasks, updateOneTask } from '../store/tasks';
 import './ListTaskContainer.css'
-function ListTasksContainer({ selectedList, showTaskDetails, editing, updateTaskTitle, updateNewDate, editTask, editingTask, deleteTask, deleteList, selectedTaskId, selectedTaskDue, setSelectedTaskDue, deletedTasks, setDeletedTasks}) {
+function ListTasksContainer({ selectedList, showTaskDetails, deleteList, selectedTaskId, selectedTaskDue, setSelectedTaskDue, deletedTasks, setDeletedTasks}) {
     const dispatch = useDispatch()
     const [showComp, setShowComp] = useState(false)
     const user = useSelector(state => state.session.user)
@@ -12,6 +12,12 @@ function ListTasksContainer({ selectedList, showTaskDetails, editing, updateTask
     const dateval = document.getElementById("dateInput")
     const [title, setTitle] = useState("")
     const [dueBy, setDueBy] = useState("0000-00-00T00:00")
+
+    const userTasks = useSelector(state => state.task)
+    const userLists = useSelector(state => state.list)
+    const tasksArr = Object.values(userTasks)
+    const listsArr = Object.values(userLists)
+
     const updateDate = e => {
         setDueBy(e.target.value)
       }
@@ -68,8 +74,6 @@ function ListTasksContainer({ selectedList, showTaskDetails, editing, updateTask
     //         dispatch(getAllTasks(userId))
     //     })();
     // }, [listsArr]);
-    const userLists = useSelector(state => state.list)
-    const userTasks = useSelector(state => state.task)
     console.log(userTasks,"HUHUHUHUHUHUH")
     useEffect(() => {
         (async () => {
@@ -81,8 +85,8 @@ function ListTasksContainer({ selectedList, showTaskDetails, editing, updateTask
         })()
     }, [selectedList, dispatch, errors, selectedTaskDue, setSelectedTaskDue])
     // dispatch(getAllTasks(userId))
-      const listsArr = Object.values(userLists)
-      const tasksArr = Object.values(userTasks)
+    //   const listsArr = Object.values(userLists)
+    //   const tasksArr = Object.values(userTasks)
 
 
       const setIncomplete = e => {
