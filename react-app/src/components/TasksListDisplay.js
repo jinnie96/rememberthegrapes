@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { updateOneTask, getAllTasks } from '../store/tasks';
+import { updateOneTask, getAllTasks, deleteOneTask } from '../store/tasks';
 import './TasksListDisplay.css'
 
-function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle, editingTaskTitle, selectedTaskDue, editingTask, listsArr, selectedTaskId, setShowTask, showTaskDetails, setSelectedTaskTitle, setSelectedTaskDue, setSelectedListTitle, selectedList, setSelectedList, compNum, selectedTaskList, deleteTask, deletedTasks, setDeletedTasks}) {
+function TasksListDisplay ( {showTask, selectedListTitle, selectedTaskTitle, selectedTaskDue, selectedTaskId, setShowTask, setSelectedTaskTitle, setSelectedTaskDue, selectedList, selectedTaskList, setDeletedTasks}) {
 
     const [newTitleVal, setNewTitleVal] = useState("")
     const [today, setToday] = useState("")
@@ -12,6 +12,11 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
     const tasks = useSelector(state => state.task)
     const user = useSelector(state => state.user)
     const userId = useSelector(state => state.session.user.id);
+    const userTasks = useSelector(state => state.task)
+    const userLists = useSelector(state => state.list)
+    const tasksArr = Object.values(userTasks)
+    const listsArr = Object.values(userLists)
+
     let complete = 0
     let incomplete = 0
     // useEffect(() => {
@@ -52,6 +57,14 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
         const today = year + "-" + month + "-" + day +"T00:00";
         setToday(today)
 
+    }
+
+    const deleteTask = async (e) => {
+        e.preventDefault()
+        console.log("HEEEEEEEEE", selectedTaskId)
+        await dispatch(deleteOneTask(selectedTaskId))
+        dispatch(getAllTasks(userId))
+        setShowTask(false)
     }
 
     const editingTaskDue = (e) => {
@@ -199,6 +212,13 @@ function TasksListDisplay ( {showTask, selectedListTitle, num, selectedTaskTitle
 
         }
     }
+
+    const editingTaskTitle = (e) => {
+        const titleInput = document.getElementById("taskTitleName")
+        titleInput.innerHTML = `<input name='title' type='text' value=${selectedTaskTitle} onChange={updateTaskTitle}></input>`
+    }
+
+
 
 
     // console.log("YOIOOYOYOYOYOYOYOY", selectedTaskDue.toUTCString())
