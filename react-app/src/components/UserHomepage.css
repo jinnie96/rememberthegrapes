@@ -71,6 +71,13 @@
     height: 100%;
 }
 
+.taskSelectedInfoContainerShift {
+    background-color:#FFFFFF;
+    bottom: 0;
+    margin-bottom: 0;
+    height: 100%;
+}
+
 i:hover {
     cursor: pointer;
 }
