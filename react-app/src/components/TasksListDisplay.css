@@ -31,8 +31,48 @@
     border-radius: 1%;
     background-color: #efeeef;
     position: relative;
-    transition: 3s;
-    /* right: -500%; */
+    /* transition: 3s; */
+    right: -1000px;
+    /* animation-delay: 2s; */
+}
+.taskSelectedInfoContainerShift {
+    display:flex;
+    flex-direction: column;
+    box-shadow: -2px 0 0 #d9d9d9;
+    border-radius: 1%;
+    background-color: #efeeef;
+    position: relative;
+    animation-duration: .5s;
+    animation-name: slide;
+    /* transition: 3s;
+    right: 0px; */
+    /* animation-delay: 2s; */
+}
+
+@keyframes slide {
+    from {
+        left: 800px
+    }
+
+    to {
+        left: 0px;
+    }
+}
+
+
+@keyframes slide-left {
+    from {
+      margin-left: -500px;
+    }
+
+    to {
+      margin-left: 0%;
+    }
+  }
+
+
+.taskUnselected {
+    margin-left: 500px;
 }
 
 .showContainer, .unshowContainer {

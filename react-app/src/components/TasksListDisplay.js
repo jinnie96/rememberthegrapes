@@ -58,8 +58,41 @@ function TasksListDisplay ( {showTask, selectedListTitle, selectedTaskTitle, sel
         setToday(today)
 
     }
+        useEffect(() => {
+            if (showTask) {
+                const selectedTask = document.querySelector(".taskSelectedInfoContainer")
+                console.log("HEHEHEHEHEHE", selectedTask)
+                // if (showTask) {
+                    selectedTask.classList.remove("taskSelectedInfoContainer")
+                    console.log(selectedTask, "SELECT")
+                    selectedTask.classList.add("taskSelectedInfoContainerShift")
+                // } else {
+                //     // selectedTask.style.marginLeft = "0"
+                // }
+            }
+            if (!showTask && document.querySelector(".taskSelectedInfoContainerShift")) {
+                    const selectedTask = document.querySelector(".taskSelectedInfoContainerShift")
+                    console.log("HEHEHEHEHEHE", selectedTask)
+                        selectedTask.classList.remove("taskSelectedInfoContainerShift")
+                        console.log(selectedTask, "SELECT")
+                        selectedTask.classList.add("taskSelectedInfoContainer")
+            }
 
+        }, [showTask])
+    window.onload = function () {
+        if (showTask) {
+            const selectedTask = document.querySelector(".taskSelectedInfoContainer")
+            console.log("HEHEHEHEHEHE", selectedTask)
+            // if (showTask) {
+                selectedTask.classList.remove("taskSelectedInfoContainer")
+                console.log(selectedTask, "SELECT")
+                selectedTask.classList.add("taskSelectedInfoContainerShift")
+            // } else {
+            //     // selectedTask.style.marginLeft = "0"
+            // }
+        }
 
+    }
 
     const deleteTask = async (e) => {
         e.preventDefault()
@@ -215,7 +248,7 @@ function TasksListDisplay ( {showTask, selectedListTitle, selectedTaskTitle, sel
             )}
             {showTask && (
                 <div class="taskSelectedInfoContainer">
-                    <div className="showContainer">
+                    <div className="showContainer" id ="animation">
                     <div className="changeTitleContainer">
                         <div id="titlename" onClick={editingTitle}>{selectedTaskTitle}</div>
                         <form onSubmit={changeTitleName}>
