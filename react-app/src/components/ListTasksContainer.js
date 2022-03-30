@@ -62,18 +62,7 @@ function ListTasksContainer({ selectedList, showTaskDetails, deleteList, selecte
             // alert("Task added!")
 
         }
-        // setSelectedNewTaskId(null)
-
-        // if (data) {
-        //   setErrors(data);
-        // }
       };
-    //   useEffect(() => {
-    //     // const id = user.id
-    //     (async () => {
-    //         dispatch(getAllTasks(userId))
-    //     })();
-    // }, [listsArr]);
     console.log(userTasks,"HUHUHUHUHUHUH")
     useEffect(() => {
         (async () => {
@@ -84,10 +73,6 @@ function ListTasksContainer({ selectedList, showTaskDetails, deleteList, selecte
 
         })()
     }, [selectedList, dispatch, errors, selectedTaskDue, setSelectedTaskDue])
-    // dispatch(getAllTasks(userId))
-    //   const listsArr = Object.values(userLists)
-    //   const tasksArr = Object.values(userTasks)
-
 
       const setIncomplete = e => {
         e.target.style.color ="black"
@@ -146,8 +131,6 @@ function ListTasksContainer({ selectedList, showTaskDetails, deleteList, selecte
         </div>
 
         </form>
-        {/* <button>Edit List</button> */}
-        {/* <h1>All tasks: (Replace with Tasks in List Selected)</h1> */}
         <div className="listContainer">
             {!showComp && (
                 <div>
