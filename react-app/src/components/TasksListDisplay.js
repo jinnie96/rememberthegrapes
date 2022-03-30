@@ -59,6 +59,8 @@ function TasksListDisplay ( {showTask, selectedListTitle, selectedTaskTitle, sel
 
     }
 
+
+
     const deleteTask = async (e) => {
         e.preventDefault()
         console.log("HEEEEEEEEE", selectedTaskId)
@@ -96,10 +98,6 @@ function TasksListDisplay ( {showTask, selectedListTitle, selectedTaskTitle, sel
         e.target.parentElement.childNodes[1].childNodes[0].style.display="block"
         e.target.parentElement.childNodes[1].childNodes[1].style.display="block"
 
-
-        // e.target.style.display="none"
-        // e.target.parentElement.childNodes[1].style.display="block"
-        // e.target.parentElement.childNodes[2].style.display="block"
     }
 
     const changeDueTime = async(e) => {
@@ -111,9 +109,6 @@ function TasksListDisplay ( {showTask, selectedListTitle, selectedTaskTitle, sel
         if (res) {
             cancelTaskDueChange(e)
         }
-        // setShowTask(!showTask)
-        // setShowTask(!showTask)
-
     }
 
     const cancelListChange = (e) => {
@@ -122,31 +117,6 @@ function TasksListDisplay ( {showTask, selectedListTitle, selectedTaskTitle, sel
     }
 
     const changeTaskList = async(e) => {
-        // if (e.target.value === "0") {
-        //      const newList = {
-        //          list_id:undefined
-        //      }
-        //      const res = await dispatch(updateOneTask(selectedTaskId, newList))
-        //      if (res) {
-        //         cancelListChange(e)
-        //     }
-        //     setShowTask(!showTask)
-
-        // } else {
-        //     const newList = {
-        //         list_id: e.target.value
-        //     }
-        //     const res = await dispatch(updateOneTask(selectedTaskId, newList))
-        //     setSelectedListTitle(res.title)
-        //     if (res) {
-        //         console.log("EDIT LIST", res)
-        //         cancelListChange(e)
-        //     }
-        //     // setShowTask(showTask)
-        //     // setSelectedList("All Tasks")
-        //     // setSelectedListTitle(res.title)
-
-        // }
         if (e.target.value == 0) {
              const newList = {
                  list_id:null
@@ -188,9 +158,6 @@ function TasksListDisplay ( {showTask, selectedListTitle, selectedTaskTitle, sel
         if (res) {
             cancelTitleValChange(e)
         }
-        // showTaskDetails(e)
-        // setShowTask(false)
-        // setShowTask(true)
     }
 
     const setTitleVal = (e) => {
@@ -217,12 +184,6 @@ function TasksListDisplay ( {showTask, selectedListTitle, selectedTaskTitle, sel
         const titleInput = document.getElementById("taskTitleName")
         titleInput.innerHTML = `<input name='title' type='text' value=${selectedTaskTitle} onChange={updateTaskTitle}></input>`
     }
-
-
-
-
-    // console.log("YOIOOYOYOYOYOYOYOY", selectedTaskDue.toUTCString())
-
 
     window.addEventListener("click", getToday);
 
