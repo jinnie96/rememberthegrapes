@@ -64,8 +64,9 @@ Users can implement full CRUD functionality on tasks. Tasks that belong to a lis
 ### List Summary (Read, Update)
 Users can view the details of their list. The list summary update as the user creates, updates, or deletes lists/tasks.
 
+### Search (Read, Update)
+Users can search for tasks that they've created.
+
 ## Future Features
-- Search
-    - Users will be able to search for tasks and lists that they've created.
 - Subtasks
     - Users will be able to add subtasks onto their tasks.
