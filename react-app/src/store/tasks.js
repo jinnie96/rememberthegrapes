@@ -54,11 +54,9 @@ export const getAllTasks = (id) => async dispatch => {
 }
 
 export const searchInput = (id, term) => async dispatch => {
-    console.log("IN STORE")
     const response = await fetch (`/api/tasks/search/${id}/${term}`)
     if (response.ok) {
         const data = await response.json();
-        console.log(data)
         if (data.errors) {
             return
         };
@@ -140,7 +138,6 @@ export default function taskReducer(state = initialState, action) {
             // for (const key in action.payload) {
             //     newState[action.payload[key].id] = action.payload[key]
             // }
-            console.log(action)
             action.payload.tasks.forEach(task => {
                 newState[task.id] = task
             })

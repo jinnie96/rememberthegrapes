@@ -61,20 +61,12 @@ function TasksListDisplay ( {showTask, selectedListTitle, selectedTaskTitle, sel
         useEffect(() => {
             if (showTask) {
                 const selectedTask = document.querySelector(".taskSelectedInfoContainer")
-                console.log("HEHEHEHEHEHE", selectedTask)
-                // if (showTask) {
                     selectedTask.classList.remove("taskSelectedInfoContainer")
-                    console.log(selectedTask, "SELECT")
                     selectedTask.classList.add("taskSelectedInfoContainerShift")
-                // } else {
-                //     // selectedTask.style.marginLeft = "0"
-                // }
             }
             if (!showTask && document.querySelector(".taskSelectedInfoContainerShift")) {
                     const selectedTask = document.querySelector(".taskSelectedInfoContainerShift")
-                    console.log("HEHEHEHEHEHE", selectedTask)
                         selectedTask.classList.remove("taskSelectedInfoContainerShift")
-                        console.log(selectedTask, "SELECT")
                         selectedTask.classList.add("taskSelectedInfoContainer")
             }
 
@@ -82,10 +74,8 @@ function TasksListDisplay ( {showTask, selectedListTitle, selectedTaskTitle, sel
     window.onload = function () {
         if (showTask) {
             const selectedTask = document.querySelector(".taskSelectedInfoContainer")
-            console.log("HEHEHEHEHEHE", selectedTask)
             // if (showTask) {
                 selectedTask.classList.remove("taskSelectedInfoContainer")
-                console.log(selectedTask, "SELECT")
                 selectedTask.classList.add("taskSelectedInfoContainerShift")
             // } else {
             //     // selectedTask.style.marginLeft = "0"
@@ -96,7 +86,6 @@ function TasksListDisplay ( {showTask, selectedListTitle, selectedTaskTitle, sel
 
     const deleteTask = async (e) => {
         e.preventDefault()
-        console.log("HEEEEEEEEE", selectedTaskId)
         await dispatch(deleteOneTask(selectedTaskId))
         dispatch(getAllTasks(userId))
         setShowTask(false)
@@ -171,7 +160,6 @@ function TasksListDisplay ( {showTask, selectedListTitle, selectedTaskTitle, sel
                 cancelListChange(e)
             }
             setShowTask(!showTask)
-            console.log(selectedList, (e.target.id))
             // alert("list updated!")
             // setSelectedList(e.target.id)
         }
@@ -201,7 +189,6 @@ function TasksListDisplay ( {showTask, selectedListTitle, selectedTaskTitle, sel
         const compTask = {
             complete: true
         }
-        console.log("COMP", e.target.id)
         const res = await dispatch(updateOneTask(e.target.id, compTask))
         const response = await dispatch(getAllTasks(userId))
         // if (res) {
