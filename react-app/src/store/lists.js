@@ -74,7 +74,6 @@ export const addOneList = (form) => async dispatch => {
         },
         body: JSON.stringify(form)
     })
-    // console.log(response.json(), "JSON!!")
     if (response.ok) {
         const data = await response.json();
         dispatch(addList(data));
@@ -131,7 +130,6 @@ export default function listReducer(state = initialState, action) {
             // for (const key in action.payload) {
             //     newState[action.payload[key].id] = action.payload[key]
             // }
-            console.log(action.payload.lists,"!!@#@!#@!#!#!#")
             action.payload.lists.forEach(list => {
                 newState[list.id] = list
             })
@@ -160,10 +158,7 @@ export default function listReducer(state = initialState, action) {
         };
         case DELETE_LIST: {
             newState = { ...state };
-            // console.log("OLDSTATE", newState)
-            // console.log("ACTION DELETE@@@@@@", action.payload)
             delete newState[action.payload];
-            // console.log("NEWSTATE", newState)
             return newState;
         };
 

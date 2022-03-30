@@ -62,14 +62,6 @@ function UserHomepage () {
     const taskval = document.getElementById("taskInput")
     const dateval = document.getElementById("dateInput")
 
-      // const deleteTask = async (e) => {
-      //     e.preventDefault()
-      //     console.log("HEEEEEEEEE", selectedTaskId)
-      //     await dispatch(deleteOneTask(selectedTaskId))
-      //     dispatch(getAllTasks(userId))
-      //     setShowTask(false)
-      // }
-
       const editTask = async (e) => {
         e.preventDefault()
         const task = {
@@ -103,15 +95,6 @@ function UserHomepage () {
           // dispatch(getAllTasks(userId))
           await dispatch(getAllTasks(userId))
       }
-      // const num = tasksArr.filter( task => !task.complete)
-      // const comp = tasksArr.filter(task => task.complete)
-      // num.map(task => console.log(task))
-      // setNum(num.length)
-      // setCompNum(comp.length)
-
-      // const updateListTitle = e => {
-      //     setListTitle(e.target.value)
-      // }
 
 
       const updateNewDate = e => {
@@ -138,8 +121,6 @@ function UserHomepage () {
                 fetchOneList(data.task.list_id)
 
               }
-              // const listTitle = await fetch(`api/lists/${data.task.list_id}`)
-              // console.log("LISSSSS", listTitle.json())
               setSelectedTaskTitle(data.task.title)
               setSelectedTaskDue(new Date(data.task.due_by).toLocaleString())
           }

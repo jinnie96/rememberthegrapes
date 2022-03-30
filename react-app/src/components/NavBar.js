@@ -12,7 +12,6 @@ const NavBar = () => {
 const user = useSelector(state => state.session.user)
 const input = document.getElementById("inputSearch")
 
-console.log(searchInput)
 // const onLogin = async (e) => {
 //   e.preventDefault();
 //   const data = await dispatch(login(email, password));
@@ -22,12 +21,10 @@ console.log(searchInput)
 // };
 
 const searchTerm = async(e) => {
-  console.log("YOOOOOOO", !e.target.value)
   if (!e.target.value) {
     await dispatch(getAllTasks(user.id))
   } else {
     const data = await dispatch(searchInput(user.id, e.target.value))
-    {console.log(data)}
 
   }
 

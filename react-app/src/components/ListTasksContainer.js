@@ -63,7 +63,6 @@ function ListTasksContainer({ selectedList, showTaskDetails, deleteList, selecte
 
         }
       };
-    console.log(userTasks,"HUHUHUHUHUHUH")
     useEffect(() => {
         (async () => {
             const res = await dispatch(getAllTasks(userId))
