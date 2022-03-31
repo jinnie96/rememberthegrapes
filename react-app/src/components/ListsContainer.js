@@ -19,6 +19,7 @@ function ListsContainer( { setSelectedList, setSelectedListTitle, selectedListId
     const [addingList, setAddingList] = useState(false)
     const [listTitle, setListTitle] = useState("")
     const [listId, setListId] = useState(null)
+    const [showLists, setShowLists] = useState(false)
 
     // const [num, setNum] = useState()
 
@@ -150,6 +151,16 @@ function ListsContainer( { setSelectedList, setSelectedListTitle, selectedListId
             setEditingTitle("")
         }
 
+        const toggleLists = (e) => {
+            setShowLists(!showLists)
+            console.log(e.target.classList[1])
+            if (e.target.classList[1] == "fa-angle-right") {
+                e.target.classList = "fa-solid fa-angle-down"
+            } else {
+                e.target.classList = "fa-solid fa-angle-right"
+            }
+        }
+
     return (
         <div className="listsContainer">
             <a href="/">
@@ -162,7 +173,7 @@ function ListsContainer( { setSelectedList, setSelectedListTitle, selectedListId
                 <hr id="horizLine"></hr>
                 <div className="addList">
 
-                <p id="lists">Lists</p><i id="plusfa" class="fa-solid fa-square-plus" onClick={addActiveClassAddList}></i>
+                <p id="lists"><i class="fa-solid fa-angle-right" id="rightArrow" onClick={toggleLists}></i>Lists</p><i id="plusfa" class="fa-solid fa-square-plus" onClick={addActiveClassAddList}></i>
                 <div className={`modal`}>
                     <div className="modalForm">
                             <form className="editingBtns" onSubmit={addList}>
@@ -192,6 +203,8 @@ function ListsContainer( { setSelectedList, setSelectedListTitle, selectedListId
                     <h3 id="errorMsg" key={ind}>{error}</h3>
                     ))}
                     </ul>
+                {showLists && (
+
                 <div className="userLists">
                 {listsArr && (listsArr.map(list => (
                     <div>
@@ -226,6 +239,7 @@ function ListsContainer( { setSelectedList, setSelectedListTitle, selectedListId
                     </div>
                 )))}
                 </div>
+                )}
                 </div>
             </div>
     )
