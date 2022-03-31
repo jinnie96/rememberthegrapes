@@ -85,6 +85,20 @@ function ListTasksContainer({ selectedList, showTaskDetails, deleteList, selecte
           setShowComp(true)
       }
 
+      const tasksAll = document.querySelectorAll(".deleteBtns")
+      for (let i = 0; i < tasksAll.length; i++) {
+          if (tasksAll[i].childNodes[0]) {
+              if (tasksAll[i].childNodes[0].id == selectedTaskId) {
+                tasksAll[i].childNodes[0].style.backgroundColor = "#FFFFD6"
+              } else {
+                tasksAll[i].childNodes[0].style.backgroundColor = "#EFEEEF"
+              }
+          }
+        //   if (tasksAll[i].childNodes[0] && !selectedTaskId && tasksAll[i].childNodes[0].id !== selectedTaskId) {
+        //       tasksAll[i].childNodes[0].style.backgroundColor = "#EFEEEF"
+        //   }
+      }
+
     return (
         <div className="listTasksContainer">
         {selectedList && (

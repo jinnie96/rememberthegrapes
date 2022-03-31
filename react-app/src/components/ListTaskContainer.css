@@ -118,8 +118,8 @@ form {
 }
 
 .checkboxTitle:hover {
-    /* background-color: #FFFFD6; */
-    /* cursor: pointer; */
+    background-color: #FFFFD6;
+    cursor: pointer;
 }
 
 .pointer {
