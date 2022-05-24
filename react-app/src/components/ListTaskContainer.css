@@ -115,6 +115,9 @@ form {
 .checkboxTitle {
     border-bottom: solid 1px #e5e5e5;
     cursor: pointer;
+    border-left: solid 3px #CCCCCC;
+    margin-left: 10px;
+    margin-bottom: 3px;
 }
 
 .checkboxTitle:hover {
@@ -124,6 +127,8 @@ form {
 
 .pointer {
     cursor: pointer;
+    margin-left: 3px;
+    margin-right: 3px;
 }
 
 .icons {
@@ -193,6 +198,7 @@ form {
 
 #selectedCheck {
     width: 15px;
+    margin-right: 5px;
 }
 
 #date {
