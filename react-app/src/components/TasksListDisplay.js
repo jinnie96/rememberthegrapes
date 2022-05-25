@@ -87,8 +87,10 @@ function TasksListDisplay ( {showTask, selectedListTitle, selectedTaskTitle, sel
     const deleteTask = async (e) => {
         e.preventDefault()
         await dispatch(deleteOneTask(selectedTaskId))
+        console.log("EEEEEEEEEEEEEEEE@#@$@@$@$@$", e.target)
         dispatch(getAllTasks(userId))
         setShowTask(false)
+        window.location.href = "localhost:3003"
     }
 
     const editingTaskDue = (e) => {
