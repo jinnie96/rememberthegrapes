@@ -74,12 +74,8 @@ function TasksListDisplay ( {showTask, selectedListTitle, selectedTaskTitle, sel
     window.onload = function () {
         if (showTask) {
             const selectedTask = document.querySelector(".taskSelectedInfoContainer")
-            // if (showTask) {
                 selectedTask.classList.remove("taskSelectedInfoContainer")
                 selectedTask.classList.add("taskSelectedInfoContainerShift")
-            // } else {
-            //     // selectedTask.style.marginLeft = "0"
-            // }
         }
 
     }
@@ -87,8 +83,10 @@ function TasksListDisplay ( {showTask, selectedListTitle, selectedTaskTitle, sel
     const deleteTask = async (e) => {
         e.preventDefault()
         await dispatch(deleteOneTask(selectedTaskId))
+        console.log("EEEEEEEEEEEEEEEE@#@$@@$@$@$", e.target)
         dispatch(getAllTasks(userId))
         setShowTask(false)
+        window.location.href = "localhost:3003"
     }
 
     const editingTaskDue = (e) => {
@@ -160,12 +158,7 @@ function TasksListDisplay ( {showTask, selectedListTitle, selectedTaskTitle, sel
                 cancelListChange(e)
             }
             setShowTask(!showTask)
-            // alert("list updated!")
-            // setSelectedList(e.target.id)
         }
-
-
-        // setShowTask(!showTask)
     }
 
     const changeTitleName = async(e) => {
@@ -191,18 +184,11 @@ function TasksListDisplay ( {showTask, selectedListTitle, selectedTaskTitle, sel
         }
         const res = await dispatch(updateOneTask(e.target.id, compTask))
         const response = await dispatch(getAllTasks(userId))
-        // if (res) {
-        // }
         if (response) {
             setDeletedTasks(response.tasks)
             setShowTask(false)
 
         }
-    }
-
-    const editingTaskTitle = (e) => {
-        const titleInput = document.getElementById("taskTitleName")
-        titleInput.innerHTML = `<input name='title' type='text' value=${selectedTaskTitle} onChange={updateTaskTitle}></input>`
     }
 
     window.addEventListener("click", getToday);
@@ -277,7 +263,3 @@ function TasksListDisplay ( {showTask, selectedListTitle, selectedTaskTitle, sel
 }
 
 export default TasksListDisplay
-
-{/* <p onClick = {editingTaskTitle} id="taskTitleName">{selectedTaskTitle}</p><br></br>
-<p>{selectedTaskTitle}</p>
-<input name='title' type='text' defaultValue={selectedTaskTitle} onChange={updateTaskTitle}></input> */}
