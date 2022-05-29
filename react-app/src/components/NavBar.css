@@ -31,7 +31,7 @@ li {
     left: 12%;
     margin-top: 30px;
     margin-bottom: 30px;
-    background-color: #ad9fda;
+    /* background-color: #ad9fda; */
     padding: -1px 2px;
     /* height:fit-content */
 }
@@ -44,6 +44,7 @@ li {
 
 #inputSearch {
     background-color: #ad9fda;
+    width: auto;
 }
 
 #inputSearch:focus {
