@@ -120,8 +120,15 @@
 }
 
 .changeTitleContainer {
+    /* display: flex;
+    flex-direction: row; */
     border-left: 2px solid #ccc;
     /* margin-left: 5px; */
+}
+
+#listUpdateBtn {
+    display: flex;
+    /* flex-direction: column; */
 }
 
 #taskdue:hover, #listName:hover, #titlename:hover {
@@ -171,10 +178,16 @@
 
 #titleChange {
     display: none;
+    justify-content: center;
+    align-items: center;
+
 }
 
 #confirmTitleBtn {
     display: none;
+    justify-content: center;
+    align-items: center;
+    margin-left: 3px;
     background-color: #5E44B2;
     color: white;
 }

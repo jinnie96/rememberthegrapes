@@ -114,9 +114,9 @@ function TasksListDisplay ( {showTask, selectedListTitle, selectedTaskTitle, sel
     const editingTitle = (e) => {
         setNewTitleVal(e.target.innerText)
         e.target.style.display="none"
-        e.target.parentElement.childNodes[1].style.display="block"
-        e.target.parentElement.childNodes[1].childNodes[0].style.display="block"
-        e.target.parentElement.childNodes[1].childNodes[1].style.display="block"
+        e.target.parentElement.childNodes[1].style.display="flex"
+        e.target.parentElement.childNodes[1].childNodes[0].style.display="flex"
+        e.target.parentElement.childNodes[1].childNodes[1].style.display="flex"
 
     }
 
@@ -224,7 +224,7 @@ function TasksListDisplay ( {showTask, selectedListTitle, selectedTaskTitle, sel
                     <div className="showContainer" id ="animation">
                     <div className="changeTitleContainer">
                         <div id="titlename" onClick={editingTitle}>{selectedTaskTitle}</div>
-                        <form onSubmit={changeTitleName}>
+                        <form id="listUpdateBtn" onSubmit={changeTitleName}>
                             <input id="titleChange" name="title" defaultValue={selectedTaskTitle} onChange={setTitleVal} value={newTitleVal} required></input>
                             <button type="submit" id="confirmTitleBtn" >Update</button>
                         </form>
