@@ -45,6 +45,14 @@ li {
 #inputSearch {
     background-color: #ad9fda;
     width: auto;
+    /* font-size: 20px; */
+    border: none;
+    color: white;
+}
+
+::placeholder {
+    color: white;
+    font-size:21px
 }
 
 #inputSearch:focus {
