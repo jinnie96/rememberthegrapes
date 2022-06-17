@@ -13,7 +13,7 @@ To view and use this application, you can either navigate to the [live hosted si
 
 3. ```cd``` into ```/react-app``` and install dependencies ```npm install```
 
-4.  Create a .env file based on the .env.example given
+4.  Create a .env file based on the .env.example given.
 
 5.  Setup a PostgresSQL user + database:
     ```javascript
