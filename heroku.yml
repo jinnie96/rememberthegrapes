@@ -2,4 +2,4 @@ build:
   docker:
     web: Dockerfile
 run:
-  web: gunicorn main:app/puma.rb
+  web: gunicorn main:app
